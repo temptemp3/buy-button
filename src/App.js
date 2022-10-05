@@ -99,8 +99,9 @@ function App() {
     const acc = await state.reach.connectAccount({ addr: state.addr });
     const ctc = acc.contract(backend, appId);
     const amt = window.prompt("How much?");
+    await acc.tokenAccept(state.app.token);
     await ctc.a.buy(state.reach.parseCurrency(amt, state.app.decimals));
-    getApp(state.reach, ctc).then(app => setState({ ...state, app }));
+    getApp(state.reach, ctc).then((app) => setState({ ...state, app }));
   };
   return (
     <div className="App">
