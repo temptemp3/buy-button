@@ -2,12 +2,16 @@ import React, { useEffect } from "react";
 import { loadStdlib } from "@reach-sh/stdlib";
 import { ALGO_MyAlgoConnect as MyAlgoConnect } from "@reach-sh/stdlib";
 import * as backend from "./app/sale/build/index.main.mjs";
-import { getView } from "./app/sale/functions";
+import { compactAddress } from "./app/sale/functions";
 import logo from "./logo.svg";
 import "./App.css";
 import axios from "axios";
 
-const appId = 114586728;
+const appIds = [
+  ["TCOIN (DEC4)", 114909381],
+  ["DEC0", 114917119],
+  ["DEC19", 114923011],
+];
 const provider = "TestNet";
 
 const getConfig = (provider) => {
@@ -28,42 +32,28 @@ const getConfig = (provider) => {
   };
 };
 
-const apiService = {
-  getAssetInfo: async (id, endpoint) => {
+const appService = {
+  getApp: async (id) => {
     return (
-      (await axios.get(`${getConfig(provider).apiEndpoint}/v2/assets/${id}`))
+      (await axios.get(`${getConfig(provider).appEndpoint}/api/v2/apps/${id}`))
         ?.data || {}
     );
   },
 };
 
-/*
-const appService = {
-  getApp: async (id, endpoint = "https://launcher.testnet.zestbloom.com") => {
-    return (await axios.get(`${endpoint}/api/v2/apps/${id}`))?.data || {};
-  },
-};
-*/
 function App() {
-  const [state, setState] = React.useState(null);
-  /*
+  const [app, setApp] = React.useState(null);
+  const [state, setState] = React.useState({ appId: appIds[0][1] });
+  const [loading, setLoading] = React.useState(false);
+  const [amount, setAmount] = React.useState(0);
   useEffect(() => {
-    if (app) return;
-    appService.getApp(114560815).then(setApp);
-  });
-  */
-  const getApp = async (reach, ctc) => {
-    const app = await getView(reach, ctc);
-    const {
-      params: { decimals },
-    } = await apiService.getAssetInfo(app.token);
-    const fPrice = reach.formatCurrency(reach.bigNumberify(app.price));
-    const fTokenAmount = reach.formatWithDecimals(
-      reach.bigNumberify(app.tokenAmount),
-      decimals
+    if (loading) return;
+    const timeout = setTimeout(
+      () => appService.getApp(state.appId).then(setApp),
+      1000
     );
-    return { ...app, fPrice, fTokenAmount };
-  };
+    return () => clearTimeout(timeout);
+  }, [loading, state.appId]);
   const onConnect = async () => {
     const providerEnv = {
       ALGO_TOKEN: "",
@@ -90,41 +80,155 @@ function App() {
     const {
       networkAccount: { addr },
     } = acc;
-    const ctc = acc.contract(backend, appId);
-    const app = await getApp(reach, ctc);
-    console.log({ addr, app });
-    setState({ reach, addr, app });
+    setState({ ...state, reach, addr });
   };
   const onBuy = async () => {
-    const acc = await state.reach.connectAccount({ addr: state.addr });
-    const ctc = acc.contract(backend, appId);
-    const amt = window.prompt("How much?");
-    await acc.tokenAccept(state.app.token);
-    await ctc.a.buy(state.reach.parseCurrency(amt, state.app.decimals));
-    getApp(state.reach, ctc).then((app) => setState({ ...state, app }));
+    try {
+      setLoading(true);
+      const acc = await state.reach.connectAccount({ addr: state.addr });
+      const ctc = acc.contract(backend, state.appId);
+      await acc.tokenAccept(app.view.token);
+      await ctc.a.buy(state.reach.parseCurrency(amount, app.view.decimals));
+      appService.getApp(state.appId).then(setApp);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setLoading(false);
+    }
   };
   return (
     <div className="App">
+      <select onChange={(e) => setState({ ...state, appId: e.target.value })}>
+        {appIds.map(([name, value]) => (
+          <option value={value}>{name}</option>
+        ))}
+      </select>
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        {state?.addr && state?.app ? (
+        {!app ? (
           <>
-            <div style={{ color: "pink" }}>
-              {Object.keys(state.app).map((k) => (
-                <div>
-                  {k}: {state.app[k]}
-                </div>
-              ))}
-            </div>
-            <div>
-              <p>Account: {state?.addr}</p>
-            </div>
-            <button style={{ display: "inline" }} onClick={onBuy}>
-              Buy
-            </button>
+            <img src={logo} className="App-logo" alt="logo" />
+            Loading...
           </>
         ) : (
-          <button onClick={onConnect}>Connect</button>
+          <>
+            {app && (
+              <>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    width: "400px",
+                  }}
+                >
+                  <div>{app.view.unitName}</div>
+                  <div>{app.view.fPrice}</div>
+                </div>
+                <div
+                  style={{
+                    background: "black",
+                    height: "400px",
+                    width: "400px",
+                    display: "flex",
+                    alignItems: "flex-end",
+                  }}
+                >
+                  <div
+                    style={{
+                      color: "pink",
+                      height: `${
+                        parseFloat(app.view.fTokenPercentRemaining) * 100
+                      }%`,
+                      width: `100%`,
+                      background: "green",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    {Object.keys(app.view).map((k) => {
+                      switch (k) {
+                        case "fTokenAmount":
+                          return <div key={k}>{app.view[k]} remaining</div>;
+                        /*
+                      case "manager":
+                        return (
+                          <div key={k}>
+                            {k}: {compactAddress(app.view[k])}
+                          </div>
+                        );
+                        */
+                        default:
+                          return null;
+                      }
+                    })}
+                  </div>
+                </div>
+              </>
+            )}
+            {state?.addr ? (
+              <>
+                <div>
+                  <p>Connected as: {compactAddress(state.addr, 5)}</p>
+                </div>
+                {!loading ? (
+                  <>
+                    <small style={{ color: "aqua" }}>
+                      Cost:{" "}
+                      {Number(parseFloat(app.view.fPrice) * amount).toFixed(6)}A
+                    </small>
+                    <br />
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <small>{app.view.unitName}</small>&nbsp;
+                      <input
+                        type="number"
+                        id="amount"
+                        name="amount"
+                        value={amount}
+                        placeholder={`Amount in ${app.view.unitName}`}
+                        onChange={(e) => setAmount(e.target.value)}
+                      />
+                      <button style={{ display: "inline" }} onClick={onBuy}>
+                        Buy
+                      </button>
+                    </div>
+                    <br />
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <small>ALGO</small>&nbsp;
+                      <input
+                        type="number"
+                        id="amount"
+                        name="amount"
+                        value={Number(amount * app.view.fPrice).toFixed(6)}
+                        placeholder={`Amount in ALGO`}
+                        onChange={(e) =>
+                          setAmount(e.target.value / app.view.fPrice)
+                        }
+                      />
+                      <button style={{ display: "inline" }} onClick={onBuy}>
+                        Buy
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <button disabled>Processing...</button>
+                )}
+              </>
+            ) : (
+              <div>
+                <button onClick={onConnect}>Connect</button>
+              </div>
+            )}
+          </>
         )}
       </header>
     </div>

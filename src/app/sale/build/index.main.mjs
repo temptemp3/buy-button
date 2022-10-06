@@ -21,40 +21,44 @@ export function _getViews(s, viewlib) {
   const ctc1 = stdlib.T_UInt;
   const ctc2 = stdlib.T_Token;
   const ctc3 = stdlib.T_Bool;
-  const ctc4 = stdlib.T_Struct([['manager', ctc0], ['closed', ctc3], ['token', ctc2], ['tokenAmount', ctc1], ['price', ctc1]]);
+  const ctc4 = stdlib.T_Tuple([ctc1, ctc1, ctc3]);
+  const ctc5 = stdlib.T_Array(ctc4, stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '1'));
+  const ctc6 = stdlib.T_Struct([['manager', ctc0], ['closed', ctc3], ['token', ctc2], ['tokenAmount', ctc1], ['tokenSupply', ctc1], ['price', ctc1]]);
   
   const _state = async (i, svs, args) => {
     if (stdlib.eq(i, stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '1'))) {
-      const [v944, v945, v947, v962] = svs;
+      const [v2316, v2317, v2319, v2324, v2334] = svs;
       stdlib.assert(false, 'illegal view')
       }
     if (stdlib.eq(i, stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '4'))) {
-      const [v947, v1628, v1629, v1630, v1631, v1632] = svs;
+      const [v2319, v4645, v4646, v4647, v4648, v4649, v4650] = svs;
       return (await ((async () => {
         
-        const v1633 = {
-          closed: v1629,
-          manager: v1628,
-          price: v1632,
-          token: v1630,
-          tokenAmount: v1631
+        const v4651 = {
+          closed: v4646,
+          manager: v4645,
+          price: v4650,
+          token: v4647,
+          tokenAmount: v4648,
+          tokenSupply: v4649
           };
         
-        return v1633;}))(...args));
+        return v4651;}))(...args));
       }
     if (stdlib.eq(i, stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '6'))) {
-      const [v947, v978, v1047, v1048, v1049, v1050, v1051] = svs;
+      const [v2319, v2349, v2376, v2377, v2420, v2421, v2422, v2423, v2424, v2425] = svs;
       return (await ((async () => {
         
-        const v1052 = {
-          closed: v1048,
-          manager: v1047,
-          price: v1051,
-          token: v1049,
-          tokenAmount: v1050
+        const v2426 = {
+          closed: v2421,
+          manager: v2420,
+          price: v2425,
+          token: v2422,
+          tokenAmount: v2423,
+          tokenSupply: v2424
           };
         
-        return v1052;}))(...args));
+        return v2426;}))(...args));
       }
     
     stdlib.assert(false, 'illegal view')
@@ -63,13 +67,13 @@ export function _getViews(s, viewlib) {
     infos: {
       state: {
         decode: _state,
-        ty: ctc4
+        ty: ctc6
         }
       },
     views: {
-      1: [ctc0, ctc1, ctc2, ctc1],
-      4: [ctc2, ctc0, ctc3, ctc2, ctc1, ctc1],
-      6: [ctc2, ctc1, ctc0, ctc3, ctc2, ctc1, ctc1]
+      1: [ctc0, ctc1, ctc2, ctc5, ctc1],
+      4: [ctc2, ctc0, ctc3, ctc2, ctc1, ctc1, ctc1],
+      6: [ctc2, ctc1, ctc5, ctc1, ctc0, ctc3, ctc2, ctc1, ctc1, ctc1]
       }
     };
   
@@ -101,27 +105,35 @@ export async function Constructor(ctcTop, interact) {
   const ctc5 = stdlib.T_Tuple([]);
   const ctc6 = stdlib.T_Tuple([ctc0]);
   const ctc7 = stdlib.T_Data({
-    buy0_201: ctc4,
-    close0_201: ctc5,
-    grant0_201: ctc6,
-    update0_201: ctc4
+    buy0_206: ctc4,
+    close0_206: ctc5,
+    deposit0_206: ctc4,
+    grant0_206: ctc6,
+    touch0_206: ctc5,
+    update0_206: ctc4,
+    withdraw0_206: ctc4
     });
   const ctc8 = stdlib.T_Null;
+  const ctc9 = stdlib.T_Bool;
+  const ctc10 = stdlib.T_Tuple([ctc1, ctc1, ctc9]);
+  const ctc11 = stdlib.T_Array(ctc10, stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '1'));
   
   
-  const v934 = stdlib.protect(ctc3, await interact.getParams(), {
+  const v2299 = [stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0'), stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0'), false];
+  const v2300 = [v2299];
+  const v2306 = stdlib.protect(ctc3, await interact.getParams(), {
     at: './.reach/rev/@github.com:nash-protocol:starter-kit:543af82ddab2dcef581e1adb0883cb00a6d2c0aa/util.rsh:30:67:application',
     fs: ['at ./.reach/rev/@github.com:nash-protocol:starter-kit:543af82ddab2dcef581e1adb0883cb00a6d2c0aa/util.rsh:29:19:application call to [unknown function] (defined at: ./.reach/rev/@github.com:nash-protocol:starter-kit:543af82ddab2dcef581e1adb0883cb00a6d2c0aa/util.rsh:29:23:function exp)', 'at ./.reach/rev/@github.com:nash-protocol:starter-kit:543af82ddab2dcef581e1adb0883cb00a6d2c0aa/util.rsh:98:45:application call to "construct" (defined at: ./.reach/rev/@github.com:nash-protocol:starter-kit:543af82ddab2dcef581e1adb0883cb00a6d2c0aa/util.rsh:28:40:function exp)', 'at ./index.rsh:13:21:application call to "useConstructor" (defined at: ./.reach/rev/@github.com:nash-protocol:starter-kit:543af82ddab2dcef581e1adb0883cb00a6d2c0aa/util.rsh:91:3:function exp)'],
     msg: 'getParams',
     who: 'Constructor'
     });
-  const v935 = v934.addr;
-  const v936 = v934.amt;
-  const v937 = v934.tok0;
-  const v938 = v934.ttl;
+  const v2307 = v2306.addr;
+  const v2308 = v2306.amt;
+  const v2309 = v2306.tok0;
+  const v2310 = v2306.ttl;
   
   const txn1 = await (ctc.sendrecv({
-    args: [v935, v936, v938, v937],
+    args: [v2307, v2308, v2310, v2309],
     evt_cnt: 4,
     funcNum: 0,
     lct: stdlib.checkedBigNumberify('./.reach/rev/@github.com:nash-protocol:starter-kit:543af82ddab2dcef581e1adb0883cb00a6d2c0aa/util.rsh:33:15:dot', stdlib.UInt_max, '0'),
@@ -134,15 +146,18 @@ export async function Constructor(ctcTop, interact) {
       const getSimTokCtr = () => { sim_txn_ctr = sim_txn_ctr.sub(1); return sim_txn_ctr; };
       
       
-      const {data: [v944, v945, v946, v947], secs: v949, time: v948, didSend: v46, from: v943 } = txn1;
+      const {data: [v2316, v2317, v2318, v2319], secs: v2321, time: v2320, didSend: v46, from: v2315 } = txn1;
       
+      const v2322 = v2300[stdlib.checkedBigNumberify('./.reach/rev/@github.com:nash-protocol:starter-kit:543af82ddab2dcef581e1adb0883cb00a6d2c0aa/util.rsh:33:15:dot', stdlib.UInt_max, '0')];
+      const v2323 = stdlib.Array_set(v2322, '0', stdlib.checkedBigNumberify('./.reach/rev/@github.com:nash-protocol:starter-kit:543af82ddab2dcef581e1adb0883cb00a6d2c0aa/util.rsh:33:15:dot', stdlib.UInt_max, '0'));
+      const v2324 = stdlib.Array_set(v2300, stdlib.checkedBigNumberify('./.reach/rev/@github.com:nash-protocol:starter-kit:543af82ddab2dcef581e1adb0883cb00a6d2c0aa/util.rsh:33:15:dot', stdlib.UInt_max, '0'), v2323);
       sim_r.txns.push({
         amt: stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0'),
         kind: 'init',
-        tok: v947
+        tok: v2319
         });
       ;
-      const v962 = stdlib.safeAdd(v948, v946);
+      const v2334 = stdlib.safeAdd(v2320, v2318);
       sim_r.isHalt = false;
       
       return sim_r;
@@ -152,39 +167,42 @@ export async function Constructor(ctcTop, interact) {
     tys: [ctc0, ctc1, ctc1, ctc2],
     waitIfNotPresent: false
     }));
-  const {data: [v944, v945, v946, v947], secs: v949, time: v948, didSend: v46, from: v943 } = txn1;
+  const {data: [v2316, v2317, v2318, v2319], secs: v2321, time: v2320, didSend: v46, from: v2315 } = txn1;
+  const v2322 = v2300[stdlib.checkedBigNumberify('./.reach/rev/@github.com:nash-protocol:starter-kit:543af82ddab2dcef581e1adb0883cb00a6d2c0aa/util.rsh:33:15:dot', stdlib.UInt_max, '0')];
+  const v2323 = stdlib.Array_set(v2322, '0', stdlib.checkedBigNumberify('./.reach/rev/@github.com:nash-protocol:starter-kit:543af82ddab2dcef581e1adb0883cb00a6d2c0aa/util.rsh:33:15:dot', stdlib.UInt_max, '0'));
+  const v2324 = stdlib.Array_set(v2300, stdlib.checkedBigNumberify('./.reach/rev/@github.com:nash-protocol:starter-kit:543af82ddab2dcef581e1adb0883cb00a6d2c0aa/util.rsh:33:15:dot', stdlib.UInt_max, '0'), v2323);
   ;
   ;
-  const v962 = stdlib.safeAdd(v948, v946);
+  const v2334 = stdlib.safeAdd(v2320, v2318);
   const txn2 = await (ctc.recv({
     didSend: false,
     evt_cnt: 2,
     funcNum: 1,
     out_tys: [ctc1, ctc1],
-    timeoutAt: ['time', v962],
+    timeoutAt: ['time', v2334],
     waitIfNotPresent: false
     }));
   if (txn2.didTimeout) {
     const txn3 = await (ctc.sendrecv({
-      args: [v944, v945, v947, v962],
+      args: [v2316, v2317, v2319, v2324, v2334],
       evt_cnt: 0,
       funcNum: 2,
-      lct: v948,
+      lct: v2320,
       onlyIf: true,
       out_tys: [],
-      pay: [stdlib.checkedBigNumberify('./interface.rsh:109:15:decimal', stdlib.UInt_max, '0'), []],
+      pay: [stdlib.checkedBigNumberify('./interface.rsh:116:15:decimal', stdlib.UInt_max, '0'), []],
       sim_p: (async (txn3) => {
         const sim_r = { txns: [], mapRefs: [], maps: [] };
         let sim_txn_ctr = stdlib.UInt_max;
         const getSimTokCtr = () => { sim_txn_ctr = sim_txn_ctr.sub(1); return sim_txn_ctr; };
         
         
-        const {data: [], secs: v1644, time: v1643, didSend: v858, from: v1642 } = txn3;
+        const {data: [], secs: v4662, time: v4661, didSend: v2109, from: v4660 } = txn3;
         
         ;
         sim_r.txns.push({
           kind: 'halt',
-          tok: v947
+          tok: v2319
           })
         sim_r.txns.push({
           kind: 'halt',
@@ -196,55 +214,64 @@ export async function Constructor(ctcTop, interact) {
         }),
       soloSend: false,
       timeoutAt: undefined /* mto */,
-      tys: [ctc0, ctc1, ctc2, ctc1],
+      tys: [ctc0, ctc1, ctc2, ctc11, ctc1],
       waitIfNotPresent: false
       }));
-    const {data: [], secs: v1644, time: v1643, didSend: v858, from: v1642 } = txn3;
+    const {data: [], secs: v4662, time: v4661, didSend: v2109, from: v4660 } = txn3;
     ;
     return;
     
     }
   else {
-    const {data: [v977, v978], secs: v980, time: v979, didSend: v132, from: v976 } = txn2;
-    const v981 = stdlib.gt(v977, stdlib.checkedBigNumberify('./interface.rsh:105:27:decimal', stdlib.UInt_max, '0'));
-    stdlib.assert(v981, {
+    const {data: [v2348, v2349], secs: v2351, time: v2350, didSend: v130, from: v2347 } = txn2;
+    const v2352 = stdlib.gt(v2348, stdlib.checkedBigNumberify('./interface.rsh:112:27:decimal', stdlib.UInt_max, '0'));
+    stdlib.assert(v2352, {
       at: 'reach standard library:57:5:application',
-      fs: ['at ./interface.rsh:105:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+      fs: ['at ./interface.rsh:112:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
       msg: 'tokenAmount must be greater than 0',
       who: 'Constructor'
       });
-    const v983 = stdlib.gt(v978, stdlib.checkedBigNumberify('./interface.rsh:106:21:decimal', stdlib.UInt_max, '0'));
-    stdlib.assert(v983, {
+    const v2354 = stdlib.gt(v2349, stdlib.checkedBigNumberify('./interface.rsh:113:21:decimal', stdlib.UInt_max, '0'));
+    stdlib.assert(v2354, {
       at: 'reach standard library:57:5:application',
-      fs: ['at ./interface.rsh:106:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+      fs: ['at ./interface.rsh:113:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
       msg: 'price must be greater than 0',
       who: 'Constructor'
       });
-    const v985 = stdlib.safeAdd(v945, stdlib.checkedBigNumberify('./interface.rsh:16:20:decimal', stdlib.UInt_max, '1'));
     ;
+    const v2358 = v2324[stdlib.checkedBigNumberify('./interface.rsh:109:11:dot', stdlib.UInt_max, '0')];
+    const v2359 = v2358[stdlib.checkedBigNumberify('./interface.rsh:109:11:dot', stdlib.UInt_max, '0')];
+    const v2360 = stdlib.safeAdd(v2359, v2348);
+    const v2362 = stdlib.Array_set(v2358, '0', v2360);
+    const v2363 = stdlib.Array_set(v2324, stdlib.checkedBigNumberify('./interface.rsh:109:11:dot', stdlib.UInt_max, '0'), v2362);
     ;
+    const v2367 = stdlib.safeSub(v2317, v2317);
     ;
     null;
-    const v999 = {
+    const v2368 = {
       closed: false,
-      manager: v976,
-      price: v978,
-      token: v947,
-      tokenAmount: v977
+      manager: v2347,
+      price: v2349,
+      token: v2319,
+      tokenAmount: v2348,
+      tokenSupply: v2348
       };
-    let v1000 = v999;
-    let v1001 = v979;
+    let v2369 = v2368;
+    let v2370 = v2350;
+    let v2376 = v2363;
+    let v2377 = v2367;
     
     while (await (async () => {
-      const v1041 = v1000.closed;
-      const v1046 = v1041 ? false : true;
+      const v2413 = v2369.closed;
+      const v2419 = v2413 ? false : true;
       
-      return v1046;})()) {
-      const v1047 = v1000.manager;
-      const v1048 = v1000.closed;
-      const v1049 = v1000.token;
-      const v1050 = v1000.tokenAmount;
-      const v1051 = v1000.price;
+      return v2419;})()) {
+      const v2420 = v2369.manager;
+      const v2421 = v2369.closed;
+      const v2422 = v2369.token;
+      const v2423 = v2369.tokenAmount;
+      const v2424 = v2369.tokenSupply;
+      const v2425 = v2369.price;
       const txn3 = await (ctc.recv({
         didSend: false,
         evt_cnt: 1,
@@ -253,135 +280,350 @@ export async function Constructor(ctcTop, interact) {
         timeoutAt: undefined /* mto */,
         waitIfNotPresent: false
         }));
-      const {data: [v1121], secs: v1123, time: v1122, didSend: v649, from: v1120 } = txn3;
-      switch (v1121[0]) {
-        case 'buy0_201': {
-          const v1124 = v1121[1];
+      const {data: [v2605], secs: v2607, time: v2606, didSend: v1707, from: v2604 } = txn3;
+      switch (v2605[0]) {
+        case 'buy0_206': {
+          const v2608 = v2605[1];
           undefined /* setApiDetails */;
-          const v1129 = v1124[stdlib.checkedBigNumberify('./interface.rsh:175:10:spread', stdlib.UInt_max, '0')];
-          const v1131 = stdlib.le(v1129, v1050);
-          stdlib.assert(v1131, {
+          const v2613 = v2608[stdlib.checkedBigNumberify('./interface.rsh:244:10:spread', stdlib.UInt_max, '0')];
+          const v2615 = stdlib.le(v2613, v2423);
+          stdlib.assert(v2615, {
             at: 'reach standard library:57:5:application',
-            fs: ['at ./interface.rsh:176:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:175:24:application call to [unknown function] (defined at: ./interface.rsh:175:24:function exp)', 'at ./interface.rsh:124:29:application call to [unknown function] (defined at: ./interface.rsh:175:24:function exp)', 'at ./interface.rsh:124:29:application call to [unknown function] (defined at: ./interface.rsh:124:29:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+            fs: ['at ./interface.rsh:245:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:244:24:application call to [unknown function] (defined at: ./interface.rsh:244:24:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:244:24:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:132:29:function exp)', 'at ./interface.rsh:148:14:application call to [unknown function] (defined at: ./interface.rsh:148:14:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
             msg: 'not enough tokens',
             who: 'Constructor'
             });
-          const v1133 = stdlib.safeMul(v1129, v978);
+          const v2617 = stdlib.safeMul(v2613, v2349);
+          const v2670 = stdlib.safeAdd(v2377, v2617);
           ;
-          const v1145 = null;
-          await txn3.getOutput('buy', 'v1145', ctc8, v1145);
+          const v2671 = v2376[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v2672 = v2671[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v2675 = stdlib.Array_set(v2671, '0', v2672);
+          const v2676 = stdlib.Array_set(v2376, stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0'), v2675);
           ;
+          const v2683 = null;
+          await txn3.getOutput('buy', 'v2683', ctc8, v2683);
+          const v2695 = stdlib.safeSub(v2670, v2617);
           ;
-          const v1173 = stdlib.safeSub(v1050, v1129);
-          const v1174 = {
-            closed: v1048,
-            manager: v1047,
-            price: v1051,
-            token: v1049,
-            tokenAmount: v1173
+          const v2696 = v2676[stdlib.checkedBigNumberify('./interface.rsh:251:34:application', stdlib.UInt_max, '0')];
+          const v2697 = v2696[stdlib.checkedBigNumberify('./interface.rsh:251:34:application', stdlib.UInt_max, '0')];
+          const v2701 = stdlib.safeSub(v2697, v2613);
+          const v2703 = stdlib.Array_set(v2696, '0', v2701);
+          const v2704 = stdlib.Array_set(v2676, stdlib.checkedBigNumberify('./interface.rsh:251:34:application', stdlib.UInt_max, '0'), v2703);
+          ;
+          const v2712 = stdlib.safeSub(v2423, v2613);
+          const v2713 = {
+            closed: v2421,
+            manager: v2420,
+            price: v2425,
+            token: v2422,
+            tokenAmount: v2712,
+            tokenSupply: v2424
             };
-          const cv1000 = v1174;
-          const cv1001 = v1122;
+          const cv2369 = v2713;
+          const cv2370 = v2606;
+          const cv2376 = v2704;
+          const cv2377 = v2695;
           
-          v1000 = cv1000;
-          v1001 = cv1001;
+          v2369 = cv2369;
+          v2370 = cv2370;
+          v2376 = cv2376;
+          v2377 = cv2377;
           
           continue;
           break;
           }
-        case 'close0_201': {
-          const v1250 = v1121[1];
+        case 'close0_206': {
+          const v2899 = v2605[1];
           undefined /* setApiDetails */;
           ;
-          const v1305 = stdlib.addressEq(v1120, v1047);
-          stdlib.assert(v1305, {
+          const v2962 = v2376[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v2963 = v2962[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v2966 = stdlib.Array_set(v2962, '0', v2963);
+          const v2967 = stdlib.Array_set(v2376, stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0'), v2966);
+          ;
+          const v3009 = stdlib.addressEq(v2604, v2420);
+          stdlib.assert(v3009, {
             at: 'reach standard library:57:5:application',
-            fs: ['at ./interface.rsh:195:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:197:13:application call to [unknown function] (defined at: ./interface.rsh:197:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+            fs: ['at ./interface.rsh:264:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:266:13:application call to [unknown function] (defined at: ./interface.rsh:266:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
             msg: 'only manager can close',
             who: 'Constructor'
             });
-          const v1307 = null;
-          await txn3.getOutput('close', 'v1307', ctc8, v1307);
+          const v3011 = null;
+          await txn3.getOutput('close', 'v3011', ctc8, v3011);
+          const v3019 = v2967[stdlib.checkedBigNumberify('./interface.rsh:268:48:application', stdlib.UInt_max, '0')];
+          const v3020 = v3019[stdlib.checkedBigNumberify('./interface.rsh:268:48:application', stdlib.UInt_max, '0')];
+          const v3024 = stdlib.safeSub(v3020, v2423);
+          const v3026 = stdlib.Array_set(v3019, '0', v3024);
+          const v3027 = stdlib.Array_set(v2967, stdlib.checkedBigNumberify('./interface.rsh:268:48:application', stdlib.UInt_max, '0'), v3026);
           ;
-          const v1329 = {
+          const v3034 = {
             closed: true,
-            manager: v1047,
-            price: v1051,
-            token: v1049,
-            tokenAmount: stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0')
+            manager: v2420,
+            price: v2425,
+            token: v2422,
+            tokenAmount: stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0'),
+            tokenSupply: stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0')
             };
-          const cv1000 = v1329;
-          const cv1001 = v1122;
+          const cv2369 = v3034;
+          const cv2370 = v2606;
+          const cv2376 = v3027;
+          const cv2377 = v2377;
           
-          v1000 = cv1000;
-          v1001 = cv1001;
+          v2369 = cv2369;
+          v2370 = cv2370;
+          v2376 = cv2376;
+          v2377 = cv2377;
           
           continue;
           break;
           }
-        case 'grant0_201': {
-          const v1376 = v1121[1];
+        case 'deposit0_206': {
+          const v3190 = v2605[1];
+          undefined /* setApiDetails */;
+          const v3212 = v3190[stdlib.checkedBigNumberify('./interface.rsh:169:10:spread', stdlib.UInt_max, '0')];
+          const v3214 = stdlib.addressEq(v2604, v2420);
+          stdlib.assert(v3214, {
+            at: 'reach standard library:57:5:application',
+            fs: ['at ./interface.rsh:170:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:169:28:application call to [unknown function] (defined at: ./interface.rsh:169:28:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:169:28:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:132:29:function exp)', 'at ./interface.rsh:148:14:application call to [unknown function] (defined at: ./interface.rsh:148:14:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+            msg: 'only manager can deposit',
+            who: 'Constructor'
+            });
+          const v3216 = stdlib.gt(v3212, stdlib.checkedBigNumberify('./interface.rsh:171:19:decimal', stdlib.UInt_max, '0'));
+          stdlib.assert(v3216, {
+            at: 'reach standard library:57:5:application',
+            fs: ['at ./interface.rsh:171:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:169:28:application call to [unknown function] (defined at: ./interface.rsh:169:28:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:169:28:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:132:29:function exp)', 'at ./interface.rsh:148:14:application call to [unknown function] (defined at: ./interface.rsh:148:14:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+            msg: 'deposit must be greater than 0',
+            who: 'Constructor'
+            });
+          ;
+          const v3253 = v2376[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v3254 = v3253[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v3255 = stdlib.safeAdd(v3254, v3212);
+          const v3257 = stdlib.Array_set(v3253, '0', v3255);
+          const v3258 = stdlib.Array_set(v2376, stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0'), v3257);
+          ;
+          const v3336 = null;
+          await txn3.getOutput('deposit', 'v3336', ctc8, v3336);
+          const v3350 = stdlib.safeAdd(v2423, v3212);
+          const v3352 = stdlib.safeAdd(v2424, v3212);
+          const v3353 = {
+            closed: v2421,
+            manager: v2420,
+            price: v2425,
+            token: v2422,
+            tokenAmount: v3350,
+            tokenSupply: v3352
+            };
+          const cv2369 = v3353;
+          const cv2370 = v2606;
+          const cv2376 = v3258;
+          const cv2377 = v2377;
+          
+          v2369 = cv2369;
+          v2370 = cv2370;
+          v2376 = cv2376;
+          v2377 = cv2377;
+          
+          continue;
+          break;
+          }
+        case 'grant0_206': {
+          const v3481 = v2605[1];
           undefined /* setApiDetails */;
           ;
-          const v1459 = v1376[stdlib.checkedBigNumberify('./interface.rsh:159:10:spread', stdlib.UInt_max, '0')];
-          const v1461 = stdlib.addressEq(v1120, v1047);
-          stdlib.assert(v1461, {
+          const v3544 = v2376[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v3545 = v3544[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v3548 = stdlib.Array_set(v3544, '0', v3545);
+          const v3549 = stdlib.Array_set(v2376, stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0'), v3548);
+          ;
+          const v3648 = v3481[stdlib.checkedBigNumberify('./interface.rsh:228:10:spread', stdlib.UInt_max, '0')];
+          const v3650 = stdlib.addressEq(v2604, v2420);
+          stdlib.assert(v3650, {
             at: 'reach standard library:57:5:application',
-            fs: ['at ./interface.rsh:160:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:162:13:application call to [unknown function] (defined at: ./interface.rsh:162:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+            fs: ['at ./interface.rsh:229:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:231:13:application call to [unknown function] (defined at: ./interface.rsh:231:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
             msg: 'only manager can grant',
             who: 'Constructor'
             });
-          const v1464 = null;
-          await txn3.getOutput('grant', 'v1464', ctc8, v1464);
-          const v1476 = {
-            closed: v1048,
-            manager: v1459,
-            price: v1051,
-            token: v1049,
-            tokenAmount: v1050
+          const v3653 = null;
+          await txn3.getOutput('grant', 'v3653', ctc8, v3653);
+          const v3666 = {
+            closed: v2421,
+            manager: v3648,
+            price: v2425,
+            token: v2422,
+            tokenAmount: v2423,
+            tokenSupply: v2424
             };
-          const cv1000 = v1476;
-          const cv1001 = v1122;
+          const cv2369 = v3666;
+          const cv2370 = v2606;
+          const cv2376 = v3549;
+          const cv2377 = v2377;
           
-          v1000 = cv1000;
-          v1001 = cv1001;
+          v2369 = cv2369;
+          v2370 = cv2370;
+          v2376 = cv2376;
+          v2377 = cv2377;
           
           continue;
           break;
           }
-        case 'update0_201': {
-          const v1502 = v1121[1];
+        case 'touch0_206': {
+          const v3772 = v2605[1];
           undefined /* setApiDetails */;
           ;
-          const v1606 = v1502[stdlib.checkedBigNumberify('./interface.rsh:142:10:spread', stdlib.UInt_max, '0')];
-          const v1608 = stdlib.addressEq(v1120, v1047);
-          stdlib.assert(v1608, {
+          const v3835 = v2376[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v3836 = v3835[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v3839 = stdlib.Array_set(v3835, '0', v3836);
+          const v3840 = stdlib.Array_set(v2376, stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0'), v3839);
+          ;
+          const v3962 = stdlib.addressEq(v2604, v2420);
+          stdlib.assert(v3962, {
             at: 'reach standard library:57:5:application',
-            fs: ['at ./interface.rsh:143:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:146:13:application call to [unknown function] (defined at: ./interface.rsh:146:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+            fs: ['at ./interface.rsh:151:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:153:13:application call to [unknown function] (defined at: ./interface.rsh:153:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+            msg: 'only manager can touch',
+            who: 'Constructor'
+            });
+          const v3964 = null;
+          await txn3.getOutput('touch', 'v3964', ctc8, v3964);
+          const v3971 = (stdlib.le(await ctc.getBalance(), v2377) ? stdlib.checkedBigNumberify('./interface.rsh:155:37:application', stdlib.UInt_max, '0') : stdlib.safeSub(await ctc.getBalance(), v2377));
+          const v3972 = stdlib.safeAdd(v3971, v2377);
+          const v3977 = stdlib.safeSub(v3972, v3971);
+          ;
+          const v3978 = v3840[stdlib.checkedBigNumberify('./interface.rsh:156:40:application', stdlib.UInt_max, '0')];
+          const v3979 = v3978[stdlib.checkedBigNumberify('./interface.rsh:156:40:application', stdlib.UInt_max, '0')];
+          const v3980 = (stdlib.le(await ctc.getBalance(v2319), v3979) ? stdlib.checkedBigNumberify('./interface.rsh:156:40:application', stdlib.UInt_max, '0') : stdlib.safeSub(await ctc.getBalance(v2319), v3979));
+          const v3981 = stdlib.safeAdd(v3980, v3979);
+          const v3983 = stdlib.Array_set(v3978, '0', v3981);
+          const v3984 = stdlib.Array_set(v3840, stdlib.checkedBigNumberify('./interface.rsh:156:40:application', stdlib.UInt_max, '0'), v3983);
+          const v3992 = stdlib.safeAdd(v2423, v3980);
+          const v3994 = stdlib.safeAdd(v2424, v3980);
+          const v3995 = {
+            closed: v2421,
+            manager: v2420,
+            price: v2425,
+            token: v2422,
+            tokenAmount: v3992,
+            tokenSupply: v3994
+            };
+          const cv2369 = v3995;
+          const cv2370 = v2606;
+          const cv2376 = v3984;
+          const cv2377 = v3977;
+          
+          v2369 = cv2369;
+          v2370 = cv2370;
+          v2376 = cv2376;
+          v2377 = cv2377;
+          
+          continue;
+          break;
+          }
+        case 'update0_206': {
+          const v4063 = v2605[1];
+          undefined /* setApiDetails */;
+          ;
+          const v4126 = v2376[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v4127 = v4126[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v4130 = stdlib.Array_set(v4126, '0', v4127);
+          const v4131 = stdlib.Array_set(v2376, stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0'), v4130);
+          ;
+          const v4290 = v4063[stdlib.checkedBigNumberify('./interface.rsh:211:10:spread', stdlib.UInt_max, '0')];
+          const v4292 = stdlib.addressEq(v2604, v2420);
+          stdlib.assert(v4292, {
+            at: 'reach standard library:57:5:application',
+            fs: ['at ./interface.rsh:212:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:215:13:application call to [unknown function] (defined at: ./interface.rsh:215:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
             msg: 'only manager can update',
             who: 'Constructor'
             });
-          const v1610 = stdlib.gt(v1606, stdlib.checkedBigNumberify('./interface.rsh:144:19:decimal', stdlib.UInt_max, '0'));
-          stdlib.assert(v1610, {
+          const v4294 = stdlib.gt(v4290, stdlib.checkedBigNumberify('./interface.rsh:213:19:decimal', stdlib.UInt_max, '0'));
+          stdlib.assert(v4294, {
             at: 'reach standard library:57:5:application',
-            fs: ['at ./interface.rsh:144:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:146:13:application call to [unknown function] (defined at: ./interface.rsh:146:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+            fs: ['at ./interface.rsh:213:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:215:13:application call to [unknown function] (defined at: ./interface.rsh:215:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
             msg: 'price must be greater than 0',
             who: 'Constructor'
             });
-          const v1613 = null;
-          await txn3.getOutput('update', 'v1613', ctc8, v1613);
-          const v1625 = {
-            closed: v1048,
-            manager: v1047,
-            price: v1606,
-            token: v1049,
-            tokenAmount: v1050
+          const v4297 = null;
+          await txn3.getOutput('update', 'v4297', ctc8, v4297);
+          const v4310 = {
+            closed: v2421,
+            manager: v2420,
+            price: v4290,
+            token: v2422,
+            tokenAmount: v2423,
+            tokenSupply: v2424
             };
-          const cv1000 = v1625;
-          const cv1001 = v1122;
+          const cv2369 = v4310;
+          const cv2370 = v2606;
+          const cv2376 = v4131;
+          const cv2377 = v2377;
           
-          v1000 = cv1000;
-          v1001 = cv1001;
+          v2369 = cv2369;
+          v2370 = cv2370;
+          v2376 = cv2376;
+          v2377 = cv2377;
+          
+          continue;
+          break;
+          }
+        case 'withdraw0_206': {
+          const v4354 = v2605[1];
+          undefined /* setApiDetails */;
+          ;
+          const v4417 = v2376[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v4418 = v4417[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v4421 = stdlib.Array_set(v4417, '0', v4418);
+          const v4422 = stdlib.Array_set(v2376, stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0'), v4421);
+          ;
+          const v4605 = v4354[stdlib.checkedBigNumberify('./interface.rsh:188:10:spread', stdlib.UInt_max, '0')];
+          const v4607 = stdlib.addressEq(v2604, v2420);
+          stdlib.assert(v4607, {
+            at: 'reach standard library:57:5:application',
+            fs: ['at ./interface.rsh:189:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:196:13:application call to [unknown function] (defined at: ./interface.rsh:196:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+            msg: 'only manager can withdraw',
+            who: 'Constructor'
+            });
+          const v4609 = stdlib.gt(v4605, stdlib.checkedBigNumberify('./interface.rsh:190:19:decimal', stdlib.UInt_max, '0'));
+          stdlib.assert(v4609, {
+            at: 'reach standard library:57:5:application',
+            fs: ['at ./interface.rsh:190:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:196:13:application call to [unknown function] (defined at: ./interface.rsh:196:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+            msg: 'withdraw must be greater than 0',
+            who: 'Constructor'
+            });
+          const v4612 = stdlib.le(v4605, v2423);
+          stdlib.assert(v4612, {
+            at: 'reach standard library:57:5:application',
+            fs: ['at ./interface.rsh:191:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:196:13:application call to [unknown function] (defined at: ./interface.rsh:196:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+            msg: 'withdraw must be less than or equal to token amount',
+            who: 'Constructor'
+            });
+          const v4615 = null;
+          await txn3.getOutput('withdraw', 'v4615', ctc8, v4615);
+          const v4623 = v4422[stdlib.checkedBigNumberify('./interface.rsh:198:38:application', stdlib.UInt_max, '0')];
+          const v4624 = v4623[stdlib.checkedBigNumberify('./interface.rsh:198:38:application', stdlib.UInt_max, '0')];
+          const v4628 = stdlib.safeSub(v4624, v4605);
+          const v4630 = stdlib.Array_set(v4623, '0', v4628);
+          const v4631 = stdlib.Array_set(v4422, stdlib.checkedBigNumberify('./interface.rsh:198:38:application', stdlib.UInt_max, '0'), v4630);
+          ;
+          const v4639 = stdlib.safeSub(v2423, v4605);
+          const v4641 = stdlib.safeSub(v2424, v4605);
+          const v4642 = {
+            closed: v2421,
+            manager: v2420,
+            price: v2425,
+            token: v2422,
+            tokenAmount: v4639,
+            tokenSupply: v4641
+            };
+          const cv2369 = v4642;
+          const cv2370 = v2606;
+          const cv2376 = v4631;
+          const cv2377 = v2377;
+          
+          v2369 = cv2369;
+          v2370 = cv2370;
+          v2376 = cv2376;
+          v2377 = cv2377;
           
           continue;
           break;
@@ -389,11 +631,12 @@ export async function Constructor(ctcTop, interact) {
         }
       
       }
-    const v1628 = v1000.manager;
-    const v1629 = v1000.closed;
-    const v1630 = v1000.token;
-    const v1631 = v1000.tokenAmount;
-    const v1632 = v1000.price;
+    const v4645 = v2369.manager;
+    const v4646 = v2369.closed;
+    const v4647 = v2369.token;
+    const v4648 = v2369.tokenAmount;
+    const v4649 = v2369.tokenSupply;
+    const v4650 = v2369.price;
     const txn3 = await (ctc.recv({
       didSend: false,
       evt_cnt: 0,
@@ -402,7 +645,7 @@ export async function Constructor(ctcTop, interact) {
       timeoutAt: undefined /* mto */,
       waitIfNotPresent: false
       }));
-    const {data: [], secs: v1636, time: v1635, didSend: v838, from: v1634 } = txn3;
+    const {data: [], secs: v4654, time: v4653, didSend: v2089, from: v4652 } = txn3;
     ;
     return;
     
@@ -430,14 +673,22 @@ export async function Manager(ctcTop, interact) {
   const ctc5 = stdlib.T_Tuple([]);
   const ctc6 = stdlib.T_Tuple([ctc0]);
   const ctc7 = stdlib.T_Data({
-    buy0_201: ctc4,
-    close0_201: ctc5,
-    grant0_201: ctc6,
-    update0_201: ctc4
+    buy0_206: ctc4,
+    close0_206: ctc5,
+    deposit0_206: ctc4,
+    grant0_206: ctc6,
+    touch0_206: ctc5,
+    update0_206: ctc4,
+    withdraw0_206: ctc4
     });
   const ctc8 = stdlib.T_Null;
+  const ctc9 = stdlib.T_Bool;
+  const ctc10 = stdlib.T_Tuple([ctc1, ctc1, ctc9]);
+  const ctc11 = stdlib.T_Array(ctc10, stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '1'));
   
   
+  const v2299 = [stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0'), stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0'), false];
+  const v2300 = [v2299];
   const txn1 = await (ctc.recv({
     didSend: false,
     evt_cnt: 4,
@@ -446,126 +697,138 @@ export async function Manager(ctcTop, interact) {
     timeoutAt: undefined /* mto */,
     waitIfNotPresent: false
     }));
-  const {data: [v944, v945, v946, v947], secs: v949, time: v948, didSend: v46, from: v943 } = txn1;
+  const {data: [v2316, v2317, v2318, v2319], secs: v2321, time: v2320, didSend: v46, from: v2315 } = txn1;
+  const v2322 = v2300[stdlib.checkedBigNumberify('./.reach/rev/@github.com:nash-protocol:starter-kit:543af82ddab2dcef581e1adb0883cb00a6d2c0aa/util.rsh:33:15:dot', stdlib.UInt_max, '0')];
+  const v2323 = stdlib.Array_set(v2322, '0', stdlib.checkedBigNumberify('./.reach/rev/@github.com:nash-protocol:starter-kit:543af82ddab2dcef581e1adb0883cb00a6d2c0aa/util.rsh:33:15:dot', stdlib.UInt_max, '0'));
+  const v2324 = stdlib.Array_set(v2300, stdlib.checkedBigNumberify('./.reach/rev/@github.com:nash-protocol:starter-kit:543af82ddab2dcef581e1adb0883cb00a6d2c0aa/util.rsh:33:15:dot', stdlib.UInt_max, '0'), v2323);
   ;
   ;
-  const v962 = stdlib.safeAdd(v948, v946);
-  const v966 = stdlib.protect(ctc3, await interact.getParams(), {
-    at: './interface.rsh:100:65:application',
-    fs: ['at ./interface.rsh:99:15:application call to [unknown function] (defined at: ./interface.rsh:99:19:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+  const v2334 = stdlib.safeAdd(v2320, v2318);
+  const v2338 = stdlib.protect(ctc3, await interact.getParams(), {
+    at: './interface.rsh:107:65:application',
+    fs: ['at ./interface.rsh:106:15:application call to [unknown function] (defined at: ./interface.rsh:106:19:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
     msg: 'getParams',
     who: 'Manager'
     });
-  const v967 = v966.price;
-  const v968 = v966.tokenAmount;
+  const v2339 = v2338.price;
+  const v2340 = v2338.tokenAmount;
   
-  const v971 = stdlib.gt(v968, stdlib.checkedBigNumberify('./interface.rsh:105:27:decimal', stdlib.UInt_max, '0'));
-  stdlib.assert(v971, {
+  const v2343 = stdlib.gt(v2340, stdlib.checkedBigNumberify('./interface.rsh:112:27:decimal', stdlib.UInt_max, '0'));
+  stdlib.assert(v2343, {
     at: 'reach standard library:57:5:application',
-    fs: ['at ./interface.rsh:105:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+    fs: ['at ./interface.rsh:112:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
     msg: 'tokenAmount must be greater than 0',
     who: 'Manager'
     });
-  const v973 = stdlib.gt(v967, stdlib.checkedBigNumberify('./interface.rsh:106:21:decimal', stdlib.UInt_max, '0'));
-  stdlib.assert(v973, {
+  const v2345 = stdlib.gt(v2339, stdlib.checkedBigNumberify('./interface.rsh:113:21:decimal', stdlib.UInt_max, '0'));
+  stdlib.assert(v2345, {
     at: 'reach standard library:57:5:application',
-    fs: ['at ./interface.rsh:106:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+    fs: ['at ./interface.rsh:113:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
     msg: 'price must be greater than 0',
     who: 'Manager'
     });
-  const v975 = stdlib.safeAdd(v945, stdlib.checkedBigNumberify('./interface.rsh:16:20:decimal', stdlib.UInt_max, '1'));
   
   const txn2 = await (ctc.sendrecv({
-    args: [v944, v945, v947, v962, v968, v967],
+    args: [v2316, v2317, v2319, v2324, v2334, v2340, v2339],
     evt_cnt: 2,
     funcNum: 1,
-    lct: v948,
+    lct: v2320,
     onlyIf: true,
     out_tys: [ctc1, ctc1],
-    pay: [v975, [[v968, v947]]],
+    pay: [v2317, [[v2340, v2319]]],
     sim_p: (async (txn2) => {
       const sim_r = { txns: [], mapRefs: [], maps: [] };
       let sim_txn_ctr = stdlib.UInt_max;
       const getSimTokCtr = () => { sim_txn_ctr = sim_txn_ctr.sub(1); return sim_txn_ctr; };
       
       
-      const {data: [v977, v978], secs: v980, time: v979, didSend: v132, from: v976 } = txn2;
+      const {data: [v2348, v2349], secs: v2351, time: v2350, didSend: v130, from: v2347 } = txn2;
       
-      const v985 = stdlib.safeAdd(v945, stdlib.checkedBigNumberify('./interface.rsh:16:20:decimal', stdlib.UInt_max, '1'));
       sim_r.txns.push({
-        amt: v985,
+        amt: v2317,
         kind: 'to',
         tok: undefined /* Nothing */
         });
+      const v2358 = v2324[stdlib.checkedBigNumberify('./interface.rsh:109:11:dot', stdlib.UInt_max, '0')];
+      const v2359 = v2358[stdlib.checkedBigNumberify('./interface.rsh:109:11:dot', stdlib.UInt_max, '0')];
+      const v2360 = stdlib.safeAdd(v2359, v2348);
+      const v2362 = stdlib.Array_set(v2358, '0', v2360);
+      const v2363 = stdlib.Array_set(v2324, stdlib.checkedBigNumberify('./interface.rsh:109:11:dot', stdlib.UInt_max, '0'), v2362);
       sim_r.txns.push({
-        amt: v977,
+        amt: v2348,
         kind: 'to',
-        tok: v947
+        tok: v2319
         });
+      const v2367 = stdlib.safeSub(v2317, v2317);
       sim_r.txns.push({
         kind: 'from',
-        to: v944,
+        to: v2316,
         tok: undefined /* Nothing */
         });
       null;
-      const v999 = {
+      const v2368 = {
         closed: false,
-        manager: v976,
-        price: v978,
-        token: v947,
-        tokenAmount: v977
+        manager: v2347,
+        price: v2349,
+        token: v2319,
+        tokenAmount: v2348,
+        tokenSupply: v2348
         };
-      const v1000 = v999;
-      const v1001 = v979;
+      const v2369 = v2368;
+      const v2370 = v2350;
+      const v2376 = v2363;
+      const v2377 = v2367;
       
       if (await (async () => {
-        const v1041 = v1000.closed;
-        const v1046 = v1041 ? false : true;
+        const v2413 = v2369.closed;
+        const v2419 = v2413 ? false : true;
         
-        return v1046;})()) {
-        const v1047 = v1000.manager;
-        const v1048 = v1000.closed;
-        const v1049 = v1000.token;
-        const v1050 = v1000.tokenAmount;
-        const v1051 = v1000.price;
+        return v2419;})()) {
+        const v2420 = v2369.manager;
+        const v2421 = v2369.closed;
+        const v2422 = v2369.token;
+        const v2423 = v2369.tokenAmount;
+        const v2424 = v2369.tokenSupply;
+        const v2425 = v2369.price;
         sim_r.isHalt = false;
         }
       else {
-        const v1628 = v1000.manager;
-        const v1629 = v1000.closed;
-        const v1630 = v1000.token;
-        const v1631 = v1000.tokenAmount;
-        const v1632 = v1000.price;
+        const v4645 = v2369.manager;
+        const v4646 = v2369.closed;
+        const v4647 = v2369.token;
+        const v4648 = v2369.tokenAmount;
+        const v4649 = v2369.tokenSupply;
+        const v4650 = v2369.price;
         sim_r.isHalt = false;
         }
       return sim_r;
       }),
     soloSend: true,
-    timeoutAt: ['time', v962],
-    tys: [ctc0, ctc1, ctc2, ctc1, ctc1, ctc1],
+    timeoutAt: ['time', v2334],
+    tys: [ctc0, ctc1, ctc2, ctc11, ctc1, ctc1, ctc1],
     waitIfNotPresent: false
     }));
   if (txn2.didTimeout) {
     const txn3 = await (ctc.sendrecv({
-      args: [v944, v945, v947, v962],
+      args: [v2316, v2317, v2319, v2324, v2334],
       evt_cnt: 0,
       funcNum: 2,
-      lct: v948,
+      lct: v2320,
       onlyIf: true,
       out_tys: [],
-      pay: [stdlib.checkedBigNumberify('./interface.rsh:109:15:decimal', stdlib.UInt_max, '0'), []],
+      pay: [stdlib.checkedBigNumberify('./interface.rsh:116:15:decimal', stdlib.UInt_max, '0'), []],
       sim_p: (async (txn3) => {
         const sim_r = { txns: [], mapRefs: [], maps: [] };
         let sim_txn_ctr = stdlib.UInt_max;
         const getSimTokCtr = () => { sim_txn_ctr = sim_txn_ctr.sub(1); return sim_txn_ctr; };
         
         
-        const {data: [], secs: v1644, time: v1643, didSend: v858, from: v1642 } = txn3;
+        const {data: [], secs: v4662, time: v4661, didSend: v2109, from: v4660 } = txn3;
         
         ;
         sim_r.txns.push({
           kind: 'halt',
-          tok: v947
+          tok: v2319
           })
         sim_r.txns.push({
           kind: 'halt',
@@ -577,55 +840,64 @@ export async function Manager(ctcTop, interact) {
         }),
       soloSend: false,
       timeoutAt: undefined /* mto */,
-      tys: [ctc0, ctc1, ctc2, ctc1],
+      tys: [ctc0, ctc1, ctc2, ctc11, ctc1],
       waitIfNotPresent: false
       }));
-    const {data: [], secs: v1644, time: v1643, didSend: v858, from: v1642 } = txn3;
+    const {data: [], secs: v4662, time: v4661, didSend: v2109, from: v4660 } = txn3;
     ;
     return;
     
     }
   else {
-    const {data: [v977, v978], secs: v980, time: v979, didSend: v132, from: v976 } = txn2;
-    const v981 = stdlib.gt(v977, stdlib.checkedBigNumberify('./interface.rsh:105:27:decimal', stdlib.UInt_max, '0'));
-    stdlib.assert(v981, {
+    const {data: [v2348, v2349], secs: v2351, time: v2350, didSend: v130, from: v2347 } = txn2;
+    const v2352 = stdlib.gt(v2348, stdlib.checkedBigNumberify('./interface.rsh:112:27:decimal', stdlib.UInt_max, '0'));
+    stdlib.assert(v2352, {
       at: 'reach standard library:57:5:application',
-      fs: ['at ./interface.rsh:105:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+      fs: ['at ./interface.rsh:112:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
       msg: 'tokenAmount must be greater than 0',
       who: 'Manager'
       });
-    const v983 = stdlib.gt(v978, stdlib.checkedBigNumberify('./interface.rsh:106:21:decimal', stdlib.UInt_max, '0'));
-    stdlib.assert(v983, {
+    const v2354 = stdlib.gt(v2349, stdlib.checkedBigNumberify('./interface.rsh:113:21:decimal', stdlib.UInt_max, '0'));
+    stdlib.assert(v2354, {
       at: 'reach standard library:57:5:application',
-      fs: ['at ./interface.rsh:106:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+      fs: ['at ./interface.rsh:113:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
       msg: 'price must be greater than 0',
       who: 'Manager'
       });
-    const v985 = stdlib.safeAdd(v945, stdlib.checkedBigNumberify('./interface.rsh:16:20:decimal', stdlib.UInt_max, '1'));
     ;
+    const v2358 = v2324[stdlib.checkedBigNumberify('./interface.rsh:109:11:dot', stdlib.UInt_max, '0')];
+    const v2359 = v2358[stdlib.checkedBigNumberify('./interface.rsh:109:11:dot', stdlib.UInt_max, '0')];
+    const v2360 = stdlib.safeAdd(v2359, v2348);
+    const v2362 = stdlib.Array_set(v2358, '0', v2360);
+    const v2363 = stdlib.Array_set(v2324, stdlib.checkedBigNumberify('./interface.rsh:109:11:dot', stdlib.UInt_max, '0'), v2362);
     ;
+    const v2367 = stdlib.safeSub(v2317, v2317);
     ;
     null;
-    const v999 = {
+    const v2368 = {
       closed: false,
-      manager: v976,
-      price: v978,
-      token: v947,
-      tokenAmount: v977
+      manager: v2347,
+      price: v2349,
+      token: v2319,
+      tokenAmount: v2348,
+      tokenSupply: v2348
       };
-    let v1000 = v999;
-    let v1001 = v979;
+    let v2369 = v2368;
+    let v2370 = v2350;
+    let v2376 = v2363;
+    let v2377 = v2367;
     
     while (await (async () => {
-      const v1041 = v1000.closed;
-      const v1046 = v1041 ? false : true;
+      const v2413 = v2369.closed;
+      const v2419 = v2413 ? false : true;
       
-      return v1046;})()) {
-      const v1047 = v1000.manager;
-      const v1048 = v1000.closed;
-      const v1049 = v1000.token;
-      const v1050 = v1000.tokenAmount;
-      const v1051 = v1000.price;
+      return v2419;})()) {
+      const v2420 = v2369.manager;
+      const v2421 = v2369.closed;
+      const v2422 = v2369.token;
+      const v2423 = v2369.tokenAmount;
+      const v2424 = v2369.tokenSupply;
+      const v2425 = v2369.price;
       const txn3 = await (ctc.recv({
         didSend: false,
         evt_cnt: 1,
@@ -634,135 +906,350 @@ export async function Manager(ctcTop, interact) {
         timeoutAt: undefined /* mto */,
         waitIfNotPresent: false
         }));
-      const {data: [v1121], secs: v1123, time: v1122, didSend: v649, from: v1120 } = txn3;
-      switch (v1121[0]) {
-        case 'buy0_201': {
-          const v1124 = v1121[1];
+      const {data: [v2605], secs: v2607, time: v2606, didSend: v1707, from: v2604 } = txn3;
+      switch (v2605[0]) {
+        case 'buy0_206': {
+          const v2608 = v2605[1];
           undefined /* setApiDetails */;
-          const v1129 = v1124[stdlib.checkedBigNumberify('./interface.rsh:175:10:spread', stdlib.UInt_max, '0')];
-          const v1131 = stdlib.le(v1129, v1050);
-          stdlib.assert(v1131, {
+          const v2613 = v2608[stdlib.checkedBigNumberify('./interface.rsh:244:10:spread', stdlib.UInt_max, '0')];
+          const v2615 = stdlib.le(v2613, v2423);
+          stdlib.assert(v2615, {
             at: 'reach standard library:57:5:application',
-            fs: ['at ./interface.rsh:176:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:175:24:application call to [unknown function] (defined at: ./interface.rsh:175:24:function exp)', 'at ./interface.rsh:124:29:application call to [unknown function] (defined at: ./interface.rsh:175:24:function exp)', 'at ./interface.rsh:124:29:application call to [unknown function] (defined at: ./interface.rsh:124:29:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+            fs: ['at ./interface.rsh:245:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:244:24:application call to [unknown function] (defined at: ./interface.rsh:244:24:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:244:24:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:132:29:function exp)', 'at ./interface.rsh:148:14:application call to [unknown function] (defined at: ./interface.rsh:148:14:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
             msg: 'not enough tokens',
             who: 'Manager'
             });
-          const v1133 = stdlib.safeMul(v1129, v978);
+          const v2617 = stdlib.safeMul(v2613, v2349);
+          const v2670 = stdlib.safeAdd(v2377, v2617);
           ;
-          const v1145 = null;
-          await txn3.getOutput('buy', 'v1145', ctc8, v1145);
+          const v2671 = v2376[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v2672 = v2671[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v2675 = stdlib.Array_set(v2671, '0', v2672);
+          const v2676 = stdlib.Array_set(v2376, stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0'), v2675);
           ;
+          const v2683 = null;
+          await txn3.getOutput('buy', 'v2683', ctc8, v2683);
+          const v2695 = stdlib.safeSub(v2670, v2617);
           ;
-          const v1173 = stdlib.safeSub(v1050, v1129);
-          const v1174 = {
-            closed: v1048,
-            manager: v1047,
-            price: v1051,
-            token: v1049,
-            tokenAmount: v1173
+          const v2696 = v2676[stdlib.checkedBigNumberify('./interface.rsh:251:34:application', stdlib.UInt_max, '0')];
+          const v2697 = v2696[stdlib.checkedBigNumberify('./interface.rsh:251:34:application', stdlib.UInt_max, '0')];
+          const v2701 = stdlib.safeSub(v2697, v2613);
+          const v2703 = stdlib.Array_set(v2696, '0', v2701);
+          const v2704 = stdlib.Array_set(v2676, stdlib.checkedBigNumberify('./interface.rsh:251:34:application', stdlib.UInt_max, '0'), v2703);
+          ;
+          const v2712 = stdlib.safeSub(v2423, v2613);
+          const v2713 = {
+            closed: v2421,
+            manager: v2420,
+            price: v2425,
+            token: v2422,
+            tokenAmount: v2712,
+            tokenSupply: v2424
             };
-          const cv1000 = v1174;
-          const cv1001 = v1122;
+          const cv2369 = v2713;
+          const cv2370 = v2606;
+          const cv2376 = v2704;
+          const cv2377 = v2695;
           
-          v1000 = cv1000;
-          v1001 = cv1001;
+          v2369 = cv2369;
+          v2370 = cv2370;
+          v2376 = cv2376;
+          v2377 = cv2377;
           
           continue;
           break;
           }
-        case 'close0_201': {
-          const v1250 = v1121[1];
+        case 'close0_206': {
+          const v2899 = v2605[1];
           undefined /* setApiDetails */;
           ;
-          const v1305 = stdlib.addressEq(v1120, v1047);
-          stdlib.assert(v1305, {
+          const v2962 = v2376[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v2963 = v2962[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v2966 = stdlib.Array_set(v2962, '0', v2963);
+          const v2967 = stdlib.Array_set(v2376, stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0'), v2966);
+          ;
+          const v3009 = stdlib.addressEq(v2604, v2420);
+          stdlib.assert(v3009, {
             at: 'reach standard library:57:5:application',
-            fs: ['at ./interface.rsh:195:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:197:13:application call to [unknown function] (defined at: ./interface.rsh:197:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+            fs: ['at ./interface.rsh:264:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:266:13:application call to [unknown function] (defined at: ./interface.rsh:266:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
             msg: 'only manager can close',
             who: 'Manager'
             });
-          const v1307 = null;
-          await txn3.getOutput('close', 'v1307', ctc8, v1307);
+          const v3011 = null;
+          await txn3.getOutput('close', 'v3011', ctc8, v3011);
+          const v3019 = v2967[stdlib.checkedBigNumberify('./interface.rsh:268:48:application', stdlib.UInt_max, '0')];
+          const v3020 = v3019[stdlib.checkedBigNumberify('./interface.rsh:268:48:application', stdlib.UInt_max, '0')];
+          const v3024 = stdlib.safeSub(v3020, v2423);
+          const v3026 = stdlib.Array_set(v3019, '0', v3024);
+          const v3027 = stdlib.Array_set(v2967, stdlib.checkedBigNumberify('./interface.rsh:268:48:application', stdlib.UInt_max, '0'), v3026);
           ;
-          const v1329 = {
+          const v3034 = {
             closed: true,
-            manager: v1047,
-            price: v1051,
-            token: v1049,
-            tokenAmount: stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0')
+            manager: v2420,
+            price: v2425,
+            token: v2422,
+            tokenAmount: stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0'),
+            tokenSupply: stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0')
             };
-          const cv1000 = v1329;
-          const cv1001 = v1122;
+          const cv2369 = v3034;
+          const cv2370 = v2606;
+          const cv2376 = v3027;
+          const cv2377 = v2377;
           
-          v1000 = cv1000;
-          v1001 = cv1001;
+          v2369 = cv2369;
+          v2370 = cv2370;
+          v2376 = cv2376;
+          v2377 = cv2377;
           
           continue;
           break;
           }
-        case 'grant0_201': {
-          const v1376 = v1121[1];
+        case 'deposit0_206': {
+          const v3190 = v2605[1];
+          undefined /* setApiDetails */;
+          const v3212 = v3190[stdlib.checkedBigNumberify('./interface.rsh:169:10:spread', stdlib.UInt_max, '0')];
+          const v3214 = stdlib.addressEq(v2604, v2420);
+          stdlib.assert(v3214, {
+            at: 'reach standard library:57:5:application',
+            fs: ['at ./interface.rsh:170:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:169:28:application call to [unknown function] (defined at: ./interface.rsh:169:28:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:169:28:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:132:29:function exp)', 'at ./interface.rsh:148:14:application call to [unknown function] (defined at: ./interface.rsh:148:14:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+            msg: 'only manager can deposit',
+            who: 'Manager'
+            });
+          const v3216 = stdlib.gt(v3212, stdlib.checkedBigNumberify('./interface.rsh:171:19:decimal', stdlib.UInt_max, '0'));
+          stdlib.assert(v3216, {
+            at: 'reach standard library:57:5:application',
+            fs: ['at ./interface.rsh:171:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:169:28:application call to [unknown function] (defined at: ./interface.rsh:169:28:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:169:28:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:132:29:function exp)', 'at ./interface.rsh:148:14:application call to [unknown function] (defined at: ./interface.rsh:148:14:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+            msg: 'deposit must be greater than 0',
+            who: 'Manager'
+            });
+          ;
+          const v3253 = v2376[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v3254 = v3253[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v3255 = stdlib.safeAdd(v3254, v3212);
+          const v3257 = stdlib.Array_set(v3253, '0', v3255);
+          const v3258 = stdlib.Array_set(v2376, stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0'), v3257);
+          ;
+          const v3336 = null;
+          await txn3.getOutput('deposit', 'v3336', ctc8, v3336);
+          const v3350 = stdlib.safeAdd(v2423, v3212);
+          const v3352 = stdlib.safeAdd(v2424, v3212);
+          const v3353 = {
+            closed: v2421,
+            manager: v2420,
+            price: v2425,
+            token: v2422,
+            tokenAmount: v3350,
+            tokenSupply: v3352
+            };
+          const cv2369 = v3353;
+          const cv2370 = v2606;
+          const cv2376 = v3258;
+          const cv2377 = v2377;
+          
+          v2369 = cv2369;
+          v2370 = cv2370;
+          v2376 = cv2376;
+          v2377 = cv2377;
+          
+          continue;
+          break;
+          }
+        case 'grant0_206': {
+          const v3481 = v2605[1];
           undefined /* setApiDetails */;
           ;
-          const v1459 = v1376[stdlib.checkedBigNumberify('./interface.rsh:159:10:spread', stdlib.UInt_max, '0')];
-          const v1461 = stdlib.addressEq(v1120, v1047);
-          stdlib.assert(v1461, {
+          const v3544 = v2376[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v3545 = v3544[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v3548 = stdlib.Array_set(v3544, '0', v3545);
+          const v3549 = stdlib.Array_set(v2376, stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0'), v3548);
+          ;
+          const v3648 = v3481[stdlib.checkedBigNumberify('./interface.rsh:228:10:spread', stdlib.UInt_max, '0')];
+          const v3650 = stdlib.addressEq(v2604, v2420);
+          stdlib.assert(v3650, {
             at: 'reach standard library:57:5:application',
-            fs: ['at ./interface.rsh:160:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:162:13:application call to [unknown function] (defined at: ./interface.rsh:162:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+            fs: ['at ./interface.rsh:229:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:231:13:application call to [unknown function] (defined at: ./interface.rsh:231:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
             msg: 'only manager can grant',
             who: 'Manager'
             });
-          const v1464 = null;
-          await txn3.getOutput('grant', 'v1464', ctc8, v1464);
-          const v1476 = {
-            closed: v1048,
-            manager: v1459,
-            price: v1051,
-            token: v1049,
-            tokenAmount: v1050
+          const v3653 = null;
+          await txn3.getOutput('grant', 'v3653', ctc8, v3653);
+          const v3666 = {
+            closed: v2421,
+            manager: v3648,
+            price: v2425,
+            token: v2422,
+            tokenAmount: v2423,
+            tokenSupply: v2424
             };
-          const cv1000 = v1476;
-          const cv1001 = v1122;
+          const cv2369 = v3666;
+          const cv2370 = v2606;
+          const cv2376 = v3549;
+          const cv2377 = v2377;
           
-          v1000 = cv1000;
-          v1001 = cv1001;
+          v2369 = cv2369;
+          v2370 = cv2370;
+          v2376 = cv2376;
+          v2377 = cv2377;
           
           continue;
           break;
           }
-        case 'update0_201': {
-          const v1502 = v1121[1];
+        case 'touch0_206': {
+          const v3772 = v2605[1];
           undefined /* setApiDetails */;
           ;
-          const v1606 = v1502[stdlib.checkedBigNumberify('./interface.rsh:142:10:spread', stdlib.UInt_max, '0')];
-          const v1608 = stdlib.addressEq(v1120, v1047);
-          stdlib.assert(v1608, {
+          const v3835 = v2376[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v3836 = v3835[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v3839 = stdlib.Array_set(v3835, '0', v3836);
+          const v3840 = stdlib.Array_set(v2376, stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0'), v3839);
+          ;
+          const v3962 = stdlib.addressEq(v2604, v2420);
+          stdlib.assert(v3962, {
             at: 'reach standard library:57:5:application',
-            fs: ['at ./interface.rsh:143:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:146:13:application call to [unknown function] (defined at: ./interface.rsh:146:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+            fs: ['at ./interface.rsh:151:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:153:13:application call to [unknown function] (defined at: ./interface.rsh:153:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+            msg: 'only manager can touch',
+            who: 'Manager'
+            });
+          const v3964 = null;
+          await txn3.getOutput('touch', 'v3964', ctc8, v3964);
+          const v3971 = (stdlib.le(await ctc.getBalance(), v2377) ? stdlib.checkedBigNumberify('./interface.rsh:155:37:application', stdlib.UInt_max, '0') : stdlib.safeSub(await ctc.getBalance(), v2377));
+          const v3972 = stdlib.safeAdd(v3971, v2377);
+          const v3977 = stdlib.safeSub(v3972, v3971);
+          ;
+          const v3978 = v3840[stdlib.checkedBigNumberify('./interface.rsh:156:40:application', stdlib.UInt_max, '0')];
+          const v3979 = v3978[stdlib.checkedBigNumberify('./interface.rsh:156:40:application', stdlib.UInt_max, '0')];
+          const v3980 = (stdlib.le(await ctc.getBalance(v2319), v3979) ? stdlib.checkedBigNumberify('./interface.rsh:156:40:application', stdlib.UInt_max, '0') : stdlib.safeSub(await ctc.getBalance(v2319), v3979));
+          const v3981 = stdlib.safeAdd(v3980, v3979);
+          const v3983 = stdlib.Array_set(v3978, '0', v3981);
+          const v3984 = stdlib.Array_set(v3840, stdlib.checkedBigNumberify('./interface.rsh:156:40:application', stdlib.UInt_max, '0'), v3983);
+          const v3992 = stdlib.safeAdd(v2423, v3980);
+          const v3994 = stdlib.safeAdd(v2424, v3980);
+          const v3995 = {
+            closed: v2421,
+            manager: v2420,
+            price: v2425,
+            token: v2422,
+            tokenAmount: v3992,
+            tokenSupply: v3994
+            };
+          const cv2369 = v3995;
+          const cv2370 = v2606;
+          const cv2376 = v3984;
+          const cv2377 = v3977;
+          
+          v2369 = cv2369;
+          v2370 = cv2370;
+          v2376 = cv2376;
+          v2377 = cv2377;
+          
+          continue;
+          break;
+          }
+        case 'update0_206': {
+          const v4063 = v2605[1];
+          undefined /* setApiDetails */;
+          ;
+          const v4126 = v2376[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v4127 = v4126[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v4130 = stdlib.Array_set(v4126, '0', v4127);
+          const v4131 = stdlib.Array_set(v2376, stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0'), v4130);
+          ;
+          const v4290 = v4063[stdlib.checkedBigNumberify('./interface.rsh:211:10:spread', stdlib.UInt_max, '0')];
+          const v4292 = stdlib.addressEq(v2604, v2420);
+          stdlib.assert(v4292, {
+            at: 'reach standard library:57:5:application',
+            fs: ['at ./interface.rsh:212:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:215:13:application call to [unknown function] (defined at: ./interface.rsh:215:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
             msg: 'only manager can update',
             who: 'Manager'
             });
-          const v1610 = stdlib.gt(v1606, stdlib.checkedBigNumberify('./interface.rsh:144:19:decimal', stdlib.UInt_max, '0'));
-          stdlib.assert(v1610, {
+          const v4294 = stdlib.gt(v4290, stdlib.checkedBigNumberify('./interface.rsh:213:19:decimal', stdlib.UInt_max, '0'));
+          stdlib.assert(v4294, {
             at: 'reach standard library:57:5:application',
-            fs: ['at ./interface.rsh:144:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:146:13:application call to [unknown function] (defined at: ./interface.rsh:146:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+            fs: ['at ./interface.rsh:213:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:215:13:application call to [unknown function] (defined at: ./interface.rsh:215:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
             msg: 'price must be greater than 0',
             who: 'Manager'
             });
-          const v1613 = null;
-          await txn3.getOutput('update', 'v1613', ctc8, v1613);
-          const v1625 = {
-            closed: v1048,
-            manager: v1047,
-            price: v1606,
-            token: v1049,
-            tokenAmount: v1050
+          const v4297 = null;
+          await txn3.getOutput('update', 'v4297', ctc8, v4297);
+          const v4310 = {
+            closed: v2421,
+            manager: v2420,
+            price: v4290,
+            token: v2422,
+            tokenAmount: v2423,
+            tokenSupply: v2424
             };
-          const cv1000 = v1625;
-          const cv1001 = v1122;
+          const cv2369 = v4310;
+          const cv2370 = v2606;
+          const cv2376 = v4131;
+          const cv2377 = v2377;
           
-          v1000 = cv1000;
-          v1001 = cv1001;
+          v2369 = cv2369;
+          v2370 = cv2370;
+          v2376 = cv2376;
+          v2377 = cv2377;
+          
+          continue;
+          break;
+          }
+        case 'withdraw0_206': {
+          const v4354 = v2605[1];
+          undefined /* setApiDetails */;
+          ;
+          const v4417 = v2376[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v4418 = v4417[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v4421 = stdlib.Array_set(v4417, '0', v4418);
+          const v4422 = stdlib.Array_set(v2376, stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0'), v4421);
+          ;
+          const v4605 = v4354[stdlib.checkedBigNumberify('./interface.rsh:188:10:spread', stdlib.UInt_max, '0')];
+          const v4607 = stdlib.addressEq(v2604, v2420);
+          stdlib.assert(v4607, {
+            at: 'reach standard library:57:5:application',
+            fs: ['at ./interface.rsh:189:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:196:13:application call to [unknown function] (defined at: ./interface.rsh:196:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+            msg: 'only manager can withdraw',
+            who: 'Manager'
+            });
+          const v4609 = stdlib.gt(v4605, stdlib.checkedBigNumberify('./interface.rsh:190:19:decimal', stdlib.UInt_max, '0'));
+          stdlib.assert(v4609, {
+            at: 'reach standard library:57:5:application',
+            fs: ['at ./interface.rsh:190:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:196:13:application call to [unknown function] (defined at: ./interface.rsh:196:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+            msg: 'withdraw must be greater than 0',
+            who: 'Manager'
+            });
+          const v4612 = stdlib.le(v4605, v2423);
+          stdlib.assert(v4612, {
+            at: 'reach standard library:57:5:application',
+            fs: ['at ./interface.rsh:191:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:196:13:application call to [unknown function] (defined at: ./interface.rsh:196:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+            msg: 'withdraw must be less than or equal to token amount',
+            who: 'Manager'
+            });
+          const v4615 = null;
+          await txn3.getOutput('withdraw', 'v4615', ctc8, v4615);
+          const v4623 = v4422[stdlib.checkedBigNumberify('./interface.rsh:198:38:application', stdlib.UInt_max, '0')];
+          const v4624 = v4623[stdlib.checkedBigNumberify('./interface.rsh:198:38:application', stdlib.UInt_max, '0')];
+          const v4628 = stdlib.safeSub(v4624, v4605);
+          const v4630 = stdlib.Array_set(v4623, '0', v4628);
+          const v4631 = stdlib.Array_set(v4422, stdlib.checkedBigNumberify('./interface.rsh:198:38:application', stdlib.UInt_max, '0'), v4630);
+          ;
+          const v4639 = stdlib.safeSub(v2423, v4605);
+          const v4641 = stdlib.safeSub(v2424, v4605);
+          const v4642 = {
+            closed: v2421,
+            manager: v2420,
+            price: v2425,
+            token: v2422,
+            tokenAmount: v4639,
+            tokenSupply: v4641
+            };
+          const cv2369 = v4642;
+          const cv2370 = v2606;
+          const cv2376 = v4631;
+          const cv2377 = v2377;
+          
+          v2369 = cv2369;
+          v2370 = cv2370;
+          v2376 = cv2376;
+          v2377 = cv2377;
           
           continue;
           break;
@@ -770,11 +1257,12 @@ export async function Manager(ctcTop, interact) {
         }
       
       }
-    const v1628 = v1000.manager;
-    const v1629 = v1000.closed;
-    const v1630 = v1000.token;
-    const v1631 = v1000.tokenAmount;
-    const v1632 = v1000.price;
+    const v4645 = v2369.manager;
+    const v4646 = v2369.closed;
+    const v4647 = v2369.token;
+    const v4648 = v2369.tokenAmount;
+    const v4649 = v2369.tokenSupply;
+    const v4650 = v2369.price;
     const txn3 = await (ctc.recv({
       didSend: false,
       evt_cnt: 0,
@@ -783,7 +1271,7 @@ export async function Manager(ctcTop, interact) {
       timeoutAt: undefined /* mto */,
       waitIfNotPresent: false
       }));
-    const {data: [], secs: v1636, time: v1635, didSend: v838, from: v1634 } = txn3;
+    const {data: [], secs: v4654, time: v4653, didSend: v2089, from: v4652 } = txn3;
     ;
     return;
     
@@ -807,15 +1295,22 @@ export async function Relay(ctcTop, interact) {
   const ctc4 = stdlib.T_Tuple([]);
   const ctc5 = stdlib.T_Tuple([ctc0]);
   const ctc6 = stdlib.T_Data({
-    buy0_201: ctc3,
-    close0_201: ctc4,
-    grant0_201: ctc5,
-    update0_201: ctc3
+    buy0_206: ctc3,
+    close0_206: ctc4,
+    deposit0_206: ctc3,
+    grant0_206: ctc5,
+    touch0_206: ctc4,
+    update0_206: ctc3,
+    withdraw0_206: ctc3
     });
   const ctc7 = stdlib.T_Null;
   const ctc8 = stdlib.T_Bool;
+  const ctc9 = stdlib.T_Tuple([ctc1, ctc1, ctc8]);
+  const ctc10 = stdlib.T_Array(ctc9, stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '1'));
   
   
+  const v2299 = [stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0'), stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0'), false];
+  const v2300 = [v2299];
   const txn1 = await (ctc.recv({
     didSend: false,
     evt_cnt: 4,
@@ -824,39 +1319,42 @@ export async function Relay(ctcTop, interact) {
     timeoutAt: undefined /* mto */,
     waitIfNotPresent: false
     }));
-  const {data: [v944, v945, v946, v947], secs: v949, time: v948, didSend: v46, from: v943 } = txn1;
+  const {data: [v2316, v2317, v2318, v2319], secs: v2321, time: v2320, didSend: v46, from: v2315 } = txn1;
+  const v2322 = v2300[stdlib.checkedBigNumberify('./.reach/rev/@github.com:nash-protocol:starter-kit:543af82ddab2dcef581e1adb0883cb00a6d2c0aa/util.rsh:33:15:dot', stdlib.UInt_max, '0')];
+  const v2323 = stdlib.Array_set(v2322, '0', stdlib.checkedBigNumberify('./.reach/rev/@github.com:nash-protocol:starter-kit:543af82ddab2dcef581e1adb0883cb00a6d2c0aa/util.rsh:33:15:dot', stdlib.UInt_max, '0'));
+  const v2324 = stdlib.Array_set(v2300, stdlib.checkedBigNumberify('./.reach/rev/@github.com:nash-protocol:starter-kit:543af82ddab2dcef581e1adb0883cb00a6d2c0aa/util.rsh:33:15:dot', stdlib.UInt_max, '0'), v2323);
   ;
   ;
-  const v962 = stdlib.safeAdd(v948, v946);
+  const v2334 = stdlib.safeAdd(v2320, v2318);
   const txn2 = await (ctc.recv({
     didSend: false,
     evt_cnt: 2,
     funcNum: 1,
     out_tys: [ctc1, ctc1],
-    timeoutAt: ['time', v962],
+    timeoutAt: ['time', v2334],
     waitIfNotPresent: false
     }));
   if (txn2.didTimeout) {
     const txn3 = await (ctc.sendrecv({
-      args: [v944, v945, v947, v962],
+      args: [v2316, v2317, v2319, v2324, v2334],
       evt_cnt: 0,
       funcNum: 2,
-      lct: v948,
+      lct: v2320,
       onlyIf: true,
       out_tys: [],
-      pay: [stdlib.checkedBigNumberify('./interface.rsh:109:15:decimal', stdlib.UInt_max, '0'), []],
+      pay: [stdlib.checkedBigNumberify('./interface.rsh:116:15:decimal', stdlib.UInt_max, '0'), []],
       sim_p: (async (txn3) => {
         const sim_r = { txns: [], mapRefs: [], maps: [] };
         let sim_txn_ctr = stdlib.UInt_max;
         const getSimTokCtr = () => { sim_txn_ctr = sim_txn_ctr.sub(1); return sim_txn_ctr; };
         
         
-        const {data: [], secs: v1644, time: v1643, didSend: v858, from: v1642 } = txn3;
+        const {data: [], secs: v4662, time: v4661, didSend: v2109, from: v4660 } = txn3;
         
         ;
         sim_r.txns.push({
           kind: 'halt',
-          tok: v947
+          tok: v2319
           })
         sim_r.txns.push({
           kind: 'halt',
@@ -868,55 +1366,64 @@ export async function Relay(ctcTop, interact) {
         }),
       soloSend: false,
       timeoutAt: undefined /* mto */,
-      tys: [ctc0, ctc1, ctc2, ctc1],
+      tys: [ctc0, ctc1, ctc2, ctc10, ctc1],
       waitIfNotPresent: false
       }));
-    const {data: [], secs: v1644, time: v1643, didSend: v858, from: v1642 } = txn3;
+    const {data: [], secs: v4662, time: v4661, didSend: v2109, from: v4660 } = txn3;
     ;
     return;
     
     }
   else {
-    const {data: [v977, v978], secs: v980, time: v979, didSend: v132, from: v976 } = txn2;
-    const v981 = stdlib.gt(v977, stdlib.checkedBigNumberify('./interface.rsh:105:27:decimal', stdlib.UInt_max, '0'));
-    stdlib.assert(v981, {
+    const {data: [v2348, v2349], secs: v2351, time: v2350, didSend: v130, from: v2347 } = txn2;
+    const v2352 = stdlib.gt(v2348, stdlib.checkedBigNumberify('./interface.rsh:112:27:decimal', stdlib.UInt_max, '0'));
+    stdlib.assert(v2352, {
       at: 'reach standard library:57:5:application',
-      fs: ['at ./interface.rsh:105:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+      fs: ['at ./interface.rsh:112:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
       msg: 'tokenAmount must be greater than 0',
       who: 'Relay'
       });
-    const v983 = stdlib.gt(v978, stdlib.checkedBigNumberify('./interface.rsh:106:21:decimal', stdlib.UInt_max, '0'));
-    stdlib.assert(v983, {
+    const v2354 = stdlib.gt(v2349, stdlib.checkedBigNumberify('./interface.rsh:113:21:decimal', stdlib.UInt_max, '0'));
+    stdlib.assert(v2354, {
       at: 'reach standard library:57:5:application',
-      fs: ['at ./interface.rsh:106:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+      fs: ['at ./interface.rsh:113:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
       msg: 'price must be greater than 0',
       who: 'Relay'
       });
-    const v985 = stdlib.safeAdd(v945, stdlib.checkedBigNumberify('./interface.rsh:16:20:decimal', stdlib.UInt_max, '1'));
     ;
+    const v2358 = v2324[stdlib.checkedBigNumberify('./interface.rsh:109:11:dot', stdlib.UInt_max, '0')];
+    const v2359 = v2358[stdlib.checkedBigNumberify('./interface.rsh:109:11:dot', stdlib.UInt_max, '0')];
+    const v2360 = stdlib.safeAdd(v2359, v2348);
+    const v2362 = stdlib.Array_set(v2358, '0', v2360);
+    const v2363 = stdlib.Array_set(v2324, stdlib.checkedBigNumberify('./interface.rsh:109:11:dot', stdlib.UInt_max, '0'), v2362);
     ;
+    const v2367 = stdlib.safeSub(v2317, v2317);
     ;
     null;
-    const v999 = {
+    const v2368 = {
       closed: false,
-      manager: v976,
-      price: v978,
-      token: v947,
-      tokenAmount: v977
+      manager: v2347,
+      price: v2349,
+      token: v2319,
+      tokenAmount: v2348,
+      tokenSupply: v2348
       };
-    let v1000 = v999;
-    let v1001 = v979;
+    let v2369 = v2368;
+    let v2370 = v2350;
+    let v2376 = v2363;
+    let v2377 = v2367;
     
     while (await (async () => {
-      const v1041 = v1000.closed;
-      const v1046 = v1041 ? false : true;
+      const v2413 = v2369.closed;
+      const v2419 = v2413 ? false : true;
       
-      return v1046;})()) {
-      const v1047 = v1000.manager;
-      const v1048 = v1000.closed;
-      const v1049 = v1000.token;
-      const v1050 = v1000.tokenAmount;
-      const v1051 = v1000.price;
+      return v2419;})()) {
+      const v2420 = v2369.manager;
+      const v2421 = v2369.closed;
+      const v2422 = v2369.token;
+      const v2423 = v2369.tokenAmount;
+      const v2424 = v2369.tokenSupply;
+      const v2425 = v2369.price;
       const txn3 = await (ctc.recv({
         didSend: false,
         evt_cnt: 1,
@@ -925,135 +1432,350 @@ export async function Relay(ctcTop, interact) {
         timeoutAt: undefined /* mto */,
         waitIfNotPresent: false
         }));
-      const {data: [v1121], secs: v1123, time: v1122, didSend: v649, from: v1120 } = txn3;
-      switch (v1121[0]) {
-        case 'buy0_201': {
-          const v1124 = v1121[1];
+      const {data: [v2605], secs: v2607, time: v2606, didSend: v1707, from: v2604 } = txn3;
+      switch (v2605[0]) {
+        case 'buy0_206': {
+          const v2608 = v2605[1];
           undefined /* setApiDetails */;
-          const v1129 = v1124[stdlib.checkedBigNumberify('./interface.rsh:175:10:spread', stdlib.UInt_max, '0')];
-          const v1131 = stdlib.le(v1129, v1050);
-          stdlib.assert(v1131, {
+          const v2613 = v2608[stdlib.checkedBigNumberify('./interface.rsh:244:10:spread', stdlib.UInt_max, '0')];
+          const v2615 = stdlib.le(v2613, v2423);
+          stdlib.assert(v2615, {
             at: 'reach standard library:57:5:application',
-            fs: ['at ./interface.rsh:176:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:175:24:application call to [unknown function] (defined at: ./interface.rsh:175:24:function exp)', 'at ./interface.rsh:124:29:application call to [unknown function] (defined at: ./interface.rsh:175:24:function exp)', 'at ./interface.rsh:124:29:application call to [unknown function] (defined at: ./interface.rsh:124:29:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+            fs: ['at ./interface.rsh:245:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:244:24:application call to [unknown function] (defined at: ./interface.rsh:244:24:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:244:24:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:132:29:function exp)', 'at ./interface.rsh:148:14:application call to [unknown function] (defined at: ./interface.rsh:148:14:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
             msg: 'not enough tokens',
             who: 'Relay'
             });
-          const v1133 = stdlib.safeMul(v1129, v978);
+          const v2617 = stdlib.safeMul(v2613, v2349);
+          const v2670 = stdlib.safeAdd(v2377, v2617);
           ;
-          const v1145 = null;
-          await txn3.getOutput('buy', 'v1145', ctc7, v1145);
+          const v2671 = v2376[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v2672 = v2671[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v2675 = stdlib.Array_set(v2671, '0', v2672);
+          const v2676 = stdlib.Array_set(v2376, stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0'), v2675);
           ;
+          const v2683 = null;
+          await txn3.getOutput('buy', 'v2683', ctc7, v2683);
+          const v2695 = stdlib.safeSub(v2670, v2617);
           ;
-          const v1173 = stdlib.safeSub(v1050, v1129);
-          const v1174 = {
-            closed: v1048,
-            manager: v1047,
-            price: v1051,
-            token: v1049,
-            tokenAmount: v1173
+          const v2696 = v2676[stdlib.checkedBigNumberify('./interface.rsh:251:34:application', stdlib.UInt_max, '0')];
+          const v2697 = v2696[stdlib.checkedBigNumberify('./interface.rsh:251:34:application', stdlib.UInt_max, '0')];
+          const v2701 = stdlib.safeSub(v2697, v2613);
+          const v2703 = stdlib.Array_set(v2696, '0', v2701);
+          const v2704 = stdlib.Array_set(v2676, stdlib.checkedBigNumberify('./interface.rsh:251:34:application', stdlib.UInt_max, '0'), v2703);
+          ;
+          const v2712 = stdlib.safeSub(v2423, v2613);
+          const v2713 = {
+            closed: v2421,
+            manager: v2420,
+            price: v2425,
+            token: v2422,
+            tokenAmount: v2712,
+            tokenSupply: v2424
             };
-          const cv1000 = v1174;
-          const cv1001 = v1122;
+          const cv2369 = v2713;
+          const cv2370 = v2606;
+          const cv2376 = v2704;
+          const cv2377 = v2695;
           
-          v1000 = cv1000;
-          v1001 = cv1001;
+          v2369 = cv2369;
+          v2370 = cv2370;
+          v2376 = cv2376;
+          v2377 = cv2377;
           
           continue;
           break;
           }
-        case 'close0_201': {
-          const v1250 = v1121[1];
+        case 'close0_206': {
+          const v2899 = v2605[1];
           undefined /* setApiDetails */;
           ;
-          const v1305 = stdlib.addressEq(v1120, v1047);
-          stdlib.assert(v1305, {
+          const v2962 = v2376[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v2963 = v2962[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v2966 = stdlib.Array_set(v2962, '0', v2963);
+          const v2967 = stdlib.Array_set(v2376, stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0'), v2966);
+          ;
+          const v3009 = stdlib.addressEq(v2604, v2420);
+          stdlib.assert(v3009, {
             at: 'reach standard library:57:5:application',
-            fs: ['at ./interface.rsh:195:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:197:13:application call to [unknown function] (defined at: ./interface.rsh:197:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+            fs: ['at ./interface.rsh:264:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:266:13:application call to [unknown function] (defined at: ./interface.rsh:266:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
             msg: 'only manager can close',
             who: 'Relay'
             });
-          const v1307 = null;
-          await txn3.getOutput('close', 'v1307', ctc7, v1307);
+          const v3011 = null;
+          await txn3.getOutput('close', 'v3011', ctc7, v3011);
+          const v3019 = v2967[stdlib.checkedBigNumberify('./interface.rsh:268:48:application', stdlib.UInt_max, '0')];
+          const v3020 = v3019[stdlib.checkedBigNumberify('./interface.rsh:268:48:application', stdlib.UInt_max, '0')];
+          const v3024 = stdlib.safeSub(v3020, v2423);
+          const v3026 = stdlib.Array_set(v3019, '0', v3024);
+          const v3027 = stdlib.Array_set(v2967, stdlib.checkedBigNumberify('./interface.rsh:268:48:application', stdlib.UInt_max, '0'), v3026);
           ;
-          const v1329 = {
+          const v3034 = {
             closed: true,
-            manager: v1047,
-            price: v1051,
-            token: v1049,
-            tokenAmount: stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0')
+            manager: v2420,
+            price: v2425,
+            token: v2422,
+            tokenAmount: stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0'),
+            tokenSupply: stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0')
             };
-          const cv1000 = v1329;
-          const cv1001 = v1122;
+          const cv2369 = v3034;
+          const cv2370 = v2606;
+          const cv2376 = v3027;
+          const cv2377 = v2377;
           
-          v1000 = cv1000;
-          v1001 = cv1001;
+          v2369 = cv2369;
+          v2370 = cv2370;
+          v2376 = cv2376;
+          v2377 = cv2377;
           
           continue;
           break;
           }
-        case 'grant0_201': {
-          const v1376 = v1121[1];
+        case 'deposit0_206': {
+          const v3190 = v2605[1];
+          undefined /* setApiDetails */;
+          const v3212 = v3190[stdlib.checkedBigNumberify('./interface.rsh:169:10:spread', stdlib.UInt_max, '0')];
+          const v3214 = stdlib.addressEq(v2604, v2420);
+          stdlib.assert(v3214, {
+            at: 'reach standard library:57:5:application',
+            fs: ['at ./interface.rsh:170:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:169:28:application call to [unknown function] (defined at: ./interface.rsh:169:28:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:169:28:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:132:29:function exp)', 'at ./interface.rsh:148:14:application call to [unknown function] (defined at: ./interface.rsh:148:14:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+            msg: 'only manager can deposit',
+            who: 'Relay'
+            });
+          const v3216 = stdlib.gt(v3212, stdlib.checkedBigNumberify('./interface.rsh:171:19:decimal', stdlib.UInt_max, '0'));
+          stdlib.assert(v3216, {
+            at: 'reach standard library:57:5:application',
+            fs: ['at ./interface.rsh:171:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:169:28:application call to [unknown function] (defined at: ./interface.rsh:169:28:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:169:28:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:132:29:function exp)', 'at ./interface.rsh:148:14:application call to [unknown function] (defined at: ./interface.rsh:148:14:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+            msg: 'deposit must be greater than 0',
+            who: 'Relay'
+            });
+          ;
+          const v3253 = v2376[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v3254 = v3253[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v3255 = stdlib.safeAdd(v3254, v3212);
+          const v3257 = stdlib.Array_set(v3253, '0', v3255);
+          const v3258 = stdlib.Array_set(v2376, stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0'), v3257);
+          ;
+          const v3336 = null;
+          await txn3.getOutput('deposit', 'v3336', ctc7, v3336);
+          const v3350 = stdlib.safeAdd(v2423, v3212);
+          const v3352 = stdlib.safeAdd(v2424, v3212);
+          const v3353 = {
+            closed: v2421,
+            manager: v2420,
+            price: v2425,
+            token: v2422,
+            tokenAmount: v3350,
+            tokenSupply: v3352
+            };
+          const cv2369 = v3353;
+          const cv2370 = v2606;
+          const cv2376 = v3258;
+          const cv2377 = v2377;
+          
+          v2369 = cv2369;
+          v2370 = cv2370;
+          v2376 = cv2376;
+          v2377 = cv2377;
+          
+          continue;
+          break;
+          }
+        case 'grant0_206': {
+          const v3481 = v2605[1];
           undefined /* setApiDetails */;
           ;
-          const v1459 = v1376[stdlib.checkedBigNumberify('./interface.rsh:159:10:spread', stdlib.UInt_max, '0')];
-          const v1461 = stdlib.addressEq(v1120, v1047);
-          stdlib.assert(v1461, {
+          const v3544 = v2376[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v3545 = v3544[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v3548 = stdlib.Array_set(v3544, '0', v3545);
+          const v3549 = stdlib.Array_set(v2376, stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0'), v3548);
+          ;
+          const v3648 = v3481[stdlib.checkedBigNumberify('./interface.rsh:228:10:spread', stdlib.UInt_max, '0')];
+          const v3650 = stdlib.addressEq(v2604, v2420);
+          stdlib.assert(v3650, {
             at: 'reach standard library:57:5:application',
-            fs: ['at ./interface.rsh:160:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:162:13:application call to [unknown function] (defined at: ./interface.rsh:162:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+            fs: ['at ./interface.rsh:229:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:231:13:application call to [unknown function] (defined at: ./interface.rsh:231:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
             msg: 'only manager can grant',
             who: 'Relay'
             });
-          const v1464 = null;
-          await txn3.getOutput('grant', 'v1464', ctc7, v1464);
-          const v1476 = {
-            closed: v1048,
-            manager: v1459,
-            price: v1051,
-            token: v1049,
-            tokenAmount: v1050
+          const v3653 = null;
+          await txn3.getOutput('grant', 'v3653', ctc7, v3653);
+          const v3666 = {
+            closed: v2421,
+            manager: v3648,
+            price: v2425,
+            token: v2422,
+            tokenAmount: v2423,
+            tokenSupply: v2424
             };
-          const cv1000 = v1476;
-          const cv1001 = v1122;
+          const cv2369 = v3666;
+          const cv2370 = v2606;
+          const cv2376 = v3549;
+          const cv2377 = v2377;
           
-          v1000 = cv1000;
-          v1001 = cv1001;
+          v2369 = cv2369;
+          v2370 = cv2370;
+          v2376 = cv2376;
+          v2377 = cv2377;
           
           continue;
           break;
           }
-        case 'update0_201': {
-          const v1502 = v1121[1];
+        case 'touch0_206': {
+          const v3772 = v2605[1];
           undefined /* setApiDetails */;
           ;
-          const v1606 = v1502[stdlib.checkedBigNumberify('./interface.rsh:142:10:spread', stdlib.UInt_max, '0')];
-          const v1608 = stdlib.addressEq(v1120, v1047);
-          stdlib.assert(v1608, {
+          const v3835 = v2376[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v3836 = v3835[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v3839 = stdlib.Array_set(v3835, '0', v3836);
+          const v3840 = stdlib.Array_set(v2376, stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0'), v3839);
+          ;
+          const v3962 = stdlib.addressEq(v2604, v2420);
+          stdlib.assert(v3962, {
             at: 'reach standard library:57:5:application',
-            fs: ['at ./interface.rsh:143:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:146:13:application call to [unknown function] (defined at: ./interface.rsh:146:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+            fs: ['at ./interface.rsh:151:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:153:13:application call to [unknown function] (defined at: ./interface.rsh:153:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+            msg: 'only manager can touch',
+            who: 'Relay'
+            });
+          const v3964 = null;
+          await txn3.getOutput('touch', 'v3964', ctc7, v3964);
+          const v3971 = (stdlib.le(await ctc.getBalance(), v2377) ? stdlib.checkedBigNumberify('./interface.rsh:155:37:application', stdlib.UInt_max, '0') : stdlib.safeSub(await ctc.getBalance(), v2377));
+          const v3972 = stdlib.safeAdd(v3971, v2377);
+          const v3977 = stdlib.safeSub(v3972, v3971);
+          ;
+          const v3978 = v3840[stdlib.checkedBigNumberify('./interface.rsh:156:40:application', stdlib.UInt_max, '0')];
+          const v3979 = v3978[stdlib.checkedBigNumberify('./interface.rsh:156:40:application', stdlib.UInt_max, '0')];
+          const v3980 = (stdlib.le(await ctc.getBalance(v2319), v3979) ? stdlib.checkedBigNumberify('./interface.rsh:156:40:application', stdlib.UInt_max, '0') : stdlib.safeSub(await ctc.getBalance(v2319), v3979));
+          const v3981 = stdlib.safeAdd(v3980, v3979);
+          const v3983 = stdlib.Array_set(v3978, '0', v3981);
+          const v3984 = stdlib.Array_set(v3840, stdlib.checkedBigNumberify('./interface.rsh:156:40:application', stdlib.UInt_max, '0'), v3983);
+          const v3992 = stdlib.safeAdd(v2423, v3980);
+          const v3994 = stdlib.safeAdd(v2424, v3980);
+          const v3995 = {
+            closed: v2421,
+            manager: v2420,
+            price: v2425,
+            token: v2422,
+            tokenAmount: v3992,
+            tokenSupply: v3994
+            };
+          const cv2369 = v3995;
+          const cv2370 = v2606;
+          const cv2376 = v3984;
+          const cv2377 = v3977;
+          
+          v2369 = cv2369;
+          v2370 = cv2370;
+          v2376 = cv2376;
+          v2377 = cv2377;
+          
+          continue;
+          break;
+          }
+        case 'update0_206': {
+          const v4063 = v2605[1];
+          undefined /* setApiDetails */;
+          ;
+          const v4126 = v2376[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v4127 = v4126[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v4130 = stdlib.Array_set(v4126, '0', v4127);
+          const v4131 = stdlib.Array_set(v2376, stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0'), v4130);
+          ;
+          const v4290 = v4063[stdlib.checkedBigNumberify('./interface.rsh:211:10:spread', stdlib.UInt_max, '0')];
+          const v4292 = stdlib.addressEq(v2604, v2420);
+          stdlib.assert(v4292, {
+            at: 'reach standard library:57:5:application',
+            fs: ['at ./interface.rsh:212:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:215:13:application call to [unknown function] (defined at: ./interface.rsh:215:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
             msg: 'only manager can update',
             who: 'Relay'
             });
-          const v1610 = stdlib.gt(v1606, stdlib.checkedBigNumberify('./interface.rsh:144:19:decimal', stdlib.UInt_max, '0'));
-          stdlib.assert(v1610, {
+          const v4294 = stdlib.gt(v4290, stdlib.checkedBigNumberify('./interface.rsh:213:19:decimal', stdlib.UInt_max, '0'));
+          stdlib.assert(v4294, {
             at: 'reach standard library:57:5:application',
-            fs: ['at ./interface.rsh:144:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:146:13:application call to [unknown function] (defined at: ./interface.rsh:146:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+            fs: ['at ./interface.rsh:213:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:215:13:application call to [unknown function] (defined at: ./interface.rsh:215:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
             msg: 'price must be greater than 0',
             who: 'Relay'
             });
-          const v1613 = null;
-          await txn3.getOutput('update', 'v1613', ctc7, v1613);
-          const v1625 = {
-            closed: v1048,
-            manager: v1047,
-            price: v1606,
-            token: v1049,
-            tokenAmount: v1050
+          const v4297 = null;
+          await txn3.getOutput('update', 'v4297', ctc7, v4297);
+          const v4310 = {
+            closed: v2421,
+            manager: v2420,
+            price: v4290,
+            token: v2422,
+            tokenAmount: v2423,
+            tokenSupply: v2424
             };
-          const cv1000 = v1625;
-          const cv1001 = v1122;
+          const cv2369 = v4310;
+          const cv2370 = v2606;
+          const cv2376 = v4131;
+          const cv2377 = v2377;
           
-          v1000 = cv1000;
-          v1001 = cv1001;
+          v2369 = cv2369;
+          v2370 = cv2370;
+          v2376 = cv2376;
+          v2377 = cv2377;
+          
+          continue;
+          break;
+          }
+        case 'withdraw0_206': {
+          const v4354 = v2605[1];
+          undefined /* setApiDetails */;
+          ;
+          const v4417 = v2376[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v4418 = v4417[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v4421 = stdlib.Array_set(v4417, '0', v4418);
+          const v4422 = stdlib.Array_set(v2376, stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0'), v4421);
+          ;
+          const v4605 = v4354[stdlib.checkedBigNumberify('./interface.rsh:188:10:spread', stdlib.UInt_max, '0')];
+          const v4607 = stdlib.addressEq(v2604, v2420);
+          stdlib.assert(v4607, {
+            at: 'reach standard library:57:5:application',
+            fs: ['at ./interface.rsh:189:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:196:13:application call to [unknown function] (defined at: ./interface.rsh:196:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+            msg: 'only manager can withdraw',
+            who: 'Relay'
+            });
+          const v4609 = stdlib.gt(v4605, stdlib.checkedBigNumberify('./interface.rsh:190:19:decimal', stdlib.UInt_max, '0'));
+          stdlib.assert(v4609, {
+            at: 'reach standard library:57:5:application',
+            fs: ['at ./interface.rsh:190:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:196:13:application call to [unknown function] (defined at: ./interface.rsh:196:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+            msg: 'withdraw must be greater than 0',
+            who: 'Relay'
+            });
+          const v4612 = stdlib.le(v4605, v2423);
+          stdlib.assert(v4612, {
+            at: 'reach standard library:57:5:application',
+            fs: ['at ./interface.rsh:191:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:196:13:application call to [unknown function] (defined at: ./interface.rsh:196:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+            msg: 'withdraw must be less than or equal to token amount',
+            who: 'Relay'
+            });
+          const v4615 = null;
+          await txn3.getOutput('withdraw', 'v4615', ctc7, v4615);
+          const v4623 = v4422[stdlib.checkedBigNumberify('./interface.rsh:198:38:application', stdlib.UInt_max, '0')];
+          const v4624 = v4623[stdlib.checkedBigNumberify('./interface.rsh:198:38:application', stdlib.UInt_max, '0')];
+          const v4628 = stdlib.safeSub(v4624, v4605);
+          const v4630 = stdlib.Array_set(v4623, '0', v4628);
+          const v4631 = stdlib.Array_set(v4422, stdlib.checkedBigNumberify('./interface.rsh:198:38:application', stdlib.UInt_max, '0'), v4630);
+          ;
+          const v4639 = stdlib.safeSub(v2423, v4605);
+          const v4641 = stdlib.safeSub(v2424, v4605);
+          const v4642 = {
+            closed: v2421,
+            manager: v2420,
+            price: v2425,
+            token: v2422,
+            tokenAmount: v4639,
+            tokenSupply: v4641
+            };
+          const cv2369 = v4642;
+          const cv2370 = v2606;
+          const cv2376 = v4631;
+          const cv2377 = v2377;
+          
+          v2369 = cv2369;
+          v2370 = cv2370;
+          v2376 = cv2376;
+          v2377 = cv2377;
           
           continue;
           break;
@@ -1061,31 +1783,32 @@ export async function Relay(ctcTop, interact) {
         }
       
       }
-    const v1628 = v1000.manager;
-    const v1629 = v1000.closed;
-    const v1630 = v1000.token;
-    const v1631 = v1000.tokenAmount;
-    const v1632 = v1000.price;
+    const v4645 = v2369.manager;
+    const v4646 = v2369.closed;
+    const v4647 = v2369.token;
+    const v4648 = v2369.tokenAmount;
+    const v4649 = v2369.tokenSupply;
+    const v4650 = v2369.price;
     const txn3 = await (ctc.sendrecv({
-      args: [v947, v1628, v1629, v1630, v1631, v1632],
+      args: [v2319, v4645, v4646, v4647, v4648, v4649, v4650],
       evt_cnt: 0,
       funcNum: 4,
-      lct: v1001,
+      lct: v2370,
       onlyIf: true,
       out_tys: [],
-      pay: [stdlib.checkedBigNumberify('./interface.rsh:212:9:decimal', stdlib.UInt_max, '0'), []],
+      pay: [stdlib.checkedBigNumberify('./interface.rsh:282:9:decimal', stdlib.UInt_max, '0'), []],
       sim_p: (async (txn3) => {
         const sim_r = { txns: [], mapRefs: [], maps: [] };
         let sim_txn_ctr = stdlib.UInt_max;
         const getSimTokCtr = () => { sim_txn_ctr = sim_txn_ctr.sub(1); return sim_txn_ctr; };
         
         
-        const {data: [], secs: v1636, time: v1635, didSend: v838, from: v1634 } = txn3;
+        const {data: [], secs: v4654, time: v4653, didSend: v2089, from: v4652 } = txn3;
         
         ;
         sim_r.txns.push({
           kind: 'halt',
-          tok: v947
+          tok: v2319
           })
         sim_r.txns.push({
           kind: 'halt',
@@ -1097,10 +1820,10 @@ export async function Relay(ctcTop, interact) {
         }),
       soloSend: true,
       timeoutAt: undefined /* mto */,
-      tys: [ctc2, ctc0, ctc8, ctc2, ctc1, ctc1],
+      tys: [ctc2, ctc0, ctc8, ctc2, ctc1, ctc1, ctc1],
       waitIfNotPresent: false
       }));
-    const {data: [], secs: v1636, time: v1635, didSend: v838, from: v1634 } = txn3;
+    const {data: [], secs: v4654, time: v4653, didSend: v2089, from: v4652 } = txn3;
     ;
     return;
     
@@ -1124,14 +1847,22 @@ export async function Verifier(ctcTop, interact) {
   const ctc4 = stdlib.T_Tuple([]);
   const ctc5 = stdlib.T_Tuple([ctc0]);
   const ctc6 = stdlib.T_Data({
-    buy0_201: ctc3,
-    close0_201: ctc4,
-    grant0_201: ctc5,
-    update0_201: ctc3
+    buy0_206: ctc3,
+    close0_206: ctc4,
+    deposit0_206: ctc3,
+    grant0_206: ctc5,
+    touch0_206: ctc4,
+    update0_206: ctc3,
+    withdraw0_206: ctc3
     });
   const ctc7 = stdlib.T_Null;
+  const ctc8 = stdlib.T_Bool;
+  const ctc9 = stdlib.T_Tuple([ctc1, ctc1, ctc8]);
+  const ctc10 = stdlib.T_Array(ctc9, stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '1'));
   
   
+  const v2299 = [stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0'), stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0'), false];
+  const v2300 = [v2299];
   const txn1 = await (ctc.recv({
     didSend: false,
     evt_cnt: 4,
@@ -1140,39 +1871,42 @@ export async function Verifier(ctcTop, interact) {
     timeoutAt: undefined /* mto */,
     waitIfNotPresent: false
     }));
-  const {data: [v944, v945, v946, v947], secs: v949, time: v948, didSend: v46, from: v943 } = txn1;
+  const {data: [v2316, v2317, v2318, v2319], secs: v2321, time: v2320, didSend: v46, from: v2315 } = txn1;
+  const v2322 = v2300[stdlib.checkedBigNumberify('./.reach/rev/@github.com:nash-protocol:starter-kit:543af82ddab2dcef581e1adb0883cb00a6d2c0aa/util.rsh:33:15:dot', stdlib.UInt_max, '0')];
+  const v2323 = stdlib.Array_set(v2322, '0', stdlib.checkedBigNumberify('./.reach/rev/@github.com:nash-protocol:starter-kit:543af82ddab2dcef581e1adb0883cb00a6d2c0aa/util.rsh:33:15:dot', stdlib.UInt_max, '0'));
+  const v2324 = stdlib.Array_set(v2300, stdlib.checkedBigNumberify('./.reach/rev/@github.com:nash-protocol:starter-kit:543af82ddab2dcef581e1adb0883cb00a6d2c0aa/util.rsh:33:15:dot', stdlib.UInt_max, '0'), v2323);
   ;
   ;
-  const v962 = stdlib.safeAdd(v948, v946);
+  const v2334 = stdlib.safeAdd(v2320, v2318);
   const txn2 = await (ctc.recv({
     didSend: false,
     evt_cnt: 2,
     funcNum: 1,
     out_tys: [ctc1, ctc1],
-    timeoutAt: ['time', v962],
+    timeoutAt: ['time', v2334],
     waitIfNotPresent: false
     }));
   if (txn2.didTimeout) {
     const txn3 = await (ctc.sendrecv({
-      args: [v944, v945, v947, v962],
+      args: [v2316, v2317, v2319, v2324, v2334],
       evt_cnt: 0,
       funcNum: 2,
-      lct: v948,
+      lct: v2320,
       onlyIf: true,
       out_tys: [],
-      pay: [stdlib.checkedBigNumberify('./interface.rsh:109:15:decimal', stdlib.UInt_max, '0'), []],
+      pay: [stdlib.checkedBigNumberify('./interface.rsh:116:15:decimal', stdlib.UInt_max, '0'), []],
       sim_p: (async (txn3) => {
         const sim_r = { txns: [], mapRefs: [], maps: [] };
         let sim_txn_ctr = stdlib.UInt_max;
         const getSimTokCtr = () => { sim_txn_ctr = sim_txn_ctr.sub(1); return sim_txn_ctr; };
         
         
-        const {data: [], secs: v1644, time: v1643, didSend: v858, from: v1642 } = txn3;
+        const {data: [], secs: v4662, time: v4661, didSend: v2109, from: v4660 } = txn3;
         
         ;
         sim_r.txns.push({
           kind: 'halt',
-          tok: v947
+          tok: v2319
           })
         sim_r.txns.push({
           kind: 'halt',
@@ -1184,55 +1918,64 @@ export async function Verifier(ctcTop, interact) {
         }),
       soloSend: false,
       timeoutAt: undefined /* mto */,
-      tys: [ctc0, ctc1, ctc2, ctc1],
+      tys: [ctc0, ctc1, ctc2, ctc10, ctc1],
       waitIfNotPresent: false
       }));
-    const {data: [], secs: v1644, time: v1643, didSend: v858, from: v1642 } = txn3;
+    const {data: [], secs: v4662, time: v4661, didSend: v2109, from: v4660 } = txn3;
     ;
     return;
     
     }
   else {
-    const {data: [v977, v978], secs: v980, time: v979, didSend: v132, from: v976 } = txn2;
-    const v981 = stdlib.gt(v977, stdlib.checkedBigNumberify('./interface.rsh:105:27:decimal', stdlib.UInt_max, '0'));
-    stdlib.assert(v981, {
+    const {data: [v2348, v2349], secs: v2351, time: v2350, didSend: v130, from: v2347 } = txn2;
+    const v2352 = stdlib.gt(v2348, stdlib.checkedBigNumberify('./interface.rsh:112:27:decimal', stdlib.UInt_max, '0'));
+    stdlib.assert(v2352, {
       at: 'reach standard library:57:5:application',
-      fs: ['at ./interface.rsh:105:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+      fs: ['at ./interface.rsh:112:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
       msg: 'tokenAmount must be greater than 0',
       who: 'Verifier'
       });
-    const v983 = stdlib.gt(v978, stdlib.checkedBigNumberify('./interface.rsh:106:21:decimal', stdlib.UInt_max, '0'));
-    stdlib.assert(v983, {
+    const v2354 = stdlib.gt(v2349, stdlib.checkedBigNumberify('./interface.rsh:113:21:decimal', stdlib.UInt_max, '0'));
+    stdlib.assert(v2354, {
       at: 'reach standard library:57:5:application',
-      fs: ['at ./interface.rsh:106:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+      fs: ['at ./interface.rsh:113:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
       msg: 'price must be greater than 0',
       who: 'Verifier'
       });
-    const v985 = stdlib.safeAdd(v945, stdlib.checkedBigNumberify('./interface.rsh:16:20:decimal', stdlib.UInt_max, '1'));
     ;
+    const v2358 = v2324[stdlib.checkedBigNumberify('./interface.rsh:109:11:dot', stdlib.UInt_max, '0')];
+    const v2359 = v2358[stdlib.checkedBigNumberify('./interface.rsh:109:11:dot', stdlib.UInt_max, '0')];
+    const v2360 = stdlib.safeAdd(v2359, v2348);
+    const v2362 = stdlib.Array_set(v2358, '0', v2360);
+    const v2363 = stdlib.Array_set(v2324, stdlib.checkedBigNumberify('./interface.rsh:109:11:dot', stdlib.UInt_max, '0'), v2362);
     ;
+    const v2367 = stdlib.safeSub(v2317, v2317);
     ;
     null;
-    const v999 = {
+    const v2368 = {
       closed: false,
-      manager: v976,
-      price: v978,
-      token: v947,
-      tokenAmount: v977
+      manager: v2347,
+      price: v2349,
+      token: v2319,
+      tokenAmount: v2348,
+      tokenSupply: v2348
       };
-    let v1000 = v999;
-    let v1001 = v979;
+    let v2369 = v2368;
+    let v2370 = v2350;
+    let v2376 = v2363;
+    let v2377 = v2367;
     
     while (await (async () => {
-      const v1041 = v1000.closed;
-      const v1046 = v1041 ? false : true;
+      const v2413 = v2369.closed;
+      const v2419 = v2413 ? false : true;
       
-      return v1046;})()) {
-      const v1047 = v1000.manager;
-      const v1048 = v1000.closed;
-      const v1049 = v1000.token;
-      const v1050 = v1000.tokenAmount;
-      const v1051 = v1000.price;
+      return v2419;})()) {
+      const v2420 = v2369.manager;
+      const v2421 = v2369.closed;
+      const v2422 = v2369.token;
+      const v2423 = v2369.tokenAmount;
+      const v2424 = v2369.tokenSupply;
+      const v2425 = v2369.price;
       const txn3 = await (ctc.recv({
         didSend: false,
         evt_cnt: 1,
@@ -1241,135 +1984,350 @@ export async function Verifier(ctcTop, interact) {
         timeoutAt: undefined /* mto */,
         waitIfNotPresent: false
         }));
-      const {data: [v1121], secs: v1123, time: v1122, didSend: v649, from: v1120 } = txn3;
-      switch (v1121[0]) {
-        case 'buy0_201': {
-          const v1124 = v1121[1];
+      const {data: [v2605], secs: v2607, time: v2606, didSend: v1707, from: v2604 } = txn3;
+      switch (v2605[0]) {
+        case 'buy0_206': {
+          const v2608 = v2605[1];
           undefined /* setApiDetails */;
-          const v1129 = v1124[stdlib.checkedBigNumberify('./interface.rsh:175:10:spread', stdlib.UInt_max, '0')];
-          const v1131 = stdlib.le(v1129, v1050);
-          stdlib.assert(v1131, {
+          const v2613 = v2608[stdlib.checkedBigNumberify('./interface.rsh:244:10:spread', stdlib.UInt_max, '0')];
+          const v2615 = stdlib.le(v2613, v2423);
+          stdlib.assert(v2615, {
             at: 'reach standard library:57:5:application',
-            fs: ['at ./interface.rsh:176:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:175:24:application call to [unknown function] (defined at: ./interface.rsh:175:24:function exp)', 'at ./interface.rsh:124:29:application call to [unknown function] (defined at: ./interface.rsh:175:24:function exp)', 'at ./interface.rsh:124:29:application call to [unknown function] (defined at: ./interface.rsh:124:29:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+            fs: ['at ./interface.rsh:245:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:244:24:application call to [unknown function] (defined at: ./interface.rsh:244:24:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:244:24:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:132:29:function exp)', 'at ./interface.rsh:148:14:application call to [unknown function] (defined at: ./interface.rsh:148:14:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
             msg: 'not enough tokens',
             who: 'Verifier'
             });
-          const v1133 = stdlib.safeMul(v1129, v978);
+          const v2617 = stdlib.safeMul(v2613, v2349);
+          const v2670 = stdlib.safeAdd(v2377, v2617);
           ;
-          const v1145 = null;
-          await txn3.getOutput('buy', 'v1145', ctc7, v1145);
+          const v2671 = v2376[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v2672 = v2671[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v2675 = stdlib.Array_set(v2671, '0', v2672);
+          const v2676 = stdlib.Array_set(v2376, stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0'), v2675);
           ;
+          const v2683 = null;
+          await txn3.getOutput('buy', 'v2683', ctc7, v2683);
+          const v2695 = stdlib.safeSub(v2670, v2617);
           ;
-          const v1173 = stdlib.safeSub(v1050, v1129);
-          const v1174 = {
-            closed: v1048,
-            manager: v1047,
-            price: v1051,
-            token: v1049,
-            tokenAmount: v1173
+          const v2696 = v2676[stdlib.checkedBigNumberify('./interface.rsh:251:34:application', stdlib.UInt_max, '0')];
+          const v2697 = v2696[stdlib.checkedBigNumberify('./interface.rsh:251:34:application', stdlib.UInt_max, '0')];
+          const v2701 = stdlib.safeSub(v2697, v2613);
+          const v2703 = stdlib.Array_set(v2696, '0', v2701);
+          const v2704 = stdlib.Array_set(v2676, stdlib.checkedBigNumberify('./interface.rsh:251:34:application', stdlib.UInt_max, '0'), v2703);
+          ;
+          const v2712 = stdlib.safeSub(v2423, v2613);
+          const v2713 = {
+            closed: v2421,
+            manager: v2420,
+            price: v2425,
+            token: v2422,
+            tokenAmount: v2712,
+            tokenSupply: v2424
             };
-          const cv1000 = v1174;
-          const cv1001 = v1122;
+          const cv2369 = v2713;
+          const cv2370 = v2606;
+          const cv2376 = v2704;
+          const cv2377 = v2695;
           
-          v1000 = cv1000;
-          v1001 = cv1001;
+          v2369 = cv2369;
+          v2370 = cv2370;
+          v2376 = cv2376;
+          v2377 = cv2377;
           
           continue;
           break;
           }
-        case 'close0_201': {
-          const v1250 = v1121[1];
+        case 'close0_206': {
+          const v2899 = v2605[1];
           undefined /* setApiDetails */;
           ;
-          const v1305 = stdlib.addressEq(v1120, v1047);
-          stdlib.assert(v1305, {
+          const v2962 = v2376[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v2963 = v2962[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v2966 = stdlib.Array_set(v2962, '0', v2963);
+          const v2967 = stdlib.Array_set(v2376, stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0'), v2966);
+          ;
+          const v3009 = stdlib.addressEq(v2604, v2420);
+          stdlib.assert(v3009, {
             at: 'reach standard library:57:5:application',
-            fs: ['at ./interface.rsh:195:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:197:13:application call to [unknown function] (defined at: ./interface.rsh:197:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+            fs: ['at ./interface.rsh:264:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:266:13:application call to [unknown function] (defined at: ./interface.rsh:266:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
             msg: 'only manager can close',
             who: 'Verifier'
             });
-          const v1307 = null;
-          await txn3.getOutput('close', 'v1307', ctc7, v1307);
+          const v3011 = null;
+          await txn3.getOutput('close', 'v3011', ctc7, v3011);
+          const v3019 = v2967[stdlib.checkedBigNumberify('./interface.rsh:268:48:application', stdlib.UInt_max, '0')];
+          const v3020 = v3019[stdlib.checkedBigNumberify('./interface.rsh:268:48:application', stdlib.UInt_max, '0')];
+          const v3024 = stdlib.safeSub(v3020, v2423);
+          const v3026 = stdlib.Array_set(v3019, '0', v3024);
+          const v3027 = stdlib.Array_set(v2967, stdlib.checkedBigNumberify('./interface.rsh:268:48:application', stdlib.UInt_max, '0'), v3026);
           ;
-          const v1329 = {
+          const v3034 = {
             closed: true,
-            manager: v1047,
-            price: v1051,
-            token: v1049,
-            tokenAmount: stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0')
+            manager: v2420,
+            price: v2425,
+            token: v2422,
+            tokenAmount: stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0'),
+            tokenSupply: stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0')
             };
-          const cv1000 = v1329;
-          const cv1001 = v1122;
+          const cv2369 = v3034;
+          const cv2370 = v2606;
+          const cv2376 = v3027;
+          const cv2377 = v2377;
           
-          v1000 = cv1000;
-          v1001 = cv1001;
+          v2369 = cv2369;
+          v2370 = cv2370;
+          v2376 = cv2376;
+          v2377 = cv2377;
           
           continue;
           break;
           }
-        case 'grant0_201': {
-          const v1376 = v1121[1];
+        case 'deposit0_206': {
+          const v3190 = v2605[1];
+          undefined /* setApiDetails */;
+          const v3212 = v3190[stdlib.checkedBigNumberify('./interface.rsh:169:10:spread', stdlib.UInt_max, '0')];
+          const v3214 = stdlib.addressEq(v2604, v2420);
+          stdlib.assert(v3214, {
+            at: 'reach standard library:57:5:application',
+            fs: ['at ./interface.rsh:170:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:169:28:application call to [unknown function] (defined at: ./interface.rsh:169:28:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:169:28:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:132:29:function exp)', 'at ./interface.rsh:148:14:application call to [unknown function] (defined at: ./interface.rsh:148:14:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+            msg: 'only manager can deposit',
+            who: 'Verifier'
+            });
+          const v3216 = stdlib.gt(v3212, stdlib.checkedBigNumberify('./interface.rsh:171:19:decimal', stdlib.UInt_max, '0'));
+          stdlib.assert(v3216, {
+            at: 'reach standard library:57:5:application',
+            fs: ['at ./interface.rsh:171:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:169:28:application call to [unknown function] (defined at: ./interface.rsh:169:28:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:169:28:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:132:29:function exp)', 'at ./interface.rsh:148:14:application call to [unknown function] (defined at: ./interface.rsh:148:14:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+            msg: 'deposit must be greater than 0',
+            who: 'Verifier'
+            });
+          ;
+          const v3253 = v2376[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v3254 = v3253[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v3255 = stdlib.safeAdd(v3254, v3212);
+          const v3257 = stdlib.Array_set(v3253, '0', v3255);
+          const v3258 = stdlib.Array_set(v2376, stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0'), v3257);
+          ;
+          const v3336 = null;
+          await txn3.getOutput('deposit', 'v3336', ctc7, v3336);
+          const v3350 = stdlib.safeAdd(v2423, v3212);
+          const v3352 = stdlib.safeAdd(v2424, v3212);
+          const v3353 = {
+            closed: v2421,
+            manager: v2420,
+            price: v2425,
+            token: v2422,
+            tokenAmount: v3350,
+            tokenSupply: v3352
+            };
+          const cv2369 = v3353;
+          const cv2370 = v2606;
+          const cv2376 = v3258;
+          const cv2377 = v2377;
+          
+          v2369 = cv2369;
+          v2370 = cv2370;
+          v2376 = cv2376;
+          v2377 = cv2377;
+          
+          continue;
+          break;
+          }
+        case 'grant0_206': {
+          const v3481 = v2605[1];
           undefined /* setApiDetails */;
           ;
-          const v1459 = v1376[stdlib.checkedBigNumberify('./interface.rsh:159:10:spread', stdlib.UInt_max, '0')];
-          const v1461 = stdlib.addressEq(v1120, v1047);
-          stdlib.assert(v1461, {
+          const v3544 = v2376[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v3545 = v3544[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v3548 = stdlib.Array_set(v3544, '0', v3545);
+          const v3549 = stdlib.Array_set(v2376, stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0'), v3548);
+          ;
+          const v3648 = v3481[stdlib.checkedBigNumberify('./interface.rsh:228:10:spread', stdlib.UInt_max, '0')];
+          const v3650 = stdlib.addressEq(v2604, v2420);
+          stdlib.assert(v3650, {
             at: 'reach standard library:57:5:application',
-            fs: ['at ./interface.rsh:160:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:162:13:application call to [unknown function] (defined at: ./interface.rsh:162:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+            fs: ['at ./interface.rsh:229:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:231:13:application call to [unknown function] (defined at: ./interface.rsh:231:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
             msg: 'only manager can grant',
             who: 'Verifier'
             });
-          const v1464 = null;
-          await txn3.getOutput('grant', 'v1464', ctc7, v1464);
-          const v1476 = {
-            closed: v1048,
-            manager: v1459,
-            price: v1051,
-            token: v1049,
-            tokenAmount: v1050
+          const v3653 = null;
+          await txn3.getOutput('grant', 'v3653', ctc7, v3653);
+          const v3666 = {
+            closed: v2421,
+            manager: v3648,
+            price: v2425,
+            token: v2422,
+            tokenAmount: v2423,
+            tokenSupply: v2424
             };
-          const cv1000 = v1476;
-          const cv1001 = v1122;
+          const cv2369 = v3666;
+          const cv2370 = v2606;
+          const cv2376 = v3549;
+          const cv2377 = v2377;
           
-          v1000 = cv1000;
-          v1001 = cv1001;
+          v2369 = cv2369;
+          v2370 = cv2370;
+          v2376 = cv2376;
+          v2377 = cv2377;
           
           continue;
           break;
           }
-        case 'update0_201': {
-          const v1502 = v1121[1];
+        case 'touch0_206': {
+          const v3772 = v2605[1];
           undefined /* setApiDetails */;
           ;
-          const v1606 = v1502[stdlib.checkedBigNumberify('./interface.rsh:142:10:spread', stdlib.UInt_max, '0')];
-          const v1608 = stdlib.addressEq(v1120, v1047);
-          stdlib.assert(v1608, {
+          const v3835 = v2376[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v3836 = v3835[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v3839 = stdlib.Array_set(v3835, '0', v3836);
+          const v3840 = stdlib.Array_set(v2376, stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0'), v3839);
+          ;
+          const v3962 = stdlib.addressEq(v2604, v2420);
+          stdlib.assert(v3962, {
             at: 'reach standard library:57:5:application',
-            fs: ['at ./interface.rsh:143:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:146:13:application call to [unknown function] (defined at: ./interface.rsh:146:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+            fs: ['at ./interface.rsh:151:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:153:13:application call to [unknown function] (defined at: ./interface.rsh:153:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+            msg: 'only manager can touch',
+            who: 'Verifier'
+            });
+          const v3964 = null;
+          await txn3.getOutput('touch', 'v3964', ctc7, v3964);
+          const v3971 = (stdlib.le(await ctc.getBalance(), v2377) ? stdlib.checkedBigNumberify('./interface.rsh:155:37:application', stdlib.UInt_max, '0') : stdlib.safeSub(await ctc.getBalance(), v2377));
+          const v3972 = stdlib.safeAdd(v3971, v2377);
+          const v3977 = stdlib.safeSub(v3972, v3971);
+          ;
+          const v3978 = v3840[stdlib.checkedBigNumberify('./interface.rsh:156:40:application', stdlib.UInt_max, '0')];
+          const v3979 = v3978[stdlib.checkedBigNumberify('./interface.rsh:156:40:application', stdlib.UInt_max, '0')];
+          const v3980 = (stdlib.le(await ctc.getBalance(v2319), v3979) ? stdlib.checkedBigNumberify('./interface.rsh:156:40:application', stdlib.UInt_max, '0') : stdlib.safeSub(await ctc.getBalance(v2319), v3979));
+          const v3981 = stdlib.safeAdd(v3980, v3979);
+          const v3983 = stdlib.Array_set(v3978, '0', v3981);
+          const v3984 = stdlib.Array_set(v3840, stdlib.checkedBigNumberify('./interface.rsh:156:40:application', stdlib.UInt_max, '0'), v3983);
+          const v3992 = stdlib.safeAdd(v2423, v3980);
+          const v3994 = stdlib.safeAdd(v2424, v3980);
+          const v3995 = {
+            closed: v2421,
+            manager: v2420,
+            price: v2425,
+            token: v2422,
+            tokenAmount: v3992,
+            tokenSupply: v3994
+            };
+          const cv2369 = v3995;
+          const cv2370 = v2606;
+          const cv2376 = v3984;
+          const cv2377 = v3977;
+          
+          v2369 = cv2369;
+          v2370 = cv2370;
+          v2376 = cv2376;
+          v2377 = cv2377;
+          
+          continue;
+          break;
+          }
+        case 'update0_206': {
+          const v4063 = v2605[1];
+          undefined /* setApiDetails */;
+          ;
+          const v4126 = v2376[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v4127 = v4126[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v4130 = stdlib.Array_set(v4126, '0', v4127);
+          const v4131 = stdlib.Array_set(v2376, stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0'), v4130);
+          ;
+          const v4290 = v4063[stdlib.checkedBigNumberify('./interface.rsh:211:10:spread', stdlib.UInt_max, '0')];
+          const v4292 = stdlib.addressEq(v2604, v2420);
+          stdlib.assert(v4292, {
+            at: 'reach standard library:57:5:application',
+            fs: ['at ./interface.rsh:212:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:215:13:application call to [unknown function] (defined at: ./interface.rsh:215:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
             msg: 'only manager can update',
             who: 'Verifier'
             });
-          const v1610 = stdlib.gt(v1606, stdlib.checkedBigNumberify('./interface.rsh:144:19:decimal', stdlib.UInt_max, '0'));
-          stdlib.assert(v1610, {
+          const v4294 = stdlib.gt(v4290, stdlib.checkedBigNumberify('./interface.rsh:213:19:decimal', stdlib.UInt_max, '0'));
+          stdlib.assert(v4294, {
             at: 'reach standard library:57:5:application',
-            fs: ['at ./interface.rsh:144:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:146:13:application call to [unknown function] (defined at: ./interface.rsh:146:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+            fs: ['at ./interface.rsh:213:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:215:13:application call to [unknown function] (defined at: ./interface.rsh:215:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
             msg: 'price must be greater than 0',
             who: 'Verifier'
             });
-          const v1613 = null;
-          await txn3.getOutput('update', 'v1613', ctc7, v1613);
-          const v1625 = {
-            closed: v1048,
-            manager: v1047,
-            price: v1606,
-            token: v1049,
-            tokenAmount: v1050
+          const v4297 = null;
+          await txn3.getOutput('update', 'v4297', ctc7, v4297);
+          const v4310 = {
+            closed: v2421,
+            manager: v2420,
+            price: v4290,
+            token: v2422,
+            tokenAmount: v2423,
+            tokenSupply: v2424
             };
-          const cv1000 = v1625;
-          const cv1001 = v1122;
+          const cv2369 = v4310;
+          const cv2370 = v2606;
+          const cv2376 = v4131;
+          const cv2377 = v2377;
           
-          v1000 = cv1000;
-          v1001 = cv1001;
+          v2369 = cv2369;
+          v2370 = cv2370;
+          v2376 = cv2376;
+          v2377 = cv2377;
+          
+          continue;
+          break;
+          }
+        case 'withdraw0_206': {
+          const v4354 = v2605[1];
+          undefined /* setApiDetails */;
+          ;
+          const v4417 = v2376[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v4418 = v4417[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v4421 = stdlib.Array_set(v4417, '0', v4418);
+          const v4422 = stdlib.Array_set(v2376, stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0'), v4421);
+          ;
+          const v4605 = v4354[stdlib.checkedBigNumberify('./interface.rsh:188:10:spread', stdlib.UInt_max, '0')];
+          const v4607 = stdlib.addressEq(v2604, v2420);
+          stdlib.assert(v4607, {
+            at: 'reach standard library:57:5:application',
+            fs: ['at ./interface.rsh:189:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:196:13:application call to [unknown function] (defined at: ./interface.rsh:196:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+            msg: 'only manager can withdraw',
+            who: 'Verifier'
+            });
+          const v4609 = stdlib.gt(v4605, stdlib.checkedBigNumberify('./interface.rsh:190:19:decimal', stdlib.UInt_max, '0'));
+          stdlib.assert(v4609, {
+            at: 'reach standard library:57:5:application',
+            fs: ['at ./interface.rsh:190:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:196:13:application call to [unknown function] (defined at: ./interface.rsh:196:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+            msg: 'withdraw must be greater than 0',
+            who: 'Verifier'
+            });
+          const v4612 = stdlib.le(v4605, v2423);
+          stdlib.assert(v4612, {
+            at: 'reach standard library:57:5:application',
+            fs: ['at ./interface.rsh:191:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:196:13:application call to [unknown function] (defined at: ./interface.rsh:196:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+            msg: 'withdraw must be less than or equal to token amount',
+            who: 'Verifier'
+            });
+          const v4615 = null;
+          await txn3.getOutput('withdraw', 'v4615', ctc7, v4615);
+          const v4623 = v4422[stdlib.checkedBigNumberify('./interface.rsh:198:38:application', stdlib.UInt_max, '0')];
+          const v4624 = v4623[stdlib.checkedBigNumberify('./interface.rsh:198:38:application', stdlib.UInt_max, '0')];
+          const v4628 = stdlib.safeSub(v4624, v4605);
+          const v4630 = stdlib.Array_set(v4623, '0', v4628);
+          const v4631 = stdlib.Array_set(v4422, stdlib.checkedBigNumberify('./interface.rsh:198:38:application', stdlib.UInt_max, '0'), v4630);
+          ;
+          const v4639 = stdlib.safeSub(v2423, v4605);
+          const v4641 = stdlib.safeSub(v2424, v4605);
+          const v4642 = {
+            closed: v2421,
+            manager: v2420,
+            price: v2425,
+            token: v2422,
+            tokenAmount: v4639,
+            tokenSupply: v4641
+            };
+          const cv2369 = v4642;
+          const cv2370 = v2606;
+          const cv2376 = v4631;
+          const cv2377 = v2377;
+          
+          v2369 = cv2369;
+          v2370 = cv2370;
+          v2376 = cv2376;
+          v2377 = cv2377;
           
           continue;
           break;
@@ -1377,11 +2335,12 @@ export async function Verifier(ctcTop, interact) {
         }
       
       }
-    const v1628 = v1000.manager;
-    const v1629 = v1000.closed;
-    const v1630 = v1000.token;
-    const v1631 = v1000.tokenAmount;
-    const v1632 = v1000.price;
+    const v4645 = v2369.manager;
+    const v4646 = v2369.closed;
+    const v4647 = v2369.token;
+    const v4648 = v2369.tokenAmount;
+    const v4649 = v2369.tokenSupply;
+    const v4650 = v2369.price;
     const txn3 = await (ctc.recv({
       didSend: false,
       evt_cnt: 0,
@@ -1390,7 +2349,7 @@ export async function Verifier(ctcTop, interact) {
       timeoutAt: undefined /* mto */,
       waitIfNotPresent: false
       }));
-    const {data: [], secs: v1636, time: v1635, didSend: v838, from: v1634 } = txn3;
+    const {data: [], secs: v4654, time: v4653, didSend: v2089, from: v4652 } = txn3;
     ;
     return;
     
@@ -1409,119 +2368,156 @@ export async function _buy6(ctcTop, interact) {
   const stdlib = ctc.stdlib;
   const ctc0 = stdlib.T_Token;
   const ctc1 = stdlib.T_UInt;
-  const ctc2 = stdlib.T_Address;
-  const ctc3 = stdlib.T_Bool;
-  const ctc4 = stdlib.T_Tuple([ctc1]);
-  const ctc5 = stdlib.T_Tuple([]);
-  const ctc6 = stdlib.T_Tuple([ctc2]);
-  const ctc7 = stdlib.T_Data({
-    buy0_201: ctc4,
-    close0_201: ctc5,
-    grant0_201: ctc6,
-    update0_201: ctc4
+  const ctc2 = stdlib.T_Bool;
+  const ctc3 = stdlib.T_Tuple([ctc1, ctc1, ctc2]);
+  const ctc4 = stdlib.T_Array(ctc3, stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '1'));
+  const ctc5 = stdlib.T_Address;
+  const ctc6 = stdlib.T_Tuple([ctc1]);
+  const ctc7 = stdlib.T_Tuple([]);
+  const ctc8 = stdlib.T_Tuple([ctc5]);
+  const ctc9 = stdlib.T_Data({
+    buy0_206: ctc6,
+    close0_206: ctc7,
+    deposit0_206: ctc6,
+    grant0_206: ctc8,
+    touch0_206: ctc7,
+    update0_206: ctc6,
+    withdraw0_206: ctc6
     });
-  const ctc8 = stdlib.T_Null;
+  const ctc10 = stdlib.T_Null;
   
   
-  const [v947, v978, v1047, v1048, v1049, v1050, v1051] = await ctc.getState(stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '6'), [ctc0, ctc1, ctc2, ctc3, ctc0, ctc1, ctc1]);
-  const v1087 = stdlib.protect(ctc4, await interact.in(), {
+  const [v2319, v2349, v2376, v2377, v2420, v2421, v2422, v2423, v2424, v2425] = await ctc.getState(stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '6'), [ctc0, ctc1, ctc4, ctc1, ctc5, ctc2, ctc0, ctc1, ctc1, ctc1]);
+  const v2509 = stdlib.protect(ctc6, await interact.in(), {
     at: './interface.rsh:1:23:application',
-    fs: ['at ./interface.rsh:175:24:application call to [unknown function] (defined at: ./interface.rsh:175:24:function exp)', 'at ./interface.rsh:124:29:application call to "runbuy0_201" (defined at: ./interface.rsh:175:10:function exp)', 'at ./interface.rsh:124:29:application call to [unknown function] (defined at: ./interface.rsh:124:29:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+    fs: ['at ./interface.rsh:244:24:application call to [unknown function] (defined at: ./interface.rsh:244:24:function exp)', 'at ./interface.rsh:132:29:application call to "runbuy0_206" (defined at: ./interface.rsh:244:10:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:132:29:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
     msg: 'in',
     who: 'buy'
     });
-  const v1088 = v1087[stdlib.checkedBigNumberify('./interface.rsh:1:23:application', stdlib.UInt_max, '0')];
-  const v1091 = stdlib.le(v1088, v1050);
-  stdlib.assert(v1091, {
+  const v2510 = v2509[stdlib.checkedBigNumberify('./interface.rsh:1:23:application', stdlib.UInt_max, '0')];
+  const v2513 = stdlib.le(v2510, v2423);
+  stdlib.assert(v2513, {
     at: 'reach standard library:57:5:application',
-    fs: ['at ./interface.rsh:176:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:175:24:application call to [unknown function] (defined at: ./interface.rsh:175:24:function exp)', 'at ./interface.rsh:124:29:application call to "runbuy0_201" (defined at: ./interface.rsh:175:10:function exp)', 'at ./interface.rsh:124:29:application call to [unknown function] (defined at: ./interface.rsh:124:29:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+    fs: ['at ./interface.rsh:245:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:244:24:application call to [unknown function] (defined at: ./interface.rsh:244:24:function exp)', 'at ./interface.rsh:132:29:application call to "runbuy0_206" (defined at: ./interface.rsh:244:10:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:132:29:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
     msg: 'not enough tokens',
     who: 'buy'
     });
-  const v1098 = ['buy0_201', v1087];
+  const v2520 = ['buy0_206', v2509];
   
-  const v1116 = stdlib.safeMul(v1088, v978);
+  const v2538 = stdlib.safeMul(v2510, v2349);
   
   const txn1 = await (ctc.sendrecv({
-    args: [v947, v978, v1047, v1048, v1049, v1050, v1051, v1098],
+    args: [v2319, v2349, v2376, v2377, v2420, v2421, v2422, v2423, v2424, v2425, v2520],
     evt_cnt: 1,
     funcNum: 5,
     lct: stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0'),
     onlyIf: true,
-    out_tys: [ctc7],
-    pay: [v1116, []],
+    out_tys: [ctc9],
+    pay: [v2538, [[stdlib.checkedBigNumberify('./interface.rsh:247:24:decimal', stdlib.UInt_max, '0'), v2319]]],
     sim_p: (async (txn1) => {
       const sim_r = { txns: [], mapRefs: [], maps: [] };
       let sim_txn_ctr = stdlib.UInt_max;
       const getSimTokCtr = () => { sim_txn_ctr = sim_txn_ctr.sub(1); return sim_txn_ctr; };
       
       
-      const {data: [v1121], secs: v1123, time: v1122, didSend: v649, from: v1120 } = txn1;
+      const {data: [v2605], secs: v2607, time: v2606, didSend: v1707, from: v2604 } = txn1;
       
-      switch (v1121[0]) {
-        case 'buy0_201': {
-          const v1124 = v1121[1];
+      switch (v2605[0]) {
+        case 'buy0_206': {
+          const v2608 = v2605[1];
           sim_r.txns.push({
             kind: 'api',
             who: "buy"
             });
-          const v1129 = v1124[stdlib.checkedBigNumberify('./interface.rsh:175:10:spread', stdlib.UInt_max, '0')];
-          const v1133 = stdlib.safeMul(v1129, v978);
+          const v2613 = v2608[stdlib.checkedBigNumberify('./interface.rsh:244:10:spread', stdlib.UInt_max, '0')];
+          const v2617 = stdlib.safeMul(v2613, v2349);
+          const v2670 = stdlib.safeAdd(v2377, v2617);
           sim_r.txns.push({
-            amt: v1133,
+            amt: v2617,
             kind: 'to',
             tok: undefined /* Nothing */
             });
-          const v1145 = null;
-          const v1146 = await txn1.getOutput('buy', 'v1145', ctc8, v1145);
+          const v2671 = v2376[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v2672 = v2671[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v2675 = stdlib.Array_set(v2671, '0', v2672);
+          const v2676 = stdlib.Array_set(v2376, stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0'), v2675);
+          ;
+          const v2683 = null;
+          const v2684 = await txn1.getOutput('buy', 'v2683', ctc10, v2683);
           
+          const v2695 = stdlib.safeSub(v2670, v2617);
           sim_r.txns.push({
             kind: 'from',
-            to: v1047,
+            to: v2420,
             tok: undefined /* Nothing */
             });
+          const v2696 = v2676[stdlib.checkedBigNumberify('./interface.rsh:251:34:application', stdlib.UInt_max, '0')];
+          const v2697 = v2696[stdlib.checkedBigNumberify('./interface.rsh:251:34:application', stdlib.UInt_max, '0')];
+          const v2701 = stdlib.safeSub(v2697, v2613);
+          const v2703 = stdlib.Array_set(v2696, '0', v2701);
+          const v2704 = stdlib.Array_set(v2676, stdlib.checkedBigNumberify('./interface.rsh:251:34:application', stdlib.UInt_max, '0'), v2703);
           sim_r.txns.push({
             kind: 'from',
-            to: v1120,
-            tok: v947
+            to: v2604,
+            tok: v2319
             });
-          const v1173 = stdlib.safeSub(v1050, v1129);
-          const v1174 = {
-            closed: v1048,
-            manager: v1047,
-            price: v1051,
-            token: v1049,
-            tokenAmount: v1173
+          const v2712 = stdlib.safeSub(v2423, v2613);
+          const v2713 = {
+            closed: v2421,
+            manager: v2420,
+            price: v2425,
+            token: v2422,
+            tokenAmount: v2712,
+            tokenSupply: v2424
             };
-          const v3190 = v1174.closed;
-          if (v3190) {
-            const v3197 = v1174.manager;
-            const v3199 = v1174.token;
-            const v3200 = v1174.tokenAmount;
-            const v3201 = v1174.price;
+          const v8950 = v2704;
+          const v8951 = v2695;
+          const v8952 = v2713.closed;
+          if (v8952) {
+            const v8960 = v2713.manager;
+            const v8962 = v2713.token;
+            const v8963 = v2713.tokenAmount;
+            const v8964 = v2713.tokenSupply;
+            const v8965 = v2713.price;
             sim_r.isHalt = false;
             }
           else {
-            const v3192 = v1174.manager;
-            const v3194 = v1174.token;
-            const v3195 = v1174.tokenAmount;
-            const v3196 = v1174.price;
+            const v8954 = v2713.manager;
+            const v8956 = v2713.token;
+            const v8957 = v2713.tokenAmount;
+            const v8958 = v2713.tokenSupply;
+            const v8959 = v2713.price;
             sim_r.isHalt = false;
             }
           break;
           }
-        case 'close0_201': {
-          const v1250 = v1121[1];
+        case 'close0_206': {
+          const v2899 = v2605[1];
           
           break;
           }
-        case 'grant0_201': {
-          const v1376 = v1121[1];
+        case 'deposit0_206': {
+          const v3190 = v2605[1];
           
           break;
           }
-        case 'update0_201': {
-          const v1502 = v1121[1];
+        case 'grant0_206': {
+          const v3481 = v2605[1];
+          
+          break;
+          }
+        case 'touch0_206': {
+          const v3772 = v2605[1];
+          
+          break;
+          }
+        case 'update0_206': {
+          const v4063 = v2605[1];
+          
+          break;
+          }
+        case 'withdraw0_206': {
+          const v4354 = v2605[1];
           
           break;
           }
@@ -1530,30 +2526,36 @@ export async function _buy6(ctcTop, interact) {
       }),
     soloSend: false,
     timeoutAt: undefined /* mto */,
-    tys: [ctc0, ctc1, ctc2, ctc3, ctc0, ctc1, ctc1, ctc7],
+    tys: [ctc0, ctc1, ctc4, ctc1, ctc5, ctc2, ctc0, ctc1, ctc1, ctc1, ctc9],
     waitIfNotPresent: false
     }));
-  const {data: [v1121], secs: v1123, time: v1122, didSend: v649, from: v1120 } = txn1;
-  switch (v1121[0]) {
-    case 'buy0_201': {
-      const v1124 = v1121[1];
+  const {data: [v2605], secs: v2607, time: v2606, didSend: v1707, from: v2604 } = txn1;
+  switch (v2605[0]) {
+    case 'buy0_206': {
+      const v2608 = v2605[1];
       undefined /* setApiDetails */;
-      const v1129 = v1124[stdlib.checkedBigNumberify('./interface.rsh:175:10:spread', stdlib.UInt_max, '0')];
-      const v1131 = stdlib.le(v1129, v1050);
-      stdlib.assert(v1131, {
+      const v2613 = v2608[stdlib.checkedBigNumberify('./interface.rsh:244:10:spread', stdlib.UInt_max, '0')];
+      const v2615 = stdlib.le(v2613, v2423);
+      stdlib.assert(v2615, {
         at: 'reach standard library:57:5:application',
-        fs: ['at ./interface.rsh:176:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:175:24:application call to [unknown function] (defined at: ./interface.rsh:175:24:function exp)', 'at ./interface.rsh:124:29:application call to [unknown function] (defined at: ./interface.rsh:175:24:function exp)', 'at ./interface.rsh:124:29:application call to [unknown function] (defined at: ./interface.rsh:124:29:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+        fs: ['at ./interface.rsh:245:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:244:24:application call to [unknown function] (defined at: ./interface.rsh:244:24:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:244:24:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:132:29:function exp)', 'at ./interface.rsh:148:14:application call to [unknown function] (defined at: ./interface.rsh:148:14:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
         msg: 'not enough tokens',
         who: 'buy'
         });
-      const v1133 = stdlib.safeMul(v1129, v978);
+      const v2617 = stdlib.safeMul(v2613, v2349);
+      const v2670 = stdlib.safeAdd(v2377, v2617);
       ;
-      const v1145 = null;
-      const v1146 = await txn1.getOutput('buy', 'v1145', ctc8, v1145);
-      if (v649) {
-        stdlib.protect(ctc8, await interact.out(v1124, v1146), {
-          at: './interface.rsh:175:11:application',
-          fs: ['at ./interface.rsh:175:11:application call to [unknown function] (defined at: ./interface.rsh:175:11:function exp)', 'at ./interface.rsh:180:12:application call to "k" (defined at: ./interface.rsh:179:13:function exp)', 'at ./interface.rsh:179:13:application call to [unknown function] (defined at: ./interface.rsh:179:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+      const v2671 = v2376[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+      const v2672 = v2671[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+      const v2675 = stdlib.Array_set(v2671, '0', v2672);
+      const v2676 = stdlib.Array_set(v2376, stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0'), v2675);
+      ;
+      const v2683 = null;
+      const v2684 = await txn1.getOutput('buy', 'v2683', ctc10, v2683);
+      if (v1707) {
+        stdlib.protect(ctc10, await interact.out(v2608, v2684), {
+          at: './interface.rsh:244:11:application',
+          fs: ['at ./interface.rsh:244:11:application call to [unknown function] (defined at: ./interface.rsh:244:11:function exp)', 'at ./interface.rsh:249:12:application call to "k" (defined at: ./interface.rsh:248:13:function exp)', 'at ./interface.rsh:248:13:application call to [unknown function] (defined at: ./interface.rsh:248:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
           msg: 'out',
           who: 'buy'
           });
@@ -1561,45 +2563,71 @@ export async function _buy6(ctcTop, interact) {
       else {
         }
       
+      const v2695 = stdlib.safeSub(v2670, v2617);
       ;
+      const v2696 = v2676[stdlib.checkedBigNumberify('./interface.rsh:251:34:application', stdlib.UInt_max, '0')];
+      const v2697 = v2696[stdlib.checkedBigNumberify('./interface.rsh:251:34:application', stdlib.UInt_max, '0')];
+      const v2701 = stdlib.safeSub(v2697, v2613);
+      const v2703 = stdlib.Array_set(v2696, '0', v2701);
+      const v2704 = stdlib.Array_set(v2676, stdlib.checkedBigNumberify('./interface.rsh:251:34:application', stdlib.UInt_max, '0'), v2703);
       ;
-      const v1173 = stdlib.safeSub(v1050, v1129);
-      const v1174 = {
-        closed: v1048,
-        manager: v1047,
-        price: v1051,
-        token: v1049,
-        tokenAmount: v1173
+      const v2712 = stdlib.safeSub(v2423, v2613);
+      const v2713 = {
+        closed: v2421,
+        manager: v2420,
+        price: v2425,
+        token: v2422,
+        tokenAmount: v2712,
+        tokenSupply: v2424
         };
-      const v3190 = v1174.closed;
-      if (v3190) {
-        const v3197 = v1174.manager;
-        const v3199 = v1174.token;
-        const v3200 = v1174.tokenAmount;
-        const v3201 = v1174.price;
+      const v8950 = v2704;
+      const v8951 = v2695;
+      const v8952 = v2713.closed;
+      if (v8952) {
+        const v8960 = v2713.manager;
+        const v8962 = v2713.token;
+        const v8963 = v2713.tokenAmount;
+        const v8964 = v2713.tokenSupply;
+        const v8965 = v2713.price;
         return;
         }
       else {
-        const v3192 = v1174.manager;
-        const v3194 = v1174.token;
-        const v3195 = v1174.tokenAmount;
-        const v3196 = v1174.price;
+        const v8954 = v2713.manager;
+        const v8956 = v2713.token;
+        const v8957 = v2713.tokenAmount;
+        const v8958 = v2713.tokenSupply;
+        const v8959 = v2713.price;
         return;
         }
       break;
       }
-    case 'close0_201': {
-      const v1250 = v1121[1];
+    case 'close0_206': {
+      const v2899 = v2605[1];
       return;
       break;
       }
-    case 'grant0_201': {
-      const v1376 = v1121[1];
+    case 'deposit0_206': {
+      const v3190 = v2605[1];
       return;
       break;
       }
-    case 'update0_201': {
-      const v1502 = v1121[1];
+    case 'grant0_206': {
+      const v3481 = v2605[1];
+      return;
+      break;
+      }
+    case 'touch0_206': {
+      const v3772 = v2605[1];
+      return;
+      break;
+      }
+    case 'update0_206': {
+      const v4063 = v2605[1];
+      return;
+      break;
+      }
+    case 'withdraw0_206': {
+      const v4354 = v2605[1];
       return;
       break;
       }
@@ -1616,105 +2644,140 @@ export async function _close6(ctcTop, interact) {
   const stdlib = ctc.stdlib;
   const ctc0 = stdlib.T_Token;
   const ctc1 = stdlib.T_UInt;
-  const ctc2 = stdlib.T_Address;
-  const ctc3 = stdlib.T_Bool;
-  const ctc4 = stdlib.T_Tuple([]);
-  const ctc5 = stdlib.T_Tuple([ctc1]);
-  const ctc6 = stdlib.T_Tuple([ctc2]);
-  const ctc7 = stdlib.T_Data({
-    buy0_201: ctc5,
-    close0_201: ctc4,
-    grant0_201: ctc6,
-    update0_201: ctc5
+  const ctc2 = stdlib.T_Bool;
+  const ctc3 = stdlib.T_Tuple([ctc1, ctc1, ctc2]);
+  const ctc4 = stdlib.T_Array(ctc3, stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '1'));
+  const ctc5 = stdlib.T_Address;
+  const ctc6 = stdlib.T_Tuple([]);
+  const ctc7 = stdlib.T_Tuple([ctc1]);
+  const ctc8 = stdlib.T_Tuple([ctc5]);
+  const ctc9 = stdlib.T_Data({
+    buy0_206: ctc7,
+    close0_206: ctc6,
+    deposit0_206: ctc7,
+    grant0_206: ctc8,
+    touch0_206: ctc6,
+    update0_206: ctc7,
+    withdraw0_206: ctc7
     });
-  const ctc8 = stdlib.T_Null;
+  const ctc10 = stdlib.T_Null;
   
   
-  const [v947, v978, v1047, v1048, v1049, v1050, v1051] = await ctc.getState(stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '6'), [ctc0, ctc1, ctc2, ctc3, ctc0, ctc1, ctc1]);
-  const v1100 = ctc.selfAddress();
-  const v1102 = stdlib.protect(ctc4, await interact.in(), {
+  const [v2319, v2349, v2376, v2377, v2420, v2421, v2422, v2423, v2424, v2425] = await ctc.getState(stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '6'), [ctc0, ctc1, ctc4, ctc1, ctc5, ctc2, ctc0, ctc1, ctc1, ctc1]);
+  const v2522 = ctc.selfAddress();
+  const v2524 = stdlib.protect(ctc6, await interact.in(), {
     at: './interface.rsh:1:23:application',
-    fs: ['at ./interface.rsh:194:23:application call to [unknown function] (defined at: ./interface.rsh:194:23:function exp)', 'at ./interface.rsh:124:29:application call to "runclose0_201" (defined at: ./interface.rsh:194:10:function exp)', 'at ./interface.rsh:124:29:application call to [unknown function] (defined at: ./interface.rsh:124:29:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+    fs: ['at ./interface.rsh:263:23:application call to [unknown function] (defined at: ./interface.rsh:263:23:function exp)', 'at ./interface.rsh:132:29:application call to "runclose0_206" (defined at: ./interface.rsh:263:10:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:132:29:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
     msg: 'in',
     who: 'close'
     });
-  const v1104 = stdlib.addressEq(v1100, v1047);
-  stdlib.assert(v1104, {
+  const v2526 = stdlib.addressEq(v2522, v2420);
+  stdlib.assert(v2526, {
     at: 'reach standard library:57:5:application',
-    fs: ['at ./interface.rsh:195:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:194:23:application call to [unknown function] (defined at: ./interface.rsh:194:23:function exp)', 'at ./interface.rsh:124:29:application call to "runclose0_201" (defined at: ./interface.rsh:194:10:function exp)', 'at ./interface.rsh:124:29:application call to [unknown function] (defined at: ./interface.rsh:124:29:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+    fs: ['at ./interface.rsh:264:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:263:23:application call to [unknown function] (defined at: ./interface.rsh:263:23:function exp)', 'at ./interface.rsh:132:29:application call to "runclose0_206" (defined at: ./interface.rsh:263:10:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:132:29:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
     msg: 'only manager can close',
     who: 'close'
     });
-  const v1109 = ['close0_201', v1102];
+  const v2531 = ['close0_206', v2524];
   
   const txn1 = await (ctc.sendrecv({
-    args: [v947, v978, v1047, v1048, v1049, v1050, v1051, v1109],
+    args: [v2319, v2349, v2376, v2377, v2420, v2421, v2422, v2423, v2424, v2425, v2531],
     evt_cnt: 1,
     funcNum: 5,
     lct: stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0'),
     onlyIf: true,
-    out_tys: [ctc7],
-    pay: [stdlib.checkedBigNumberify('./interface.rsh:194:10:decimal', stdlib.UInt_max, '0'), []],
+    out_tys: [ctc9],
+    pay: [stdlib.checkedBigNumberify('./interface.rsh:263:10:decimal', stdlib.UInt_max, '0'), [[stdlib.checkedBigNumberify('./interface.rsh:148:14:decimal', stdlib.UInt_max, '0'), v2319]]],
     sim_p: (async (txn1) => {
       const sim_r = { txns: [], mapRefs: [], maps: [] };
       let sim_txn_ctr = stdlib.UInt_max;
       const getSimTokCtr = () => { sim_txn_ctr = sim_txn_ctr.sub(1); return sim_txn_ctr; };
       
       
-      const {data: [v1121], secs: v1123, time: v1122, didSend: v649, from: v1120 } = txn1;
+      const {data: [v2605], secs: v2607, time: v2606, didSend: v1707, from: v2604 } = txn1;
       
-      switch (v1121[0]) {
-        case 'buy0_201': {
-          const v1124 = v1121[1];
+      switch (v2605[0]) {
+        case 'buy0_206': {
+          const v2608 = v2605[1];
           
           break;
           }
-        case 'close0_201': {
-          const v1250 = v1121[1];
+        case 'close0_206': {
+          const v2899 = v2605[1];
           sim_r.txns.push({
             kind: 'api',
             who: "close"
             });
           ;
-          const v1307 = null;
-          const v1308 = await txn1.getOutput('close', 'v1307', ctc8, v1307);
+          const v2962 = v2376[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v2963 = v2962[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v2966 = stdlib.Array_set(v2962, '0', v2963);
+          const v2967 = stdlib.Array_set(v2376, stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0'), v2966);
+          ;
+          const v3011 = null;
+          const v3012 = await txn1.getOutput('close', 'v3011', ctc10, v3011);
           
+          const v3019 = v2967[stdlib.checkedBigNumberify('./interface.rsh:268:48:application', stdlib.UInt_max, '0')];
+          const v3020 = v3019[stdlib.checkedBigNumberify('./interface.rsh:268:48:application', stdlib.UInt_max, '0')];
+          const v3024 = stdlib.safeSub(v3020, v2423);
+          const v3026 = stdlib.Array_set(v3019, '0', v3024);
+          const v3027 = stdlib.Array_set(v2967, stdlib.checkedBigNumberify('./interface.rsh:268:48:application', stdlib.UInt_max, '0'), v3026);
           sim_r.txns.push({
             kind: 'from',
-            to: v1047,
-            tok: v947
+            to: v2420,
+            tok: v2319
             });
-          const v1329 = {
+          const v3034 = {
             closed: true,
-            manager: v1047,
-            price: v1051,
-            token: v1049,
-            tokenAmount: stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0')
+            manager: v2420,
+            price: v2425,
+            token: v2422,
+            tokenAmount: stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0'),
+            tokenSupply: stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0')
             };
-          const v3280 = v1329.closed;
-          if (v3280) {
-            const v3287 = v1329.manager;
-            const v3289 = v1329.token;
-            const v3290 = v1329.tokenAmount;
-            const v3291 = v1329.price;
+          const v9126 = v3027;
+          const v9127 = v2377;
+          const v9128 = v3034.closed;
+          if (v9128) {
+            const v9136 = v3034.manager;
+            const v9138 = v3034.token;
+            const v9139 = v3034.tokenAmount;
+            const v9140 = v3034.tokenSupply;
+            const v9141 = v3034.price;
             sim_r.isHalt = false;
             }
           else {
-            const v3282 = v1329.manager;
-            const v3284 = v1329.token;
-            const v3285 = v1329.tokenAmount;
-            const v3286 = v1329.price;
+            const v9130 = v3034.manager;
+            const v9132 = v3034.token;
+            const v9133 = v3034.tokenAmount;
+            const v9134 = v3034.tokenSupply;
+            const v9135 = v3034.price;
             sim_r.isHalt = false;
             }
           break;
           }
-        case 'grant0_201': {
-          const v1376 = v1121[1];
+        case 'deposit0_206': {
+          const v3190 = v2605[1];
           
           break;
           }
-        case 'update0_201': {
-          const v1502 = v1121[1];
+        case 'grant0_206': {
+          const v3481 = v2605[1];
+          
+          break;
+          }
+        case 'touch0_206': {
+          const v3772 = v2605[1];
+          
+          break;
+          }
+        case 'update0_206': {
+          const v4063 = v2605[1];
+          
+          break;
+          }
+        case 'withdraw0_206': {
+          const v4354 = v2605[1];
           
           break;
           }
@@ -1723,33 +2786,38 @@ export async function _close6(ctcTop, interact) {
       }),
     soloSend: false,
     timeoutAt: undefined /* mto */,
-    tys: [ctc0, ctc1, ctc2, ctc3, ctc0, ctc1, ctc1, ctc7],
+    tys: [ctc0, ctc1, ctc4, ctc1, ctc5, ctc2, ctc0, ctc1, ctc1, ctc1, ctc9],
     waitIfNotPresent: false
     }));
-  const {data: [v1121], secs: v1123, time: v1122, didSend: v649, from: v1120 } = txn1;
-  switch (v1121[0]) {
-    case 'buy0_201': {
-      const v1124 = v1121[1];
+  const {data: [v2605], secs: v2607, time: v2606, didSend: v1707, from: v2604 } = txn1;
+  switch (v2605[0]) {
+    case 'buy0_206': {
+      const v2608 = v2605[1];
       return;
       break;
       }
-    case 'close0_201': {
-      const v1250 = v1121[1];
+    case 'close0_206': {
+      const v2899 = v2605[1];
       undefined /* setApiDetails */;
       ;
-      const v1305 = stdlib.addressEq(v1120, v1047);
-      stdlib.assert(v1305, {
+      const v2962 = v2376[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+      const v2963 = v2962[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+      const v2966 = stdlib.Array_set(v2962, '0', v2963);
+      const v2967 = stdlib.Array_set(v2376, stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0'), v2966);
+      ;
+      const v3009 = stdlib.addressEq(v2604, v2420);
+      stdlib.assert(v3009, {
         at: 'reach standard library:57:5:application',
-        fs: ['at ./interface.rsh:195:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:197:13:application call to [unknown function] (defined at: ./interface.rsh:197:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+        fs: ['at ./interface.rsh:264:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:266:13:application call to [unknown function] (defined at: ./interface.rsh:266:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
         msg: 'only manager can close',
         who: 'close'
         });
-      const v1307 = null;
-      const v1308 = await txn1.getOutput('close', 'v1307', ctc8, v1307);
-      if (v649) {
-        stdlib.protect(ctc8, await interact.out(v1250, v1308), {
-          at: './interface.rsh:194:11:application',
-          fs: ['at ./interface.rsh:194:11:application call to [unknown function] (defined at: ./interface.rsh:194:11:function exp)', 'at ./interface.rsh:198:12:application call to "k" (defined at: ./interface.rsh:197:13:function exp)', 'at ./interface.rsh:197:13:application call to [unknown function] (defined at: ./interface.rsh:197:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+      const v3011 = null;
+      const v3012 = await txn1.getOutput('close', 'v3011', ctc10, v3011);
+      if (v1707) {
+        stdlib.protect(ctc10, await interact.out(v2899, v3012), {
+          at: './interface.rsh:263:11:application',
+          fs: ['at ./interface.rsh:263:11:application call to [unknown function] (defined at: ./interface.rsh:263:11:function exp)', 'at ./interface.rsh:267:12:application call to "k" (defined at: ./interface.rsh:266:13:function exp)', 'at ./interface.rsh:266:13:application call to [unknown function] (defined at: ./interface.rsh:266:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
           msg: 'out',
           who: 'close'
           });
@@ -1757,38 +2825,328 @@ export async function _close6(ctcTop, interact) {
       else {
         }
       
+      const v3019 = v2967[stdlib.checkedBigNumberify('./interface.rsh:268:48:application', stdlib.UInt_max, '0')];
+      const v3020 = v3019[stdlib.checkedBigNumberify('./interface.rsh:268:48:application', stdlib.UInt_max, '0')];
+      const v3024 = stdlib.safeSub(v3020, v2423);
+      const v3026 = stdlib.Array_set(v3019, '0', v3024);
+      const v3027 = stdlib.Array_set(v2967, stdlib.checkedBigNumberify('./interface.rsh:268:48:application', stdlib.UInt_max, '0'), v3026);
       ;
-      const v1329 = {
+      const v3034 = {
         closed: true,
-        manager: v1047,
-        price: v1051,
-        token: v1049,
-        tokenAmount: stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0')
+        manager: v2420,
+        price: v2425,
+        token: v2422,
+        tokenAmount: stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0'),
+        tokenSupply: stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0')
         };
-      const v3280 = v1329.closed;
-      if (v3280) {
-        const v3287 = v1329.manager;
-        const v3289 = v1329.token;
-        const v3290 = v1329.tokenAmount;
-        const v3291 = v1329.price;
+      const v9126 = v3027;
+      const v9127 = v2377;
+      const v9128 = v3034.closed;
+      if (v9128) {
+        const v9136 = v3034.manager;
+        const v9138 = v3034.token;
+        const v9139 = v3034.tokenAmount;
+        const v9140 = v3034.tokenSupply;
+        const v9141 = v3034.price;
         return;
         }
       else {
-        const v3282 = v1329.manager;
-        const v3284 = v1329.token;
-        const v3285 = v1329.tokenAmount;
-        const v3286 = v1329.price;
+        const v9130 = v3034.manager;
+        const v9132 = v3034.token;
+        const v9133 = v3034.tokenAmount;
+        const v9134 = v3034.tokenSupply;
+        const v9135 = v3034.price;
         return;
         }
       break;
       }
-    case 'grant0_201': {
-      const v1376 = v1121[1];
+    case 'deposit0_206': {
+      const v3190 = v2605[1];
       return;
       break;
       }
-    case 'update0_201': {
-      const v1502 = v1121[1];
+    case 'grant0_206': {
+      const v3481 = v2605[1];
+      return;
+      break;
+      }
+    case 'touch0_206': {
+      const v3772 = v2605[1];
+      return;
+      break;
+      }
+    case 'update0_206': {
+      const v4063 = v2605[1];
+      return;
+      break;
+      }
+    case 'withdraw0_206': {
+      const v4354 = v2605[1];
+      return;
+      break;
+      }
+    }
+  
+  
+  };
+export async function _deposit6(ctcTop, interact) {
+  if (typeof(ctcTop) !== 'object' || ctcTop._initialize === undefined) {
+    return Promise.reject(new Error(`The backend for _deposit6 expects to receive a contract as its first argument.`));}
+  if (typeof(interact) !== 'object') {
+    return Promise.reject(new Error(`The backend for _deposit6 expects to receive an interact object as its second argument.`));}
+  const ctc = ctcTop._initialize();
+  const stdlib = ctc.stdlib;
+  const ctc0 = stdlib.T_Token;
+  const ctc1 = stdlib.T_UInt;
+  const ctc2 = stdlib.T_Bool;
+  const ctc3 = stdlib.T_Tuple([ctc1, ctc1, ctc2]);
+  const ctc4 = stdlib.T_Array(ctc3, stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '1'));
+  const ctc5 = stdlib.T_Address;
+  const ctc6 = stdlib.T_Tuple([ctc1]);
+  const ctc7 = stdlib.T_Tuple([]);
+  const ctc8 = stdlib.T_Tuple([ctc5]);
+  const ctc9 = stdlib.T_Data({
+    buy0_206: ctc6,
+    close0_206: ctc7,
+    deposit0_206: ctc6,
+    grant0_206: ctc8,
+    touch0_206: ctc7,
+    update0_206: ctc6,
+    withdraw0_206: ctc6
+    });
+  const ctc10 = stdlib.T_Null;
+  
+  
+  const [v2319, v2349, v2376, v2377, v2420, v2421, v2422, v2423, v2424, v2425] = await ctc.getState(stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '6'), [ctc0, ctc1, ctc4, ctc1, ctc5, ctc2, ctc0, ctc1, ctc1, ctc1]);
+  const v2438 = ctc.selfAddress();
+  const v2440 = stdlib.protect(ctc6, await interact.in(), {
+    at: './interface.rsh:1:23:application',
+    fs: ['at ./interface.rsh:169:28:application call to [unknown function] (defined at: ./interface.rsh:169:28:function exp)', 'at ./interface.rsh:132:29:application call to "rundeposit0_206" (defined at: ./interface.rsh:169:10:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:132:29:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+    msg: 'in',
+    who: 'deposit'
+    });
+  const v2441 = v2440[stdlib.checkedBigNumberify('./interface.rsh:1:23:application', stdlib.UInt_max, '0')];
+  const v2444 = stdlib.addressEq(v2438, v2420);
+  stdlib.assert(v2444, {
+    at: 'reach standard library:57:5:application',
+    fs: ['at ./interface.rsh:170:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:169:28:application call to [unknown function] (defined at: ./interface.rsh:169:28:function exp)', 'at ./interface.rsh:132:29:application call to "rundeposit0_206" (defined at: ./interface.rsh:169:10:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:132:29:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+    msg: 'only manager can deposit',
+    who: 'deposit'
+    });
+  const v2446 = stdlib.gt(v2441, stdlib.checkedBigNumberify('./interface.rsh:171:19:decimal', stdlib.UInt_max, '0'));
+  stdlib.assert(v2446, {
+    at: 'reach standard library:57:5:application',
+    fs: ['at ./interface.rsh:171:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:169:28:application call to [unknown function] (defined at: ./interface.rsh:169:28:function exp)', 'at ./interface.rsh:132:29:application call to "rundeposit0_206" (defined at: ./interface.rsh:169:10:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:132:29:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+    msg: 'deposit must be greater than 0',
+    who: 'deposit'
+    });
+  const v2453 = ['deposit0_206', v2440];
+  
+  const txn1 = await (ctc.sendrecv({
+    args: [v2319, v2349, v2376, v2377, v2420, v2421, v2422, v2423, v2424, v2425, v2453],
+    evt_cnt: 1,
+    funcNum: 5,
+    lct: stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0'),
+    onlyIf: true,
+    out_tys: [ctc9],
+    pay: [stdlib.checkedBigNumberify('./interface.rsh:173:10:decimal', stdlib.UInt_max, '0'), [[v2441, v2319]]],
+    sim_p: (async (txn1) => {
+      const sim_r = { txns: [], mapRefs: [], maps: [] };
+      let sim_txn_ctr = stdlib.UInt_max;
+      const getSimTokCtr = () => { sim_txn_ctr = sim_txn_ctr.sub(1); return sim_txn_ctr; };
+      
+      
+      const {data: [v2605], secs: v2607, time: v2606, didSend: v1707, from: v2604 } = txn1;
+      
+      switch (v2605[0]) {
+        case 'buy0_206': {
+          const v2608 = v2605[1];
+          
+          break;
+          }
+        case 'close0_206': {
+          const v2899 = v2605[1];
+          
+          break;
+          }
+        case 'deposit0_206': {
+          const v3190 = v2605[1];
+          sim_r.txns.push({
+            kind: 'api',
+            who: "deposit"
+            });
+          const v3212 = v3190[stdlib.checkedBigNumberify('./interface.rsh:169:10:spread', stdlib.UInt_max, '0')];
+          ;
+          const v3253 = v2376[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v3254 = v3253[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v3255 = stdlib.safeAdd(v3254, v3212);
+          const v3257 = stdlib.Array_set(v3253, '0', v3255);
+          const v3258 = stdlib.Array_set(v2376, stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0'), v3257);
+          sim_r.txns.push({
+            amt: v3212,
+            kind: 'to',
+            tok: v2319
+            });
+          const v3336 = null;
+          const v3337 = await txn1.getOutput('deposit', 'v3336', ctc10, v3336);
+          
+          const v3350 = stdlib.safeAdd(v2423, v3212);
+          const v3352 = stdlib.safeAdd(v2424, v3212);
+          const v3353 = {
+            closed: v2421,
+            manager: v2420,
+            price: v2425,
+            token: v2422,
+            tokenAmount: v3350,
+            tokenSupply: v3352
+            };
+          const v9302 = v3258;
+          const v9303 = v2377;
+          const v9304 = v3353.closed;
+          if (v9304) {
+            const v9312 = v3353.manager;
+            const v9314 = v3353.token;
+            const v9315 = v3353.tokenAmount;
+            const v9316 = v3353.tokenSupply;
+            const v9317 = v3353.price;
+            sim_r.isHalt = false;
+            }
+          else {
+            const v9306 = v3353.manager;
+            const v9308 = v3353.token;
+            const v9309 = v3353.tokenAmount;
+            const v9310 = v3353.tokenSupply;
+            const v9311 = v3353.price;
+            sim_r.isHalt = false;
+            }
+          break;
+          }
+        case 'grant0_206': {
+          const v3481 = v2605[1];
+          
+          break;
+          }
+        case 'touch0_206': {
+          const v3772 = v2605[1];
+          
+          break;
+          }
+        case 'update0_206': {
+          const v4063 = v2605[1];
+          
+          break;
+          }
+        case 'withdraw0_206': {
+          const v4354 = v2605[1];
+          
+          break;
+          }
+        }
+      return sim_r;
+      }),
+    soloSend: false,
+    timeoutAt: undefined /* mto */,
+    tys: [ctc0, ctc1, ctc4, ctc1, ctc5, ctc2, ctc0, ctc1, ctc1, ctc1, ctc9],
+    waitIfNotPresent: false
+    }));
+  const {data: [v2605], secs: v2607, time: v2606, didSend: v1707, from: v2604 } = txn1;
+  switch (v2605[0]) {
+    case 'buy0_206': {
+      const v2608 = v2605[1];
+      return;
+      break;
+      }
+    case 'close0_206': {
+      const v2899 = v2605[1];
+      return;
+      break;
+      }
+    case 'deposit0_206': {
+      const v3190 = v2605[1];
+      undefined /* setApiDetails */;
+      const v3212 = v3190[stdlib.checkedBigNumberify('./interface.rsh:169:10:spread', stdlib.UInt_max, '0')];
+      const v3214 = stdlib.addressEq(v2604, v2420);
+      stdlib.assert(v3214, {
+        at: 'reach standard library:57:5:application',
+        fs: ['at ./interface.rsh:170:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:169:28:application call to [unknown function] (defined at: ./interface.rsh:169:28:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:169:28:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:132:29:function exp)', 'at ./interface.rsh:148:14:application call to [unknown function] (defined at: ./interface.rsh:148:14:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+        msg: 'only manager can deposit',
+        who: 'deposit'
+        });
+      const v3216 = stdlib.gt(v3212, stdlib.checkedBigNumberify('./interface.rsh:171:19:decimal', stdlib.UInt_max, '0'));
+      stdlib.assert(v3216, {
+        at: 'reach standard library:57:5:application',
+        fs: ['at ./interface.rsh:171:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:169:28:application call to [unknown function] (defined at: ./interface.rsh:169:28:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:169:28:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:132:29:function exp)', 'at ./interface.rsh:148:14:application call to [unknown function] (defined at: ./interface.rsh:148:14:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+        msg: 'deposit must be greater than 0',
+        who: 'deposit'
+        });
+      ;
+      const v3253 = v2376[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+      const v3254 = v3253[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+      const v3255 = stdlib.safeAdd(v3254, v3212);
+      const v3257 = stdlib.Array_set(v3253, '0', v3255);
+      const v3258 = stdlib.Array_set(v2376, stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0'), v3257);
+      ;
+      const v3336 = null;
+      const v3337 = await txn1.getOutput('deposit', 'v3336', ctc10, v3336);
+      if (v1707) {
+        stdlib.protect(ctc10, await interact.out(v3190, v3337), {
+          at: './interface.rsh:169:11:application',
+          fs: ['at ./interface.rsh:169:11:application call to [unknown function] (defined at: ./interface.rsh:169:11:function exp)', 'at ./interface.rsh:175:12:application call to "k" (defined at: ./interface.rsh:174:13:function exp)', 'at ./interface.rsh:174:13:application call to [unknown function] (defined at: ./interface.rsh:174:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+          msg: 'out',
+          who: 'deposit'
+          });
+        }
+      else {
+        }
+      
+      const v3350 = stdlib.safeAdd(v2423, v3212);
+      const v3352 = stdlib.safeAdd(v2424, v3212);
+      const v3353 = {
+        closed: v2421,
+        manager: v2420,
+        price: v2425,
+        token: v2422,
+        tokenAmount: v3350,
+        tokenSupply: v3352
+        };
+      const v9302 = v3258;
+      const v9303 = v2377;
+      const v9304 = v3353.closed;
+      if (v9304) {
+        const v9312 = v3353.manager;
+        const v9314 = v3353.token;
+        const v9315 = v3353.tokenAmount;
+        const v9316 = v3353.tokenSupply;
+        const v9317 = v3353.price;
+        return;
+        }
+      else {
+        const v9306 = v3353.manager;
+        const v9308 = v3353.token;
+        const v9309 = v3353.tokenAmount;
+        const v9310 = v3353.tokenSupply;
+        const v9311 = v3353.price;
+        return;
+        }
+      break;
+      }
+    case 'grant0_206': {
+      const v3481 = v2605[1];
+      return;
+      break;
+      }
+    case 'touch0_206': {
+      const v3772 = v2605[1];
+      return;
+      break;
+      }
+    case 'update0_206': {
+      const v4063 = v2605[1];
+      return;
+      break;
+      }
+    case 'withdraw0_206': {
+      const v4354 = v2605[1];
       return;
       break;
       }
@@ -1805,101 +3163,131 @@ export async function _grant6(ctcTop, interact) {
   const stdlib = ctc.stdlib;
   const ctc0 = stdlib.T_Token;
   const ctc1 = stdlib.T_UInt;
-  const ctc2 = stdlib.T_Address;
-  const ctc3 = stdlib.T_Bool;
-  const ctc4 = stdlib.T_Tuple([ctc2]);
-  const ctc5 = stdlib.T_Tuple([ctc1]);
-  const ctc6 = stdlib.T_Tuple([]);
-  const ctc7 = stdlib.T_Data({
-    buy0_201: ctc5,
-    close0_201: ctc6,
-    grant0_201: ctc4,
-    update0_201: ctc5
+  const ctc2 = stdlib.T_Bool;
+  const ctc3 = stdlib.T_Tuple([ctc1, ctc1, ctc2]);
+  const ctc4 = stdlib.T_Array(ctc3, stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '1'));
+  const ctc5 = stdlib.T_Address;
+  const ctc6 = stdlib.T_Tuple([ctc5]);
+  const ctc7 = stdlib.T_Tuple([ctc1]);
+  const ctc8 = stdlib.T_Tuple([]);
+  const ctc9 = stdlib.T_Data({
+    buy0_206: ctc7,
+    close0_206: ctc8,
+    deposit0_206: ctc7,
+    grant0_206: ctc6,
+    touch0_206: ctc8,
+    update0_206: ctc7,
+    withdraw0_206: ctc7
     });
-  const ctc8 = stdlib.T_Null;
+  const ctc10 = stdlib.T_Null;
   
   
-  const [v947, v978, v1047, v1048, v1049, v1050, v1051] = await ctc.getState(stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '6'), [ctc0, ctc1, ctc2, ctc3, ctc0, ctc1, ctc1]);
-  const v1070 = ctc.selfAddress();
-  const v1072 = stdlib.protect(ctc4, await interact.in(), {
+  const [v2319, v2349, v2376, v2377, v2420, v2421, v2422, v2423, v2424, v2425] = await ctc.getState(stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '6'), [ctc0, ctc1, ctc4, ctc1, ctc5, ctc2, ctc0, ctc1, ctc1, ctc1]);
+  const v2492 = ctc.selfAddress();
+  const v2494 = stdlib.protect(ctc6, await interact.in(), {
     at: './interface.rsh:1:23:application',
-    fs: ['at ./interface.rsh:159:26:application call to [unknown function] (defined at: ./interface.rsh:159:26:function exp)', 'at ./interface.rsh:124:29:application call to "rungrant0_201" (defined at: ./interface.rsh:159:10:function exp)', 'at ./interface.rsh:124:29:application call to [unknown function] (defined at: ./interface.rsh:124:29:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+    fs: ['at ./interface.rsh:228:26:application call to [unknown function] (defined at: ./interface.rsh:228:26:function exp)', 'at ./interface.rsh:132:29:application call to "rungrant0_206" (defined at: ./interface.rsh:228:10:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:132:29:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
     msg: 'in',
     who: 'grant'
     });
-  const v1076 = stdlib.addressEq(v1070, v1047);
-  stdlib.assert(v1076, {
+  const v2498 = stdlib.addressEq(v2492, v2420);
+  stdlib.assert(v2498, {
     at: 'reach standard library:57:5:application',
-    fs: ['at ./interface.rsh:160:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:159:26:application call to [unknown function] (defined at: ./interface.rsh:159:26:function exp)', 'at ./interface.rsh:124:29:application call to "rungrant0_201" (defined at: ./interface.rsh:159:10:function exp)', 'at ./interface.rsh:124:29:application call to [unknown function] (defined at: ./interface.rsh:124:29:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+    fs: ['at ./interface.rsh:229:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:228:26:application call to [unknown function] (defined at: ./interface.rsh:228:26:function exp)', 'at ./interface.rsh:132:29:application call to "rungrant0_206" (defined at: ./interface.rsh:228:10:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:132:29:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
     msg: 'only manager can grant',
     who: 'grant'
     });
-  const v1083 = ['grant0_201', v1072];
+  const v2505 = ['grant0_206', v2494];
   
   const txn1 = await (ctc.sendrecv({
-    args: [v947, v978, v1047, v1048, v1049, v1050, v1051, v1083],
+    args: [v2319, v2349, v2376, v2377, v2420, v2421, v2422, v2423, v2424, v2425, v2505],
     evt_cnt: 1,
     funcNum: 5,
     lct: stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0'),
     onlyIf: true,
-    out_tys: [ctc7],
-    pay: [stdlib.checkedBigNumberify('./interface.rsh:159:10:decimal', stdlib.UInt_max, '0'), []],
+    out_tys: [ctc9],
+    pay: [stdlib.checkedBigNumberify('./interface.rsh:228:10:decimal', stdlib.UInt_max, '0'), [[stdlib.checkedBigNumberify('./interface.rsh:148:14:decimal', stdlib.UInt_max, '0'), v2319]]],
     sim_p: (async (txn1) => {
       const sim_r = { txns: [], mapRefs: [], maps: [] };
       let sim_txn_ctr = stdlib.UInt_max;
       const getSimTokCtr = () => { sim_txn_ctr = sim_txn_ctr.sub(1); return sim_txn_ctr; };
       
       
-      const {data: [v1121], secs: v1123, time: v1122, didSend: v649, from: v1120 } = txn1;
+      const {data: [v2605], secs: v2607, time: v2606, didSend: v1707, from: v2604 } = txn1;
       
-      switch (v1121[0]) {
-        case 'buy0_201': {
-          const v1124 = v1121[1];
+      switch (v2605[0]) {
+        case 'buy0_206': {
+          const v2608 = v2605[1];
           
           break;
           }
-        case 'close0_201': {
-          const v1250 = v1121[1];
+        case 'close0_206': {
+          const v2899 = v2605[1];
           
           break;
           }
-        case 'grant0_201': {
-          const v1376 = v1121[1];
+        case 'deposit0_206': {
+          const v3190 = v2605[1];
+          
+          break;
+          }
+        case 'grant0_206': {
+          const v3481 = v2605[1];
           sim_r.txns.push({
             kind: 'api',
             who: "grant"
             });
           ;
-          const v1459 = v1376[stdlib.checkedBigNumberify('./interface.rsh:159:10:spread', stdlib.UInt_max, '0')];
-          const v1464 = null;
-          const v1465 = await txn1.getOutput('grant', 'v1464', ctc8, v1464);
+          const v3544 = v2376[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v3545 = v3544[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v3548 = stdlib.Array_set(v3544, '0', v3545);
+          const v3549 = stdlib.Array_set(v2376, stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0'), v3548);
+          ;
+          const v3648 = v3481[stdlib.checkedBigNumberify('./interface.rsh:228:10:spread', stdlib.UInt_max, '0')];
+          const v3653 = null;
+          const v3654 = await txn1.getOutput('grant', 'v3653', ctc10, v3653);
           
-          const v1476 = {
-            closed: v1048,
-            manager: v1459,
-            price: v1051,
-            token: v1049,
-            tokenAmount: v1050
+          const v3666 = {
+            closed: v2421,
+            manager: v3648,
+            price: v2425,
+            token: v2422,
+            tokenAmount: v2423,
+            tokenSupply: v2424
             };
-          const v3370 = v1476.closed;
-          if (v3370) {
-            const v3377 = v1476.manager;
-            const v3379 = v1476.token;
-            const v3380 = v1476.tokenAmount;
-            const v3381 = v1476.price;
+          const v9478 = v3549;
+          const v9479 = v2377;
+          const v9480 = v3666.closed;
+          if (v9480) {
+            const v9488 = v3666.manager;
+            const v9490 = v3666.token;
+            const v9491 = v3666.tokenAmount;
+            const v9492 = v3666.tokenSupply;
+            const v9493 = v3666.price;
             sim_r.isHalt = false;
             }
           else {
-            const v3372 = v1476.manager;
-            const v3374 = v1476.token;
-            const v3375 = v1476.tokenAmount;
-            const v3376 = v1476.price;
+            const v9482 = v3666.manager;
+            const v9484 = v3666.token;
+            const v9485 = v3666.tokenAmount;
+            const v9486 = v3666.tokenSupply;
+            const v9487 = v3666.price;
             sim_r.isHalt = false;
             }
           break;
           }
-        case 'update0_201': {
-          const v1502 = v1121[1];
+        case 'touch0_206': {
+          const v3772 = v2605[1];
+          
+          break;
+          }
+        case 'update0_206': {
+          const v4063 = v2605[1];
+          
+          break;
+          }
+        case 'withdraw0_206': {
+          const v4354 = v2605[1];
           
           break;
           }
@@ -1908,39 +3296,49 @@ export async function _grant6(ctcTop, interact) {
       }),
     soloSend: false,
     timeoutAt: undefined /* mto */,
-    tys: [ctc0, ctc1, ctc2, ctc3, ctc0, ctc1, ctc1, ctc7],
+    tys: [ctc0, ctc1, ctc4, ctc1, ctc5, ctc2, ctc0, ctc1, ctc1, ctc1, ctc9],
     waitIfNotPresent: false
     }));
-  const {data: [v1121], secs: v1123, time: v1122, didSend: v649, from: v1120 } = txn1;
-  switch (v1121[0]) {
-    case 'buy0_201': {
-      const v1124 = v1121[1];
+  const {data: [v2605], secs: v2607, time: v2606, didSend: v1707, from: v2604 } = txn1;
+  switch (v2605[0]) {
+    case 'buy0_206': {
+      const v2608 = v2605[1];
       return;
       break;
       }
-    case 'close0_201': {
-      const v1250 = v1121[1];
+    case 'close0_206': {
+      const v2899 = v2605[1];
       return;
       break;
       }
-    case 'grant0_201': {
-      const v1376 = v1121[1];
+    case 'deposit0_206': {
+      const v3190 = v2605[1];
+      return;
+      break;
+      }
+    case 'grant0_206': {
+      const v3481 = v2605[1];
       undefined /* setApiDetails */;
       ;
-      const v1459 = v1376[stdlib.checkedBigNumberify('./interface.rsh:159:10:spread', stdlib.UInt_max, '0')];
-      const v1461 = stdlib.addressEq(v1120, v1047);
-      stdlib.assert(v1461, {
+      const v3544 = v2376[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+      const v3545 = v3544[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+      const v3548 = stdlib.Array_set(v3544, '0', v3545);
+      const v3549 = stdlib.Array_set(v2376, stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0'), v3548);
+      ;
+      const v3648 = v3481[stdlib.checkedBigNumberify('./interface.rsh:228:10:spread', stdlib.UInt_max, '0')];
+      const v3650 = stdlib.addressEq(v2604, v2420);
+      stdlib.assert(v3650, {
         at: 'reach standard library:57:5:application',
-        fs: ['at ./interface.rsh:160:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:162:13:application call to [unknown function] (defined at: ./interface.rsh:162:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+        fs: ['at ./interface.rsh:229:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:231:13:application call to [unknown function] (defined at: ./interface.rsh:231:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
         msg: 'only manager can grant',
         who: 'grant'
         });
-      const v1464 = null;
-      const v1465 = await txn1.getOutput('grant', 'v1464', ctc8, v1464);
-      if (v649) {
-        stdlib.protect(ctc8, await interact.out(v1376, v1465), {
-          at: './interface.rsh:159:11:application',
-          fs: ['at ./interface.rsh:159:11:application call to [unknown function] (defined at: ./interface.rsh:159:11:function exp)', 'at ./interface.rsh:163:12:application call to "k" (defined at: ./interface.rsh:162:13:function exp)', 'at ./interface.rsh:162:13:application call to [unknown function] (defined at: ./interface.rsh:162:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+      const v3653 = null;
+      const v3654 = await txn1.getOutput('grant', 'v3653', ctc10, v3653);
+      if (v1707) {
+        stdlib.protect(ctc10, await interact.out(v3481, v3654), {
+          at: './interface.rsh:228:11:application',
+          fs: ['at ./interface.rsh:228:11:application call to [unknown function] (defined at: ./interface.rsh:228:11:function exp)', 'at ./interface.rsh:232:12:application call to "k" (defined at: ./interface.rsh:231:13:function exp)', 'at ./interface.rsh:231:13:application call to [unknown function] (defined at: ./interface.rsh:231:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
           msg: 'out',
           who: 'grant'
           });
@@ -1948,32 +3346,316 @@ export async function _grant6(ctcTop, interact) {
       else {
         }
       
-      const v1476 = {
-        closed: v1048,
-        manager: v1459,
-        price: v1051,
-        token: v1049,
-        tokenAmount: v1050
+      const v3666 = {
+        closed: v2421,
+        manager: v3648,
+        price: v2425,
+        token: v2422,
+        tokenAmount: v2423,
+        tokenSupply: v2424
         };
-      const v3370 = v1476.closed;
-      if (v3370) {
-        const v3377 = v1476.manager;
-        const v3379 = v1476.token;
-        const v3380 = v1476.tokenAmount;
-        const v3381 = v1476.price;
+      const v9478 = v3549;
+      const v9479 = v2377;
+      const v9480 = v3666.closed;
+      if (v9480) {
+        const v9488 = v3666.manager;
+        const v9490 = v3666.token;
+        const v9491 = v3666.tokenAmount;
+        const v9492 = v3666.tokenSupply;
+        const v9493 = v3666.price;
         return;
         }
       else {
-        const v3372 = v1476.manager;
-        const v3374 = v1476.token;
-        const v3375 = v1476.tokenAmount;
-        const v3376 = v1476.price;
+        const v9482 = v3666.manager;
+        const v9484 = v3666.token;
+        const v9485 = v3666.tokenAmount;
+        const v9486 = v3666.tokenSupply;
+        const v9487 = v3666.price;
         return;
         }
       break;
       }
-    case 'update0_201': {
-      const v1502 = v1121[1];
+    case 'touch0_206': {
+      const v3772 = v2605[1];
+      return;
+      break;
+      }
+    case 'update0_206': {
+      const v4063 = v2605[1];
+      return;
+      break;
+      }
+    case 'withdraw0_206': {
+      const v4354 = v2605[1];
+      return;
+      break;
+      }
+    }
+  
+  
+  };
+export async function _touch6(ctcTop, interact) {
+  if (typeof(ctcTop) !== 'object' || ctcTop._initialize === undefined) {
+    return Promise.reject(new Error(`The backend for _touch6 expects to receive a contract as its first argument.`));}
+  if (typeof(interact) !== 'object') {
+    return Promise.reject(new Error(`The backend for _touch6 expects to receive an interact object as its second argument.`));}
+  const ctc = ctcTop._initialize();
+  const stdlib = ctc.stdlib;
+  const ctc0 = stdlib.T_Token;
+  const ctc1 = stdlib.T_UInt;
+  const ctc2 = stdlib.T_Bool;
+  const ctc3 = stdlib.T_Tuple([ctc1, ctc1, ctc2]);
+  const ctc4 = stdlib.T_Array(ctc3, stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '1'));
+  const ctc5 = stdlib.T_Address;
+  const ctc6 = stdlib.T_Tuple([]);
+  const ctc7 = stdlib.T_Tuple([ctc1]);
+  const ctc8 = stdlib.T_Tuple([ctc5]);
+  const ctc9 = stdlib.T_Data({
+    buy0_206: ctc7,
+    close0_206: ctc6,
+    deposit0_206: ctc7,
+    grant0_206: ctc8,
+    touch0_206: ctc6,
+    update0_206: ctc7,
+    withdraw0_206: ctc7
+    });
+  const ctc10 = stdlib.T_Null;
+  
+  
+  const [v2319, v2349, v2376, v2377, v2420, v2421, v2422, v2423, v2424, v2425] = await ctc.getState(stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '6'), [ctc0, ctc1, ctc4, ctc1, ctc5, ctc2, ctc0, ctc1, ctc1, ctc1]);
+  const v2427 = ctc.selfAddress();
+  const v2429 = stdlib.protect(ctc6, await interact.in(), {
+    at: './interface.rsh:1:23:application',
+    fs: ['at ./interface.rsh:150:23:application call to [unknown function] (defined at: ./interface.rsh:150:23:function exp)', 'at ./interface.rsh:132:29:application call to "runtouch0_206" (defined at: ./interface.rsh:150:10:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:132:29:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+    msg: 'in',
+    who: 'touch'
+    });
+  const v2431 = stdlib.addressEq(v2427, v2420);
+  stdlib.assert(v2431, {
+    at: 'reach standard library:57:5:application',
+    fs: ['at ./interface.rsh:151:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:150:23:application call to [unknown function] (defined at: ./interface.rsh:150:23:function exp)', 'at ./interface.rsh:132:29:application call to "runtouch0_206" (defined at: ./interface.rsh:150:10:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:132:29:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+    msg: 'only manager can touch',
+    who: 'touch'
+    });
+  const v2436 = ['touch0_206', v2429];
+  
+  const txn1 = await (ctc.sendrecv({
+    args: [v2319, v2349, v2376, v2377, v2420, v2421, v2422, v2423, v2424, v2425, v2436],
+    evt_cnt: 1,
+    funcNum: 5,
+    lct: stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0'),
+    onlyIf: true,
+    out_tys: [ctc9],
+    pay: [stdlib.checkedBigNumberify('./interface.rsh:150:10:decimal', stdlib.UInt_max, '0'), [[stdlib.checkedBigNumberify('./interface.rsh:148:14:decimal', stdlib.UInt_max, '0'), v2319]]],
+    sim_p: (async (txn1) => {
+      const sim_r = { txns: [], mapRefs: [], maps: [] };
+      let sim_txn_ctr = stdlib.UInt_max;
+      const getSimTokCtr = () => { sim_txn_ctr = sim_txn_ctr.sub(1); return sim_txn_ctr; };
+      
+      
+      const {data: [v2605], secs: v2607, time: v2606, didSend: v1707, from: v2604 } = txn1;
+      
+      switch (v2605[0]) {
+        case 'buy0_206': {
+          const v2608 = v2605[1];
+          
+          break;
+          }
+        case 'close0_206': {
+          const v2899 = v2605[1];
+          
+          break;
+          }
+        case 'deposit0_206': {
+          const v3190 = v2605[1];
+          
+          break;
+          }
+        case 'grant0_206': {
+          const v3481 = v2605[1];
+          
+          break;
+          }
+        case 'touch0_206': {
+          const v3772 = v2605[1];
+          sim_r.txns.push({
+            kind: 'api',
+            who: "touch"
+            });
+          ;
+          const v3835 = v2376[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v3836 = v3835[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v3839 = stdlib.Array_set(v3835, '0', v3836);
+          const v3840 = stdlib.Array_set(v2376, stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0'), v3839);
+          ;
+          const v3964 = null;
+          const v3965 = await txn1.getOutput('touch', 'v3964', ctc10, v3964);
+          
+          const v3971 = (stdlib.le(await ctc.getBalance(), v2377) ? stdlib.checkedBigNumberify('./interface.rsh:155:37:application', stdlib.UInt_max, '0') : stdlib.safeSub(await ctc.getBalance(), v2377));
+          const v3972 = stdlib.safeAdd(v3971, v2377);
+          const v3977 = stdlib.safeSub(v3972, v3971);
+          sim_r.txns.push({
+            kind: 'from',
+            to: v2420,
+            tok: undefined /* Nothing */
+            });
+          const v3978 = v3840[stdlib.checkedBigNumberify('./interface.rsh:156:40:application', stdlib.UInt_max, '0')];
+          const v3979 = v3978[stdlib.checkedBigNumberify('./interface.rsh:156:40:application', stdlib.UInt_max, '0')];
+          const v3980 = (sim_r.txns.push({
+            kind: 'info',
+            tok: v2319
+            }),stdlib.le(await ctc.getBalance(v2319), v3979) ? stdlib.checkedBigNumberify('./interface.rsh:156:40:application', stdlib.UInt_max, '0') : stdlib.safeSub(await ctc.getBalance(v2319), v3979));
+          const v3981 = stdlib.safeAdd(v3980, v3979);
+          const v3983 = stdlib.Array_set(v3978, '0', v3981);
+          const v3984 = stdlib.Array_set(v3840, stdlib.checkedBigNumberify('./interface.rsh:156:40:application', stdlib.UInt_max, '0'), v3983);
+          const v3992 = stdlib.safeAdd(v2423, v3980);
+          const v3994 = stdlib.safeAdd(v2424, v3980);
+          const v3995 = {
+            closed: v2421,
+            manager: v2420,
+            price: v2425,
+            token: v2422,
+            tokenAmount: v3992,
+            tokenSupply: v3994
+            };
+          const v9654 = v3984;
+          const v9655 = v3977;
+          const v9656 = v3995.closed;
+          if (v9656) {
+            const v9664 = v3995.manager;
+            const v9666 = v3995.token;
+            const v9667 = v3995.tokenAmount;
+            const v9668 = v3995.tokenSupply;
+            const v9669 = v3995.price;
+            sim_r.isHalt = false;
+            }
+          else {
+            const v9658 = v3995.manager;
+            const v9660 = v3995.token;
+            const v9661 = v3995.tokenAmount;
+            const v9662 = v3995.tokenSupply;
+            const v9663 = v3995.price;
+            sim_r.isHalt = false;
+            }
+          break;
+          }
+        case 'update0_206': {
+          const v4063 = v2605[1];
+          
+          break;
+          }
+        case 'withdraw0_206': {
+          const v4354 = v2605[1];
+          
+          break;
+          }
+        }
+      return sim_r;
+      }),
+    soloSend: false,
+    timeoutAt: undefined /* mto */,
+    tys: [ctc0, ctc1, ctc4, ctc1, ctc5, ctc2, ctc0, ctc1, ctc1, ctc1, ctc9],
+    waitIfNotPresent: false
+    }));
+  const {data: [v2605], secs: v2607, time: v2606, didSend: v1707, from: v2604 } = txn1;
+  switch (v2605[0]) {
+    case 'buy0_206': {
+      const v2608 = v2605[1];
+      return;
+      break;
+      }
+    case 'close0_206': {
+      const v2899 = v2605[1];
+      return;
+      break;
+      }
+    case 'deposit0_206': {
+      const v3190 = v2605[1];
+      return;
+      break;
+      }
+    case 'grant0_206': {
+      const v3481 = v2605[1];
+      return;
+      break;
+      }
+    case 'touch0_206': {
+      const v3772 = v2605[1];
+      undefined /* setApiDetails */;
+      ;
+      const v3835 = v2376[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+      const v3836 = v3835[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+      const v3839 = stdlib.Array_set(v3835, '0', v3836);
+      const v3840 = stdlib.Array_set(v2376, stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0'), v3839);
+      ;
+      const v3962 = stdlib.addressEq(v2604, v2420);
+      stdlib.assert(v3962, {
+        at: 'reach standard library:57:5:application',
+        fs: ['at ./interface.rsh:151:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:153:13:application call to [unknown function] (defined at: ./interface.rsh:153:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+        msg: 'only manager can touch',
+        who: 'touch'
+        });
+      const v3964 = null;
+      const v3965 = await txn1.getOutput('touch', 'v3964', ctc10, v3964);
+      if (v1707) {
+        stdlib.protect(ctc10, await interact.out(v3772, v3965), {
+          at: './interface.rsh:150:11:application',
+          fs: ['at ./interface.rsh:150:11:application call to [unknown function] (defined at: ./interface.rsh:150:11:function exp)', 'at ./interface.rsh:154:12:application call to "k" (defined at: ./interface.rsh:153:13:function exp)', 'at ./interface.rsh:153:13:application call to [unknown function] (defined at: ./interface.rsh:153:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+          msg: 'out',
+          who: 'touch'
+          });
+        }
+      else {
+        }
+      
+      const v3971 = (stdlib.le(await ctc.getBalance(), v2377) ? stdlib.checkedBigNumberify('./interface.rsh:155:37:application', stdlib.UInt_max, '0') : stdlib.safeSub(await ctc.getBalance(), v2377));
+      const v3972 = stdlib.safeAdd(v3971, v2377);
+      const v3977 = stdlib.safeSub(v3972, v3971);
+      ;
+      const v3978 = v3840[stdlib.checkedBigNumberify('./interface.rsh:156:40:application', stdlib.UInt_max, '0')];
+      const v3979 = v3978[stdlib.checkedBigNumberify('./interface.rsh:156:40:application', stdlib.UInt_max, '0')];
+      const v3980 = (stdlib.le(await ctc.getBalance(v2319), v3979) ? stdlib.checkedBigNumberify('./interface.rsh:156:40:application', stdlib.UInt_max, '0') : stdlib.safeSub(await ctc.getBalance(v2319), v3979));
+      const v3981 = stdlib.safeAdd(v3980, v3979);
+      const v3983 = stdlib.Array_set(v3978, '0', v3981);
+      const v3984 = stdlib.Array_set(v3840, stdlib.checkedBigNumberify('./interface.rsh:156:40:application', stdlib.UInt_max, '0'), v3983);
+      const v3992 = stdlib.safeAdd(v2423, v3980);
+      const v3994 = stdlib.safeAdd(v2424, v3980);
+      const v3995 = {
+        closed: v2421,
+        manager: v2420,
+        price: v2425,
+        token: v2422,
+        tokenAmount: v3992,
+        tokenSupply: v3994
+        };
+      const v9654 = v3984;
+      const v9655 = v3977;
+      const v9656 = v3995.closed;
+      if (v9656) {
+        const v9664 = v3995.manager;
+        const v9666 = v3995.token;
+        const v9667 = v3995.tokenAmount;
+        const v9668 = v3995.tokenSupply;
+        const v9669 = v3995.price;
+        return;
+        }
+      else {
+        const v9658 = v3995.manager;
+        const v9660 = v3995.token;
+        const v9661 = v3995.tokenAmount;
+        const v9662 = v3995.tokenSupply;
+        const v9663 = v3995.price;
+        return;
+        }
+      break;
+      }
+    case 'update0_206': {
+      const v4063 = v2605[1];
+      return;
+      break;
+      }
+    case 'withdraw0_206': {
+      const v4354 = v2605[1];
       return;
       break;
       }
@@ -1990,108 +3672,412 @@ export async function _update6(ctcTop, interact) {
   const stdlib = ctc.stdlib;
   const ctc0 = stdlib.T_Token;
   const ctc1 = stdlib.T_UInt;
-  const ctc2 = stdlib.T_Address;
-  const ctc3 = stdlib.T_Bool;
-  const ctc4 = stdlib.T_Tuple([ctc1]);
-  const ctc5 = stdlib.T_Tuple([]);
-  const ctc6 = stdlib.T_Tuple([ctc2]);
-  const ctc7 = stdlib.T_Data({
-    buy0_201: ctc4,
-    close0_201: ctc5,
-    grant0_201: ctc6,
-    update0_201: ctc4
+  const ctc2 = stdlib.T_Bool;
+  const ctc3 = stdlib.T_Tuple([ctc1, ctc1, ctc2]);
+  const ctc4 = stdlib.T_Array(ctc3, stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '1'));
+  const ctc5 = stdlib.T_Address;
+  const ctc6 = stdlib.T_Tuple([ctc1]);
+  const ctc7 = stdlib.T_Tuple([]);
+  const ctc8 = stdlib.T_Tuple([ctc5]);
+  const ctc9 = stdlib.T_Data({
+    buy0_206: ctc6,
+    close0_206: ctc7,
+    deposit0_206: ctc6,
+    grant0_206: ctc8,
+    touch0_206: ctc7,
+    update0_206: ctc6,
+    withdraw0_206: ctc6
     });
-  const ctc8 = stdlib.T_Null;
+  const ctc10 = stdlib.T_Null;
   
   
-  const [v947, v978, v1047, v1048, v1049, v1050, v1051] = await ctc.getState(stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '6'), [ctc0, ctc1, ctc2, ctc3, ctc0, ctc1, ctc1]);
-  const v1053 = ctc.selfAddress();
-  const v1055 = stdlib.protect(ctc4, await interact.in(), {
+  const [v2319, v2349, v2376, v2377, v2420, v2421, v2422, v2423, v2424, v2425] = await ctc.getState(stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '6'), [ctc0, ctc1, ctc4, ctc1, ctc5, ctc2, ctc0, ctc1, ctc1, ctc1]);
+  const v2475 = ctc.selfAddress();
+  const v2477 = stdlib.protect(ctc6, await interact.in(), {
     at: './interface.rsh:1:23:application',
-    fs: ['at ./interface.rsh:142:27:application call to [unknown function] (defined at: ./interface.rsh:142:27:function exp)', 'at ./interface.rsh:124:29:application call to "runupdate0_201" (defined at: ./interface.rsh:142:10:function exp)', 'at ./interface.rsh:124:29:application call to [unknown function] (defined at: ./interface.rsh:124:29:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+    fs: ['at ./interface.rsh:211:27:application call to [unknown function] (defined at: ./interface.rsh:211:27:function exp)', 'at ./interface.rsh:132:29:application call to "runupdate0_206" (defined at: ./interface.rsh:211:10:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:132:29:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
     msg: 'in',
     who: 'update'
     });
-  const v1056 = v1055[stdlib.checkedBigNumberify('./interface.rsh:1:23:application', stdlib.UInt_max, '0')];
-  const v1059 = stdlib.addressEq(v1053, v1047);
-  stdlib.assert(v1059, {
+  const v2478 = v2477[stdlib.checkedBigNumberify('./interface.rsh:1:23:application', stdlib.UInt_max, '0')];
+  const v2481 = stdlib.addressEq(v2475, v2420);
+  stdlib.assert(v2481, {
     at: 'reach standard library:57:5:application',
-    fs: ['at ./interface.rsh:143:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:142:27:application call to [unknown function] (defined at: ./interface.rsh:142:27:function exp)', 'at ./interface.rsh:124:29:application call to "runupdate0_201" (defined at: ./interface.rsh:142:10:function exp)', 'at ./interface.rsh:124:29:application call to [unknown function] (defined at: ./interface.rsh:124:29:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+    fs: ['at ./interface.rsh:212:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:211:27:application call to [unknown function] (defined at: ./interface.rsh:211:27:function exp)', 'at ./interface.rsh:132:29:application call to "runupdate0_206" (defined at: ./interface.rsh:211:10:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:132:29:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
     msg: 'only manager can update',
     who: 'update'
     });
-  const v1061 = stdlib.gt(v1056, stdlib.checkedBigNumberify('./interface.rsh:144:19:decimal', stdlib.UInt_max, '0'));
-  stdlib.assert(v1061, {
+  const v2483 = stdlib.gt(v2478, stdlib.checkedBigNumberify('./interface.rsh:213:19:decimal', stdlib.UInt_max, '0'));
+  stdlib.assert(v2483, {
     at: 'reach standard library:57:5:application',
-    fs: ['at ./interface.rsh:144:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:142:27:application call to [unknown function] (defined at: ./interface.rsh:142:27:function exp)', 'at ./interface.rsh:124:29:application call to "runupdate0_201" (defined at: ./interface.rsh:142:10:function exp)', 'at ./interface.rsh:124:29:application call to [unknown function] (defined at: ./interface.rsh:124:29:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+    fs: ['at ./interface.rsh:213:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:211:27:application call to [unknown function] (defined at: ./interface.rsh:211:27:function exp)', 'at ./interface.rsh:132:29:application call to "runupdate0_206" (defined at: ./interface.rsh:211:10:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:132:29:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
     msg: 'price must be greater than 0',
     who: 'update'
     });
-  const v1068 = ['update0_201', v1055];
+  const v2490 = ['update0_206', v2477];
   
   const txn1 = await (ctc.sendrecv({
-    args: [v947, v978, v1047, v1048, v1049, v1050, v1051, v1068],
+    args: [v2319, v2349, v2376, v2377, v2420, v2421, v2422, v2423, v2424, v2425, v2490],
     evt_cnt: 1,
     funcNum: 5,
     lct: stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0'),
     onlyIf: true,
-    out_tys: [ctc7],
-    pay: [stdlib.checkedBigNumberify('./interface.rsh:142:10:decimal', stdlib.UInt_max, '0'), []],
+    out_tys: [ctc9],
+    pay: [stdlib.checkedBigNumberify('./interface.rsh:211:10:decimal', stdlib.UInt_max, '0'), [[stdlib.checkedBigNumberify('./interface.rsh:148:14:decimal', stdlib.UInt_max, '0'), v2319]]],
     sim_p: (async (txn1) => {
       const sim_r = { txns: [], mapRefs: [], maps: [] };
       let sim_txn_ctr = stdlib.UInt_max;
       const getSimTokCtr = () => { sim_txn_ctr = sim_txn_ctr.sub(1); return sim_txn_ctr; };
       
       
-      const {data: [v1121], secs: v1123, time: v1122, didSend: v649, from: v1120 } = txn1;
+      const {data: [v2605], secs: v2607, time: v2606, didSend: v1707, from: v2604 } = txn1;
       
-      switch (v1121[0]) {
-        case 'buy0_201': {
-          const v1124 = v1121[1];
+      switch (v2605[0]) {
+        case 'buy0_206': {
+          const v2608 = v2605[1];
           
           break;
           }
-        case 'close0_201': {
-          const v1250 = v1121[1];
+        case 'close0_206': {
+          const v2899 = v2605[1];
           
           break;
           }
-        case 'grant0_201': {
-          const v1376 = v1121[1];
+        case 'deposit0_206': {
+          const v3190 = v2605[1];
           
           break;
           }
-        case 'update0_201': {
-          const v1502 = v1121[1];
+        case 'grant0_206': {
+          const v3481 = v2605[1];
+          
+          break;
+          }
+        case 'touch0_206': {
+          const v3772 = v2605[1];
+          
+          break;
+          }
+        case 'update0_206': {
+          const v4063 = v2605[1];
           sim_r.txns.push({
             kind: 'api',
             who: "update"
             });
           ;
-          const v1606 = v1502[stdlib.checkedBigNumberify('./interface.rsh:142:10:spread', stdlib.UInt_max, '0')];
-          const v1613 = null;
-          const v1614 = await txn1.getOutput('update', 'v1613', ctc8, v1613);
+          const v4126 = v2376[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v4127 = v4126[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v4130 = stdlib.Array_set(v4126, '0', v4127);
+          const v4131 = stdlib.Array_set(v2376, stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0'), v4130);
+          ;
+          const v4290 = v4063[stdlib.checkedBigNumberify('./interface.rsh:211:10:spread', stdlib.UInt_max, '0')];
+          const v4297 = null;
+          const v4298 = await txn1.getOutput('update', 'v4297', ctc10, v4297);
           
-          const v1625 = {
-            closed: v1048,
-            manager: v1047,
-            price: v1606,
-            token: v1049,
-            tokenAmount: v1050
+          const v4310 = {
+            closed: v2421,
+            manager: v2420,
+            price: v4290,
+            token: v2422,
+            tokenAmount: v2423,
+            tokenSupply: v2424
             };
-          const v3460 = v1625.closed;
-          if (v3460) {
-            const v3467 = v1625.manager;
-            const v3469 = v1625.token;
-            const v3470 = v1625.tokenAmount;
-            const v3471 = v1625.price;
+          const v9830 = v4131;
+          const v9831 = v2377;
+          const v9832 = v4310.closed;
+          if (v9832) {
+            const v9840 = v4310.manager;
+            const v9842 = v4310.token;
+            const v9843 = v4310.tokenAmount;
+            const v9844 = v4310.tokenSupply;
+            const v9845 = v4310.price;
             sim_r.isHalt = false;
             }
           else {
-            const v3462 = v1625.manager;
-            const v3464 = v1625.token;
-            const v3465 = v1625.tokenAmount;
-            const v3466 = v1625.price;
+            const v9834 = v4310.manager;
+            const v9836 = v4310.token;
+            const v9837 = v4310.tokenAmount;
+            const v9838 = v4310.tokenSupply;
+            const v9839 = v4310.price;
+            sim_r.isHalt = false;
+            }
+          break;
+          }
+        case 'withdraw0_206': {
+          const v4354 = v2605[1];
+          
+          break;
+          }
+        }
+      return sim_r;
+      }),
+    soloSend: false,
+    timeoutAt: undefined /* mto */,
+    tys: [ctc0, ctc1, ctc4, ctc1, ctc5, ctc2, ctc0, ctc1, ctc1, ctc1, ctc9],
+    waitIfNotPresent: false
+    }));
+  const {data: [v2605], secs: v2607, time: v2606, didSend: v1707, from: v2604 } = txn1;
+  switch (v2605[0]) {
+    case 'buy0_206': {
+      const v2608 = v2605[1];
+      return;
+      break;
+      }
+    case 'close0_206': {
+      const v2899 = v2605[1];
+      return;
+      break;
+      }
+    case 'deposit0_206': {
+      const v3190 = v2605[1];
+      return;
+      break;
+      }
+    case 'grant0_206': {
+      const v3481 = v2605[1];
+      return;
+      break;
+      }
+    case 'touch0_206': {
+      const v3772 = v2605[1];
+      return;
+      break;
+      }
+    case 'update0_206': {
+      const v4063 = v2605[1];
+      undefined /* setApiDetails */;
+      ;
+      const v4126 = v2376[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+      const v4127 = v4126[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+      const v4130 = stdlib.Array_set(v4126, '0', v4127);
+      const v4131 = stdlib.Array_set(v2376, stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0'), v4130);
+      ;
+      const v4290 = v4063[stdlib.checkedBigNumberify('./interface.rsh:211:10:spread', stdlib.UInt_max, '0')];
+      const v4292 = stdlib.addressEq(v2604, v2420);
+      stdlib.assert(v4292, {
+        at: 'reach standard library:57:5:application',
+        fs: ['at ./interface.rsh:212:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:215:13:application call to [unknown function] (defined at: ./interface.rsh:215:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+        msg: 'only manager can update',
+        who: 'update'
+        });
+      const v4294 = stdlib.gt(v4290, stdlib.checkedBigNumberify('./interface.rsh:213:19:decimal', stdlib.UInt_max, '0'));
+      stdlib.assert(v4294, {
+        at: 'reach standard library:57:5:application',
+        fs: ['at ./interface.rsh:213:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:215:13:application call to [unknown function] (defined at: ./interface.rsh:215:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+        msg: 'price must be greater than 0',
+        who: 'update'
+        });
+      const v4297 = null;
+      const v4298 = await txn1.getOutput('update', 'v4297', ctc10, v4297);
+      if (v1707) {
+        stdlib.protect(ctc10, await interact.out(v4063, v4298), {
+          at: './interface.rsh:211:11:application',
+          fs: ['at ./interface.rsh:211:11:application call to [unknown function] (defined at: ./interface.rsh:211:11:function exp)', 'at ./interface.rsh:216:12:application call to "k" (defined at: ./interface.rsh:215:13:function exp)', 'at ./interface.rsh:215:13:application call to [unknown function] (defined at: ./interface.rsh:215:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+          msg: 'out',
+          who: 'update'
+          });
+        }
+      else {
+        }
+      
+      const v4310 = {
+        closed: v2421,
+        manager: v2420,
+        price: v4290,
+        token: v2422,
+        tokenAmount: v2423,
+        tokenSupply: v2424
+        };
+      const v9830 = v4131;
+      const v9831 = v2377;
+      const v9832 = v4310.closed;
+      if (v9832) {
+        const v9840 = v4310.manager;
+        const v9842 = v4310.token;
+        const v9843 = v4310.tokenAmount;
+        const v9844 = v4310.tokenSupply;
+        const v9845 = v4310.price;
+        return;
+        }
+      else {
+        const v9834 = v4310.manager;
+        const v9836 = v4310.token;
+        const v9837 = v4310.tokenAmount;
+        const v9838 = v4310.tokenSupply;
+        const v9839 = v4310.price;
+        return;
+        }
+      break;
+      }
+    case 'withdraw0_206': {
+      const v4354 = v2605[1];
+      return;
+      break;
+      }
+    }
+  
+  
+  };
+export async function _withdraw6(ctcTop, interact) {
+  if (typeof(ctcTop) !== 'object' || ctcTop._initialize === undefined) {
+    return Promise.reject(new Error(`The backend for _withdraw6 expects to receive a contract as its first argument.`));}
+  if (typeof(interact) !== 'object') {
+    return Promise.reject(new Error(`The backend for _withdraw6 expects to receive an interact object as its second argument.`));}
+  const ctc = ctcTop._initialize();
+  const stdlib = ctc.stdlib;
+  const ctc0 = stdlib.T_Token;
+  const ctc1 = stdlib.T_UInt;
+  const ctc2 = stdlib.T_Bool;
+  const ctc3 = stdlib.T_Tuple([ctc1, ctc1, ctc2]);
+  const ctc4 = stdlib.T_Array(ctc3, stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '1'));
+  const ctc5 = stdlib.T_Address;
+  const ctc6 = stdlib.T_Tuple([ctc1]);
+  const ctc7 = stdlib.T_Tuple([]);
+  const ctc8 = stdlib.T_Tuple([ctc5]);
+  const ctc9 = stdlib.T_Data({
+    buy0_206: ctc6,
+    close0_206: ctc7,
+    deposit0_206: ctc6,
+    grant0_206: ctc8,
+    touch0_206: ctc7,
+    update0_206: ctc6,
+    withdraw0_206: ctc6
+    });
+  const ctc10 = stdlib.T_Null;
+  
+  
+  const [v2319, v2349, v2376, v2377, v2420, v2421, v2422, v2423, v2424, v2425] = await ctc.getState(stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '6'), [ctc0, ctc1, ctc4, ctc1, ctc5, ctc2, ctc0, ctc1, ctc1, ctc1]);
+  const v2455 = ctc.selfAddress();
+  const v2457 = stdlib.protect(ctc6, await interact.in(), {
+    at: './interface.rsh:1:23:application',
+    fs: ['at ./interface.rsh:188:29:application call to [unknown function] (defined at: ./interface.rsh:188:29:function exp)', 'at ./interface.rsh:132:29:application call to "runwithdraw0_206" (defined at: ./interface.rsh:188:10:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:132:29:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+    msg: 'in',
+    who: 'withdraw'
+    });
+  const v2458 = v2457[stdlib.checkedBigNumberify('./interface.rsh:1:23:application', stdlib.UInt_max, '0')];
+  const v2461 = stdlib.addressEq(v2455, v2420);
+  stdlib.assert(v2461, {
+    at: 'reach standard library:57:5:application',
+    fs: ['at ./interface.rsh:189:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:188:29:application call to [unknown function] (defined at: ./interface.rsh:188:29:function exp)', 'at ./interface.rsh:132:29:application call to "runwithdraw0_206" (defined at: ./interface.rsh:188:10:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:132:29:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+    msg: 'only manager can withdraw',
+    who: 'withdraw'
+    });
+  const v2463 = stdlib.gt(v2458, stdlib.checkedBigNumberify('./interface.rsh:190:19:decimal', stdlib.UInt_max, '0'));
+  stdlib.assert(v2463, {
+    at: 'reach standard library:57:5:application',
+    fs: ['at ./interface.rsh:190:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:188:29:application call to [unknown function] (defined at: ./interface.rsh:188:29:function exp)', 'at ./interface.rsh:132:29:application call to "runwithdraw0_206" (defined at: ./interface.rsh:188:10:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:132:29:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+    msg: 'withdraw must be greater than 0',
+    who: 'withdraw'
+    });
+  const v2466 = stdlib.le(v2458, v2423);
+  stdlib.assert(v2466, {
+    at: 'reach standard library:57:5:application',
+    fs: ['at ./interface.rsh:191:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:188:29:application call to [unknown function] (defined at: ./interface.rsh:188:29:function exp)', 'at ./interface.rsh:132:29:application call to "runwithdraw0_206" (defined at: ./interface.rsh:188:10:function exp)', 'at ./interface.rsh:132:29:application call to [unknown function] (defined at: ./interface.rsh:132:29:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+    msg: 'withdraw must be less than or equal to token amount',
+    who: 'withdraw'
+    });
+  const v2473 = ['withdraw0_206', v2457];
+  
+  const txn1 = await (ctc.sendrecv({
+    args: [v2319, v2349, v2376, v2377, v2420, v2421, v2422, v2423, v2424, v2425, v2473],
+    evt_cnt: 1,
+    funcNum: 5,
+    lct: stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0'),
+    onlyIf: true,
+    out_tys: [ctc9],
+    pay: [stdlib.checkedBigNumberify('./interface.rsh:188:10:decimal', stdlib.UInt_max, '0'), [[stdlib.checkedBigNumberify('./interface.rsh:148:14:decimal', stdlib.UInt_max, '0'), v2319]]],
+    sim_p: (async (txn1) => {
+      const sim_r = { txns: [], mapRefs: [], maps: [] };
+      let sim_txn_ctr = stdlib.UInt_max;
+      const getSimTokCtr = () => { sim_txn_ctr = sim_txn_ctr.sub(1); return sim_txn_ctr; };
+      
+      
+      const {data: [v2605], secs: v2607, time: v2606, didSend: v1707, from: v2604 } = txn1;
+      
+      switch (v2605[0]) {
+        case 'buy0_206': {
+          const v2608 = v2605[1];
+          
+          break;
+          }
+        case 'close0_206': {
+          const v2899 = v2605[1];
+          
+          break;
+          }
+        case 'deposit0_206': {
+          const v3190 = v2605[1];
+          
+          break;
+          }
+        case 'grant0_206': {
+          const v3481 = v2605[1];
+          
+          break;
+          }
+        case 'touch0_206': {
+          const v3772 = v2605[1];
+          
+          break;
+          }
+        case 'update0_206': {
+          const v4063 = v2605[1];
+          
+          break;
+          }
+        case 'withdraw0_206': {
+          const v4354 = v2605[1];
+          sim_r.txns.push({
+            kind: 'api',
+            who: "withdraw"
+            });
+          ;
+          const v4417 = v2376[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v4418 = v4417[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+          const v4421 = stdlib.Array_set(v4417, '0', v4418);
+          const v4422 = stdlib.Array_set(v2376, stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0'), v4421);
+          ;
+          const v4605 = v4354[stdlib.checkedBigNumberify('./interface.rsh:188:10:spread', stdlib.UInt_max, '0')];
+          const v4615 = null;
+          const v4616 = await txn1.getOutput('withdraw', 'v4615', ctc10, v4615);
+          
+          const v4623 = v4422[stdlib.checkedBigNumberify('./interface.rsh:198:38:application', stdlib.UInt_max, '0')];
+          const v4624 = v4623[stdlib.checkedBigNumberify('./interface.rsh:198:38:application', stdlib.UInt_max, '0')];
+          const v4628 = stdlib.safeSub(v4624, v4605);
+          const v4630 = stdlib.Array_set(v4623, '0', v4628);
+          const v4631 = stdlib.Array_set(v4422, stdlib.checkedBigNumberify('./interface.rsh:198:38:application', stdlib.UInt_max, '0'), v4630);
+          sim_r.txns.push({
+            kind: 'from',
+            to: v2420,
+            tok: v2319
+            });
+          const v4639 = stdlib.safeSub(v2423, v4605);
+          const v4641 = stdlib.safeSub(v2424, v4605);
+          const v4642 = {
+            closed: v2421,
+            manager: v2420,
+            price: v2425,
+            token: v2422,
+            tokenAmount: v4639,
+            tokenSupply: v4641
+            };
+          const v10006 = v4631;
+          const v10007 = v2377;
+          const v10008 = v4642.closed;
+          if (v10008) {
+            const v10016 = v4642.manager;
+            const v10018 = v4642.token;
+            const v10019 = v4642.tokenAmount;
+            const v10020 = v4642.tokenSupply;
+            const v10021 = v4642.price;
+            sim_r.isHalt = false;
+            }
+          else {
+            const v10010 = v4642.manager;
+            const v10012 = v4642.token;
+            const v10013 = v4642.tokenAmount;
+            const v10014 = v4642.tokenSupply;
+            const v10015 = v4642.price;
             sim_r.isHalt = false;
             }
           break;
@@ -2101,78 +4087,118 @@ export async function _update6(ctcTop, interact) {
       }),
     soloSend: false,
     timeoutAt: undefined /* mto */,
-    tys: [ctc0, ctc1, ctc2, ctc3, ctc0, ctc1, ctc1, ctc7],
+    tys: [ctc0, ctc1, ctc4, ctc1, ctc5, ctc2, ctc0, ctc1, ctc1, ctc1, ctc9],
     waitIfNotPresent: false
     }));
-  const {data: [v1121], secs: v1123, time: v1122, didSend: v649, from: v1120 } = txn1;
-  switch (v1121[0]) {
-    case 'buy0_201': {
-      const v1124 = v1121[1];
+  const {data: [v2605], secs: v2607, time: v2606, didSend: v1707, from: v2604 } = txn1;
+  switch (v2605[0]) {
+    case 'buy0_206': {
+      const v2608 = v2605[1];
       return;
       break;
       }
-    case 'close0_201': {
-      const v1250 = v1121[1];
+    case 'close0_206': {
+      const v2899 = v2605[1];
       return;
       break;
       }
-    case 'grant0_201': {
-      const v1376 = v1121[1];
+    case 'deposit0_206': {
+      const v3190 = v2605[1];
       return;
       break;
       }
-    case 'update0_201': {
-      const v1502 = v1121[1];
+    case 'grant0_206': {
+      const v3481 = v2605[1];
+      return;
+      break;
+      }
+    case 'touch0_206': {
+      const v3772 = v2605[1];
+      return;
+      break;
+      }
+    case 'update0_206': {
+      const v4063 = v2605[1];
+      return;
+      break;
+      }
+    case 'withdraw0_206': {
+      const v4354 = v2605[1];
       undefined /* setApiDetails */;
       ;
-      const v1606 = v1502[stdlib.checkedBigNumberify('./interface.rsh:142:10:spread', stdlib.UInt_max, '0')];
-      const v1608 = stdlib.addressEq(v1120, v1047);
-      stdlib.assert(v1608, {
+      const v4417 = v2376[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+      const v4418 = v4417[stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0')];
+      const v4421 = stdlib.Array_set(v4417, '0', v4418);
+      const v4422 = stdlib.Array_set(v2376, stdlib.checkedBigNumberify('./interface.rsh:132:29:dot', stdlib.UInt_max, '0'), v4421);
+      ;
+      const v4605 = v4354[stdlib.checkedBigNumberify('./interface.rsh:188:10:spread', stdlib.UInt_max, '0')];
+      const v4607 = stdlib.addressEq(v2604, v2420);
+      stdlib.assert(v4607, {
         at: 'reach standard library:57:5:application',
-        fs: ['at ./interface.rsh:143:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:146:13:application call to [unknown function] (defined at: ./interface.rsh:146:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
-        msg: 'only manager can update',
-        who: 'update'
+        fs: ['at ./interface.rsh:189:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:196:13:application call to [unknown function] (defined at: ./interface.rsh:196:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+        msg: 'only manager can withdraw',
+        who: 'withdraw'
         });
-      const v1610 = stdlib.gt(v1606, stdlib.checkedBigNumberify('./interface.rsh:144:19:decimal', stdlib.UInt_max, '0'));
-      stdlib.assert(v1610, {
+      const v4609 = stdlib.gt(v4605, stdlib.checkedBigNumberify('./interface.rsh:190:19:decimal', stdlib.UInt_max, '0'));
+      stdlib.assert(v4609, {
         at: 'reach standard library:57:5:application',
-        fs: ['at ./interface.rsh:144:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:146:13:application call to [unknown function] (defined at: ./interface.rsh:146:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
-        msg: 'price must be greater than 0',
-        who: 'update'
+        fs: ['at ./interface.rsh:190:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:196:13:application call to [unknown function] (defined at: ./interface.rsh:196:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+        msg: 'withdraw must be greater than 0',
+        who: 'withdraw'
         });
-      const v1613 = null;
-      const v1614 = await txn1.getOutput('update', 'v1613', ctc8, v1613);
-      if (v649) {
-        stdlib.protect(ctc8, await interact.out(v1502, v1614), {
-          at: './interface.rsh:142:11:application',
-          fs: ['at ./interface.rsh:142:11:application call to [unknown function] (defined at: ./interface.rsh:142:11:function exp)', 'at ./interface.rsh:147:12:application call to "k" (defined at: ./interface.rsh:146:13:function exp)', 'at ./interface.rsh:146:13:application call to [unknown function] (defined at: ./interface.rsh:146:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+      const v4612 = stdlib.le(v4605, v2423);
+      stdlib.assert(v4612, {
+        at: 'reach standard library:57:5:application',
+        fs: ['at ./interface.rsh:191:12:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./interface.rsh:196:13:application call to [unknown function] (defined at: ./interface.rsh:196:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
+        msg: 'withdraw must be less than or equal to token amount',
+        who: 'withdraw'
+        });
+      const v4615 = null;
+      const v4616 = await txn1.getOutput('withdraw', 'v4615', ctc10, v4615);
+      if (v1707) {
+        stdlib.protect(ctc10, await interact.out(v4354, v4616), {
+          at: './interface.rsh:188:11:application',
+          fs: ['at ./interface.rsh:188:11:application call to [unknown function] (defined at: ./interface.rsh:188:11:function exp)', 'at ./interface.rsh:197:12:application call to "k" (defined at: ./interface.rsh:196:13:function exp)', 'at ./interface.rsh:196:13:application call to [unknown function] (defined at: ./interface.rsh:196:13:function exp)', 'at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
           msg: 'out',
-          who: 'update'
+          who: 'withdraw'
           });
         }
       else {
         }
       
-      const v1625 = {
-        closed: v1048,
-        manager: v1047,
-        price: v1606,
-        token: v1049,
-        tokenAmount: v1050
+      const v4623 = v4422[stdlib.checkedBigNumberify('./interface.rsh:198:38:application', stdlib.UInt_max, '0')];
+      const v4624 = v4623[stdlib.checkedBigNumberify('./interface.rsh:198:38:application', stdlib.UInt_max, '0')];
+      const v4628 = stdlib.safeSub(v4624, v4605);
+      const v4630 = stdlib.Array_set(v4623, '0', v4628);
+      const v4631 = stdlib.Array_set(v4422, stdlib.checkedBigNumberify('./interface.rsh:198:38:application', stdlib.UInt_max, '0'), v4630);
+      ;
+      const v4639 = stdlib.safeSub(v2423, v4605);
+      const v4641 = stdlib.safeSub(v2424, v4605);
+      const v4642 = {
+        closed: v2421,
+        manager: v2420,
+        price: v2425,
+        token: v2422,
+        tokenAmount: v4639,
+        tokenSupply: v4641
         };
-      const v3460 = v1625.closed;
-      if (v3460) {
-        const v3467 = v1625.manager;
-        const v3469 = v1625.token;
-        const v3470 = v1625.tokenAmount;
-        const v3471 = v1625.price;
+      const v10006 = v4631;
+      const v10007 = v2377;
+      const v10008 = v4642.closed;
+      if (v10008) {
+        const v10016 = v4642.manager;
+        const v10018 = v4642.token;
+        const v10019 = v4642.tokenAmount;
+        const v10020 = v4642.tokenSupply;
+        const v10021 = v4642.price;
         return;
         }
       else {
-        const v3462 = v1625.manager;
-        const v3464 = v1625.token;
-        const v3465 = v1625.tokenAmount;
-        const v3466 = v1625.price;
+        const v10010 = v4642.manager;
+        const v10012 = v4642.token;
+        const v10013 = v4642.tokenAmount;
+        const v10014 = v4642.tokenSupply;
+        const v10015 = v4642.price;
         return;
         }
       break;
@@ -2203,6 +4229,17 @@ export async function close(ctcTop, interact) {
   if (step == 6) {return _close6(ctcTop, interact);}
   throw stdlib.apiStateMismatchError({ _stateSourceMap }, [stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '6')], stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, step))
   };
+export async function deposit(ctcTop, interact) {
+  if (typeof(ctcTop) !== 'object' || ctcTop._initialize === undefined) {
+    return Promise.reject(new Error(`The backend for deposit expects to receive a contract as its first argument.`));}
+  if (typeof(interact) !== 'object') {
+    return Promise.reject(new Error(`The backend for deposit expects to receive an interact object as its second argument.`));}
+  const ctc = ctcTop._initialize();
+  const stdlib = ctc.stdlib;
+  const step = await ctc.getCurrentStep()
+  if (step == 6) {return _deposit6(ctcTop, interact);}
+  throw stdlib.apiStateMismatchError({ _stateSourceMap }, [stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '6')], stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, step))
+  };
 export async function grant(ctcTop, interact) {
   if (typeof(ctcTop) !== 'object' || ctcTop._initialize === undefined) {
     return Promise.reject(new Error(`The backend for grant expects to receive a contract as its first argument.`));}
@@ -2212,6 +4249,17 @@ export async function grant(ctcTop, interact) {
   const stdlib = ctc.stdlib;
   const step = await ctc.getCurrentStep()
   if (step == 6) {return _grant6(ctcTop, interact);}
+  throw stdlib.apiStateMismatchError({ _stateSourceMap }, [stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '6')], stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, step))
+  };
+export async function touch(ctcTop, interact) {
+  if (typeof(ctcTop) !== 'object' || ctcTop._initialize === undefined) {
+    return Promise.reject(new Error(`The backend for touch expects to receive a contract as its first argument.`));}
+  if (typeof(interact) !== 'object') {
+    return Promise.reject(new Error(`The backend for touch expects to receive an interact object as its second argument.`));}
+  const ctc = ctcTop._initialize();
+  const stdlib = ctc.stdlib;
+  const step = await ctc.getCurrentStep()
+  if (step == 6) {return _touch6(ctcTop, interact);}
   throw stdlib.apiStateMismatchError({ _stateSourceMap }, [stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '6')], stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, step))
   };
 export async function update(ctcTop, interact) {
@@ -2225,20 +4273,31 @@ export async function update(ctcTop, interact) {
   if (step == 6) {return _update6(ctcTop, interact);}
   throw stdlib.apiStateMismatchError({ _stateSourceMap }, [stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '6')], stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, step))
   };
+export async function withdraw(ctcTop, interact) {
+  if (typeof(ctcTop) !== 'object' || ctcTop._initialize === undefined) {
+    return Promise.reject(new Error(`The backend for withdraw expects to receive a contract as its first argument.`));}
+  if (typeof(interact) !== 'object') {
+    return Promise.reject(new Error(`The backend for withdraw expects to receive an interact object as its second argument.`));}
+  const ctc = ctcTop._initialize();
+  const stdlib = ctc.stdlib;
+  const step = await ctc.getCurrentStep()
+  if (step == 6) {return _withdraw6(ctcTop, interact);}
+  throw stdlib.apiStateMismatchError({ _stateSourceMap }, [stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '6')], stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, step))
+  };
 const _ALGO = {
   ABI: {
-    impure: [`buy(uint64)byte[0]`, `close()byte[0]`, `grant(address)byte[0]`, `update(uint64)byte[0]`],
-    pure: [`state()(address,byte,uint64,uint64,uint64)`],
-    sigs: [`buy(uint64)byte[0]`, `close()byte[0]`, `grant(address)byte[0]`, `state()(address,byte,uint64,uint64,uint64)`, `update(uint64)byte[0]`]
+    impure: [`buy(uint64)byte[0]`, `close()byte[0]`, `deposit(uint64)byte[0]`, `grant(address)byte[0]`, `touch()byte[0]`, `update(uint64)byte[0]`, `withdraw(uint64)byte[0]`],
+    pure: [`state()(address,byte,uint64,uint64,uint64,uint64)`],
+    sigs: [`buy(uint64)byte[0]`, `close()byte[0]`, `deposit(uint64)byte[0]`, `grant(address)byte[0]`, `state()(address,byte,uint64,uint64,uint64,uint64)`, `touch()byte[0]`, `update(uint64)byte[0]`, `withdraw(uint64)byte[0]`]
     },
-  appApproval: `BiAUAAEECAYCBTEwKLXcwZkM1Y6erg2i1IrcDhiI9//RCgMgoI0GKSEmAwEAAAEBIjUAMRhBBSApZEkiWzUBJVs1AjYaABdJQQDQIjUEIzUGSSEKDEAAkkkhCwxAAHlJIQwMQABeIQwSRDQBSSEEDEAAKSEEEkQoZEk1A1cQIDQDVzABUDQDVzEIUDQDVzkIUDQDV0EIUDUHQgS0JBJEKGRJNQNXCCA0A1coAVA0A1cpCFA0A1cxCFA0A1c5CFA1B0IEjCELEkQ2GgE1/yg0/1AhDa9QQgBoIQoSRDYaATX/gAECNP9QQgBWSSEODEAAFiEOEkQ2GgE1/4ABAzT/UCENr1BCADmB9biIMBJEKTX/KjT/UDIDUEIAJTYaAhc1BDYaAzYaARdJIQUMQAIkSSQMQAHZSSEGDEABmiEGEkQhBDQBEkQ0BEkiEkw0AhIRRChkSTUDSUpKSSJbNf8lWzX+VxAgNf1XMAEXNfwhB1s1+4E5WzX6gUFbNflJNQU1+IAE8/IFIDT4ULA0+CJVSSEFDEAAiEkhDwxAAEchDxJENPhXAQg19zT3FzX2MQA0/RJENPYiDUSACAAAAAAAAAZNsCk1BzT/NP40/BZRBwg0/VA09hZQNPsWUDT6FlAyBkICikg0+FcBIDX3MQA0/RJEgAgAAAAAAAAFuLApNQc0/zT+NPwWUQcINPdQNPkWUDT7FlA0+hZQMgZCAlBJIwxAAEFIMQA0/RJEgAgAAAAAAAAFG7ApNQexIrIBNPqyEiSyEDT9shQ0/7IRszT/NP4qNP1QNPkWUDT7FlAlr1AyBkICCUg0+FcBCDX3NPcXSTX2NPoORDT2NP4LNfU09YgC84AIAAAAAAAABHmwKTUHsSKyATT1sggjshA0/bIHs7EisgE09rISJLIQMQCyFDT/shGzNP80/jT8FlEHCDT9UDT5FlA0+xZQNPo09gkWUDIGQgGYSCQ0ARJENARJIhJMNAISEUQoZDUDgASRJzTzsLEisgEishIkshAyCbIVMgqyFDQDIluyEbNCAfohBRJEIzQBEkQ0BEkiEkw0AhIRRChkNQOABEGxQE2wMgY0AyEIWw9EsSKyASKyEiSyEDIJshUyCrIUNAMhCVuyEbNCAbVJIwxAAJFIIzQBEkQ0BEkiEkw0AhIRRChkSTUDIQlbNf9JNQVJIls1/iVbNf2ABMe2CtU0/hZQNP0WULAyBjQDIQhbDEQ0/iINRDT9Ig1ENAMhEFsjCDX8NPyIAcY0/jT/iAHXsSKyATT8sggjshA0A1cAILIHs4AEVlCYBLA0/zT9KDEAUDT9FlA0/xZQNP4WUDIGQgCESCERiAGGIjQBEkQ0BEkiEkw0AhIRREk1BUlKVwAgNf8hEFs1/iEJWzX9IQhbNfyABOjBUMg0/1A0/hZQNP0WUDT8FlCwIRGIAUKxIrIBIrISJLIQMgqyFDT8shGzMgY0/Qg1+zT/NP4WUDT8FlA0+xZQKEsBVwA4Z0gjNQEyBjUCQgC2Nf81/jX9Nfw0/lcAARdBAEI0/lcBIDX7NP4hEls1+jT+IQdbNfk0/iETWzX4NPwWNPtQKlA0+hZQNPkWUDT4FlAoSwFXAEFnSCQ1ATIGNQJCAGM0/lcBIDX7NP4hEls1+jT+IQdbNfk0/iETWzX4NPwWNP0WUDT7UChQNPoWUDT5FlA0+BZQKEsBVwBJZ0ghBDUBMgY1AkIAHDEZIQYSRLEisgEisggjshAyCbIJMgqyB7NCAAUxGSISRCk0ARY0AhZQZzQGQQAKgAQVH3x1NAdQsDQASSMIMgQSRDEWEkQjQzEZIhJEQv/fIjE0EkQhBTE1EkQiMTYSRCIxNxJEIjUBIjUCQv+uNABJSiMINQA4BzIKEkQ4ECMSRDgIEkSJNABJSkkjCDUAOBQyChJEOBAkEkQ4EU8CEkQ4EhJEiQ==`,
+  appApproval: `BiAXAAEECAYYAgUhKIj3/9EK+Iz71AzVjp6uDbXcwZkM6/GPnQaFvda4Csve+4MGQSCgjQYpMTkmAwEAAAEBIjUAMRhBCGEpZEkiWzUBJVs1AjYaABdJQQEwIjUEIzUGSSEKDEAAu0khCwxAAIVJIQwMQAAUIQwSRDYaATX/KDT/UCEFr1BCASYhCxJENAFJIQQMQAAvIQQSRChkSTUDVykgNANXSQFQNANXSghQNANXUghQNANXWghQNANXYghQNQdCB9skEkQoZEk1A1cIIDQDVygBUDQDVykIUDQDVzEIUDQDVzkIUDQDV0EIUDUHQgetSSENDEAAEiENEkQ2GgE1/4ABAzT/UEIAoyEKEkQ2GgE1/4ABBTT/UCEFr1BCAI1JIQ4MQAAzSSEPDEAAFiEPEkQ2GgE1/4ABBjT/UCEFr1BCAGkhDhJENhoBNf+AAQI0/1AhBa9QQgBTSSEQDEAAEyEQEkQpNf+AAQQ0/1AyA1BCADmB9biIMBJEKTX/KjT/UDIDUEIAJTYaAhc1BDYaAzYaARdJIQYMQASnSSQMQARcSSEHDEAEHSEHEkQhBDQBEkQ0BEkiEkw0AhIRRChkSTUDSUpKSkoiWzX/JVs1/lcQETX9IQhbNfxXKSA1+1dJARc1+oFKWzX5gVJbNfiBWls194FiWzX2STUFNfWABPPyBSA09VCwNPUiVUmBAwxAAhNJIQcMQAEESSEEDEAAnSEEEkQ09VcBCDX0NP1XABFJNfNJVwAINfFXCAk08UxQNfI09Bc18TEANPsSRDTxIg1ENPE0+A5EgAgAAAAAAAASB7ApNQc08lcAETXwsSKyATTxshIkshA0+7IUNP+yEbM0/zT+NPoWUQcINPtQNPYWUDT5FlA0+DTxCRZQNPc08QkWUDIGNPBJIls08QkWNe9XCAk070xQNPxCBN1INPVXAQg19DT9VwARNfM09Bc18jEANPsSRDTyIg1EgAgAAAAAAAAQybApNQc0/zT+NPoWUQcINPtQNPIWUDT5FlA0+BZQNPcWUDIGNPNJVwAINfFXCAk08UxQNPxCBH1JJAxAAKxINP1XABFJNfRJVwAINfJXCAk08kxQNfMxADT7EkSACAAAAAAAAA98sCk1BzIKYDIKeAk0/Ak18rEisgE08rIII7IQNPuyB7M081cAEUk18SJbNfAyCjT/cABINPBKDEAABAlCAANISCI17zT/NP40+hZRBwg0+1A09hZQNPkWUDT4NO8IFlA09zTvCBZQMgY08TTvNPAIFjXuVwgJNO5MUDTyNPwINPIJQgPLSDT1VwEgNfQ0/VcAETXzMQA0+xJEgAgAAAAAAAAORbApNQc0/zT+NPoWUQcINPRQNPYWUDT5FlA0+BZQNPcWUDIGNPNJVwAINfJXCAk08kxQNPxCA3VJIwxAAO1JIQYMQABwSDT1VwEINfQ09Bc18zEANPsSRDTzIg1ENP1XABE18jTzNP+IBIOACAAAAAAAAA0IsCk1BzT/NP40+hZRBwg0+1A09hZQNPkWUDT4NPMIFlA09zTzCBZQMgY08kkiWzTzCBY18VcICTTxTFA0/EIC+Eg0/VcAEUk19ElXAAg18lcICTTyTFA18zEANPsSRIAIAAAAAAAAC8OwKTUHNPNXABE18rEisgE0+LISJLIQNPuyFDT/shGzNP80/io0+1A09hZQNPkWUCWvUCWvUDIGNPJJIls0+AkWNfFXCAk08UxQNPxCAoJINPVXAQg19DT0F0k18zT4DkQ08zT+CzXyNPKIA400/VcAEUk18UlXAAg171cICTTvTFA18IAIAAAAAAAACnuwKTUHsSKyATTysggjshA0+7IHszTwVwARNe+xIrIBNPOyEiSyEDEAshQ0/7IRszT/NP40+hZRBwg0+1A09hZQNPkWUDT4NPMJFlA09xZQMgY070kiWzTzCRY17lcICTTuTFA0/DTyCDTyCUIB1UgkNAESRDQESSISTDQCEhFEKGQ1A4AEkSc087CxIrIBIrISJLIQMgmyFTIKshQ0AyJbshGzQgJYIQYSRCM0ARJENARJIhJMNAISEUQoZDUDgARBsUBNsDIGNAMhEVsPRLEisgEishIkshAyCbIVMgqyFDQDIQlbshGzQgITSSMMQAC1SCM0ARJENARJIhJMNAISEUQoZEk1A0lJIRJbNf8hCVs1/lcwETX9STUFSSJbNfwlWzX7gATHtgrVNPwWUDT7FlCwMgY0AyERWwxENPwiDUQ0+yINRDT/iAIhNP1XABE1+jT8NP6IAiuxIrIBNP+yCCOyEDQDVwAgsgezgARWUJgEsDT+NPsoMQBQNPsWUDT+FlA0/BZQNPwWUDIGNPpJIls0/AgWNflXCAk0+UxQNP9JCUIAnUghE4gBwCI0ARJENARJIhJMNAISEURJNQVJSlcAIDX/IRJbNf4hCVs1/YEwWzX8gATowVDINP9QNP4WUDT9FlA0/BZQsIERr0k1+1cAESWvNflXCAk0+UxQNfohE4gBZrEisgEishIkshAyCrIUNPyyEbMyBjT9CDX5NP80/hZQNPwWUDT6UDT5FlAoSwFXAElnSCM1ATIGNQJCANc1/zX+Nf01/DX7Nfo0/FcAARdBAE00/FcBIDX5NPwhFFs1+DT8IRVbNfc0/CEWWzX2NPwhCFs19TT6FjT5UCpQNPgWUDT3FlA09hZQNPUWUChLAVcASWdIJDUBMgY1AkIAdTT8VwEgNfk0/CEUWzX4NPwhFVs19zT8IRZbNfY0/CEIWzX1NPoWNPsWUDT+UDT/FlA0+VAoUDT4FlA09xZQNPYWUDT1FlAoSwFXAGpnSCEENQEyBjUCQgAcMRkhBxJEsSKyASKyCCOyEDIJsgkyCrIHs0IABTEZIhJEKTQBFjQCFlBnNAZBAAqABBUffHU0B1CwNABJIwgyBBJEMRYSRCNDMRkiEkRC/98iMTQSRCEGMTUSRCIxNhJEIjE3EkQiNQEiNQJC/640AElKIwg1ADgHMgoSRDgQIxJEOAgSRIk0AElKSSMINQA4FDIKEkQ4ECQSRDgRTwISRDgSEkSJ`,
   appClear: `Bg==`,
   companionInfo: null,
-  extraPages: 0,
+  extraPages: 1,
   mapDataKeys: 0,
   mapDataSize: 0,
   stateKeys: 1,
-  stateSize: 73,
+  stateSize: 106,
   unsupported: [],
   version: 10,
   warnings: []
@@ -2258,31 +4317,31 @@ const _ETH = {
             "components": [
               {
                 "internalType": "address payable",
-                "name": "v944",
+                "name": "v2316",
                 "type": "address"
               },
               {
                 "internalType": "uint256",
-                "name": "v945",
+                "name": "v2317",
                 "type": "uint256"
               },
               {
                 "internalType": "uint256",
-                "name": "v946",
+                "name": "v2318",
                 "type": "uint256"
               },
               {
                 "internalType": "address payable",
-                "name": "v947",
+                "name": "v2319",
                 "type": "address"
               }
             ],
-            "internalType": "struct T5",
+            "internalType": "struct T7",
             "name": "msg",
             "type": "tuple"
           }
         ],
-        "internalType": "struct T6",
+        "internalType": "struct T8",
         "name": "_a",
         "type": "tuple"
       }
@@ -2321,32 +4380,32 @@ const _ETH = {
             "components": [
               {
                 "internalType": "address payable",
-                "name": "v944",
+                "name": "v2316",
                 "type": "address"
               },
               {
                 "internalType": "uint256",
-                "name": "v945",
+                "name": "v2317",
                 "type": "uint256"
               },
               {
                 "internalType": "uint256",
-                "name": "v946",
+                "name": "v2318",
                 "type": "uint256"
               },
               {
                 "internalType": "address payable",
-                "name": "v947",
+                "name": "v2319",
                 "type": "address"
               }
             ],
-            "internalType": "struct T5",
+            "internalType": "struct T7",
             "name": "msg",
             "type": "tuple"
           }
         ],
         "indexed": false,
-        "internalType": "struct T6",
+        "internalType": "struct T8",
         "name": "_a",
         "type": "tuple"
       }
@@ -2374,22 +4433,22 @@ const _ETH = {
             "components": [
               {
                 "internalType": "uint256",
-                "name": "v977",
+                "name": "v2348",
                 "type": "uint256"
               },
               {
                 "internalType": "uint256",
-                "name": "v978",
+                "name": "v2349",
                 "type": "uint256"
               }
             ],
-            "internalType": "struct T11",
+            "internalType": "struct T13",
             "name": "msg",
             "type": "tuple"
           }
         ],
         "indexed": false,
-        "internalType": "struct T12",
+        "internalType": "struct T14",
         "name": "_a",
         "type": "tuple"
       }
@@ -2420,7 +4479,7 @@ const _ETH = {
           }
         ],
         "indexed": false,
-        "internalType": "struct T14",
+        "internalType": "struct T16",
         "name": "_a",
         "type": "tuple"
       }
@@ -2451,7 +4510,7 @@ const _ETH = {
           }
         ],
         "indexed": false,
-        "internalType": "struct T14",
+        "internalType": "struct T16",
         "name": "_a",
         "type": "tuple"
       }
@@ -2480,7 +4539,7 @@ const _ETH = {
               {
                 "components": [
                   {
-                    "internalType": "enum _enum_T17",
+                    "internalType": "enum _enum_T19",
                     "name": "which",
                     "type": "uint8"
                   },
@@ -2492,14 +4551,26 @@ const _ETH = {
                         "type": "uint256"
                       }
                     ],
-                    "internalType": "struct T15",
-                    "name": "_buy0_201",
+                    "internalType": "struct T17",
+                    "name": "_buy0_206",
                     "type": "tuple"
                   },
                   {
                     "internalType": "bool",
-                    "name": "_close0_201",
+                    "name": "_close0_206",
                     "type": "bool"
+                  },
+                  {
+                    "components": [
+                      {
+                        "internalType": "uint256",
+                        "name": "elem0",
+                        "type": "uint256"
+                      }
+                    ],
+                    "internalType": "struct T17",
+                    "name": "_deposit0_206",
+                    "type": "tuple"
                   },
                   {
                     "components": [
@@ -2509,8 +4580,25 @@ const _ETH = {
                         "type": "address"
                       }
                     ],
-                    "internalType": "struct T16",
-                    "name": "_grant0_201",
+                    "internalType": "struct T18",
+                    "name": "_grant0_206",
+                    "type": "tuple"
+                  },
+                  {
+                    "internalType": "bool",
+                    "name": "_touch0_206",
+                    "type": "bool"
+                  },
+                  {
+                    "components": [
+                      {
+                        "internalType": "uint256",
+                        "name": "elem0",
+                        "type": "uint256"
+                      }
+                    ],
+                    "internalType": "struct T17",
+                    "name": "_update0_206",
                     "type": "tuple"
                   },
                   {
@@ -2521,23 +4609,23 @@ const _ETH = {
                         "type": "uint256"
                       }
                     ],
-                    "internalType": "struct T15",
-                    "name": "_update0_201",
+                    "internalType": "struct T17",
+                    "name": "_withdraw0_206",
                     "type": "tuple"
                   }
                 ],
-                "internalType": "struct T17",
-                "name": "v1121",
+                "internalType": "struct T19",
+                "name": "v2605",
                 "type": "tuple"
               }
             ],
-            "internalType": "struct T18",
+            "internalType": "struct T20",
             "name": "msg",
             "type": "tuple"
           }
         ],
         "indexed": false,
-        "internalType": "struct T19",
+        "internalType": "struct T21",
         "name": "_a",
         "type": "tuple"
       }
@@ -2555,7 +4643,7 @@ const _ETH = {
         "type": "bool"
       }
     ],
-    "name": "_reach_oe_v1145",
+    "name": "_reach_oe_v2683",
     "type": "event"
   },
   {
@@ -2568,7 +4656,7 @@ const _ETH = {
         "type": "bool"
       }
     ],
-    "name": "_reach_oe_v1307",
+    "name": "_reach_oe_v3011",
     "type": "event"
   },
   {
@@ -2581,7 +4669,7 @@ const _ETH = {
         "type": "bool"
       }
     ],
-    "name": "_reach_oe_v1464",
+    "name": "_reach_oe_v3336",
     "type": "event"
   },
   {
@@ -2594,7 +4682,46 @@ const _ETH = {
         "type": "bool"
       }
     ],
-    "name": "_reach_oe_v1613",
+    "name": "_reach_oe_v3653",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "v0",
+        "type": "bool"
+      }
+    ],
+    "name": "_reach_oe_v3964",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "v0",
+        "type": "bool"
+      }
+    ],
+    "name": "_reach_oe_v4297",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "v0",
+        "type": "bool"
+      }
+    ],
+    "name": "_reach_oe_v4615",
     "type": "event"
   },
   {
@@ -2664,21 +4791,21 @@ const _ETH = {
             "components": [
               {
                 "internalType": "uint256",
-                "name": "v977",
+                "name": "v2348",
                 "type": "uint256"
               },
               {
                 "internalType": "uint256",
-                "name": "v978",
+                "name": "v2349",
                 "type": "uint256"
               }
             ],
-            "internalType": "struct T11",
+            "internalType": "struct T13",
             "name": "msg",
             "type": "tuple"
           }
         ],
-        "internalType": "struct T12",
+        "internalType": "struct T14",
         "name": "_a",
         "type": "tuple"
       }
@@ -2703,7 +4830,7 @@ const _ETH = {
             "type": "bool"
           }
         ],
-        "internalType": "struct T14",
+        "internalType": "struct T16",
         "name": "_a",
         "type": "tuple"
       }
@@ -2728,7 +4855,7 @@ const _ETH = {
             "type": "bool"
           }
         ],
-        "internalType": "struct T14",
+        "internalType": "struct T16",
         "name": "_a",
         "type": "tuple"
       }
@@ -2752,7 +4879,7 @@ const _ETH = {
               {
                 "components": [
                   {
-                    "internalType": "enum _enum_T17",
+                    "internalType": "enum _enum_T19",
                     "name": "which",
                     "type": "uint8"
                   },
@@ -2764,14 +4891,26 @@ const _ETH = {
                         "type": "uint256"
                       }
                     ],
-                    "internalType": "struct T15",
-                    "name": "_buy0_201",
+                    "internalType": "struct T17",
+                    "name": "_buy0_206",
                     "type": "tuple"
                   },
                   {
                     "internalType": "bool",
-                    "name": "_close0_201",
+                    "name": "_close0_206",
                     "type": "bool"
+                  },
+                  {
+                    "components": [
+                      {
+                        "internalType": "uint256",
+                        "name": "elem0",
+                        "type": "uint256"
+                      }
+                    ],
+                    "internalType": "struct T17",
+                    "name": "_deposit0_206",
+                    "type": "tuple"
                   },
                   {
                     "components": [
@@ -2781,8 +4920,25 @@ const _ETH = {
                         "type": "address"
                       }
                     ],
-                    "internalType": "struct T16",
-                    "name": "_grant0_201",
+                    "internalType": "struct T18",
+                    "name": "_grant0_206",
+                    "type": "tuple"
+                  },
+                  {
+                    "internalType": "bool",
+                    "name": "_touch0_206",
+                    "type": "bool"
+                  },
+                  {
+                    "components": [
+                      {
+                        "internalType": "uint256",
+                        "name": "elem0",
+                        "type": "uint256"
+                      }
+                    ],
+                    "internalType": "struct T17",
+                    "name": "_update0_206",
                     "type": "tuple"
                   },
                   {
@@ -2793,22 +4949,22 @@ const _ETH = {
                         "type": "uint256"
                       }
                     ],
-                    "internalType": "struct T15",
-                    "name": "_update0_201",
+                    "internalType": "struct T17",
+                    "name": "_withdraw0_206",
                     "type": "tuple"
                   }
                 ],
-                "internalType": "struct T17",
-                "name": "v1121",
+                "internalType": "struct T19",
+                "name": "v2605",
                 "type": "tuple"
               }
             ],
-            "internalType": "struct T18",
+            "internalType": "struct T20",
             "name": "msg",
             "type": "tuple"
           }
         ],
-        "internalType": "struct T19",
+        "internalType": "struct T21",
         "name": "_a",
         "type": "tuple"
       }
@@ -2840,6 +4996,25 @@ const _ETH = {
   {
     "inputs": [],
     "name": "close",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_a0",
+        "type": "uint256"
+      }
+    ],
+    "name": "deposit",
     "outputs": [
       {
         "internalType": "bool",
@@ -2897,6 +5072,11 @@ const _ETH = {
           },
           {
             "internalType": "uint256",
+            "name": "tokenSupply",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
             "name": "price",
             "type": "uint256"
           }
@@ -2907,6 +5087,19 @@ const _ETH = {
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "touch",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "payable",
     "type": "function"
   },
   {
@@ -2929,12 +5122,31 @@ const _ETH = {
     "type": "function"
   },
   {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_a0",
+        "type": "uint256"
+      }
+    ],
+    "name": "withdraw",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
     "stateMutability": "payable",
     "type": "receive"
   }
 ]`,
-  Bytecode: `0x60806040526040516200257c3803806200257c8339810160408190526200002691620002fe565b600080805543600355604080516020808201835292815281513381528451818501528484015180516001600160a01b039081168386015294810151606080840191909152938101516080830152929092015190921660a08201527ff3f7b40e3e3b9f4100b9e92d74f44191fabe2129aaf0490c6d70d95395a3def79060c00160405180910390a1620000bb3415600862000182565b620000d543836020015160400151620001ad60201b60201c565b815260408051608080820183526000808352602080840182815284860183815260608087018581528a85018051516001600160a01b03908116808b52825188015187529151840151811685528b51835260019788905543909755895195860152925197840197909752519092169481019490945251908301529060a001604051602081830303815290604052600290805190602001906200017892919062000204565b5050505062000413565b81620001a95760405163100960cb60e01b8152600481018290526024015b60405180910390fd5b5050565b600082620001bc8382620003af565b9150811015620001fe5760405162461bcd60e51b815260206004820152600c60248201526b616464206f766572666c6f7760a01b6044820152606401620001a0565b92915050565b8280546200021290620003d6565b90600052602060002090601f01602090048101928262000236576000855562000281565b82601f106200025157805160ff191683800117855562000281565b8280016001018555821562000281579182015b828111156200028157825182559160200191906001019062000264565b506200028f92915062000293565b5090565b5b808211156200028f576000815560010162000294565b604051608081016001600160401b0381118282101715620002db57634e487b7160e01b600052604160045260246000fd5b60405290565b80516001600160a01b0381168114620002f957600080fd5b919050565b600081830360a08112156200031257600080fd5b604080519081016001600160401b03811182821017156200034357634e487b7160e01b600052604160045260246000fd5b604052835181526080601f19830112156200035d57600080fd5b62000367620002aa565b91506200037760208501620002e1565b825260408401516020830152606084015160408301526200039b60808501620002e1565b606083015260208101919091529392505050565b60008219821115620003d157634e487b7160e01b600052601160045260246000fd5b500190565b600181811c90821680620003eb57607f821691505b602082108114156200040d57634e487b7160e01b600052602260045260246000fd5b50919050565b61215980620004236000396000f3fe6080604052600436106100a55760003560e01c806382ab890a1161006157806382ab890a146101365780638323075714610149578063a7661d541461015e578063ab53f2c614610171578063c19d93fb14610194578063d96a094a146101f357005b80630d80b056146100ae5780631e93b0f1146100c157806342ae229d146100e557806343d726d6146100f857806370284d19146101105780637eea518c1461012357005b366100ac57005b005b6100ac6100bc366004611a48565b610206565b3480156100cd57600080fd5b506003545b6040519081526020015b60405180910390f35b6100ac6100f3366004611a60565b61022a565b61010061024a565b60405190151581526020016100dc565b61010061011e366004611a87565b61027a565b6100ac610131366004611aa4565b6102be565b610100610144366004611ab6565b6102de565b34801561015557600080fd5b506001546100d2565b6100ac61016c366004611aa4565b610319565b34801561017d57600080fd5b50610186610339565b6040516100dc929190611afb565b3480156101a057600080fd5b506101a96103d6565b6040805182516001600160a01b039081168252602080850151151590830152838301511691810191909152606080830151908201526080918201519181019190915260a0016100dc565b610100610201366004611ab6565b6103ef565b61020e6117a7565b61022661022036849003840184611c2c565b82610426565b5050565b6102326117a7565b61022661024436849003840184611cfa565b82610a6c565b60006102546117ce565b602081015151600190526102666117a7565b6102708282610426565b6020015192915050565b60006102846117ce565b60208101805151600290525151606001516001600160a01b03841690526102a96117a7565b6102b38282610426565b604001519392505050565b6102c66117a7565b6102266102d836849003840184611d6a565b82610d02565b60006102e86117ce565b60208101805151600390525151608001518390526103046117a7565b61030e8282610426565b606001519392505050565b6103216117a7565b61022661033336849003840184611d6a565b82610e52565b60006060600054600280805461034e90611dce565b80601f016020809104026020016040519081016040528092919081815260200182805461037a90611dce565b80156103c75780601f1061039c576101008083540402835291602001916103c7565b820191906000526020600020905b8154815290600101906020018083116103aa57829003601f168201915b50505050509050915091509091565b6103de6117ed565b60006103e981610f77565b91505090565b60006103f96117ce565b602081810180515160009052515101518390526104146117a7565b61041e8282610426565b519392505050565b6104366006600054146020611268565b815161045190158061044a57508251600154145b6021611268565b60008080556002805461046390611dce565b80601f016020809104026020016040519081016040528092919081815260200182805461048f90611dce565b80156104dc5780601f106104b1576101008083540402835291602001916104dc565b820191906000526020600020905b8154815290600101906020018083116104bf57829003601f168201915b50505050508060200190518101906104f49190611e03565b90506104fe61181b565b7f80c0c256042afd2ccaea2ec02408c259fca626984e8827d32bc6a7da07fe4263338560405161052f929190611eb6565b60405180910390a1600060208501515151600381111561055157610551611d54565b14156106cc5760208085015151015180825260a083015190516105779110156017611268565b8051516020830151610589919061128e565b6020820181905261059d9034146018611268565b604051600081527fcc00c8db8d1739ce8ac5a5e1f44857df5101bcd70c69d2e0ca9da2cc8a9498029060200160405180910390a16000808452604080840151602084015191516001600160a01b039091169282156108fc02929190818181858888f19350505050158015610615573d6000803e3d6000fd5b508151815151610627919033906112f3565b606080830151604080840180519215159092528085015182516001600160a01b0391821660209091015260c086015183519092019190915260808501519151911691015260a082015181515161067d9190611307565b60408201516080015261068e611894565b825181516001600160a01b0390911690526020808401518251820152604083015181830180519190915251439101526106c681611356565b50610a66565b60016020850151515160038111156106e6576106e6611d54565b14156107f4576106f834156019611268565b61071b82604001516001600160a01b0316336001600160a01b031614601a611268565b604051600081527f2b5e229f25e1ec089dba1fa01c19adeb46c77297c22c0ae22e2ad03b10b1cc8b9060200160405180910390a1600060208401528151604083015160a084015161076d9291906112f3565b606080820180516001905260408085015182516001600160a01b0391821660209091015260c08601518351909201919091526080808601518351921691909301525160009101526107bc611894565b825181516001600160a01b0390911690526020808401518251820152606083015181830180519190915251439101526106c681611356565b600260208501515151600381111561080e5761080e611d54565b14156109245760208401515160600151608082015261082f3415601b611268565b61085282604001516001600160a01b0316336001600160a01b031614601c611268565b604051600081527f01736a56598b2a4b25e84ca1a9ae2ea48465b6ba43dc81b871a7d19ac91ad3569060200160405180910390a1600060408085019190915260608084015160a080850180519215159092526080808601515183516001600160a01b0391821660209091015260c08801518451909601959095528087015183519516949093019390935291840151915101526108ec611894565b825181516001600160a01b039091169052602080840151825182015260a083015181830180519190915251439101526106c681611356565b600360208501515151600381111561093e5761093e611d54565b1415610a66576020840151516080015160c082015261095f3415601d611268565b61098282604001516001600160a01b0316336001600160a01b031614601e611268565b60c081015151610995901515601f611268565b604051600081527f5e9d0232a8407e8c67ecb36093a8d95adefc7593e1d457a1c753a62bdbf9941c9060200160405180910390a160006060808501919091528281015160e08301805191151590915260408085015182516001600160a01b0391821660209091015260c08501515183519092019190915260808086015183519216919093015260a0840151905190910152610a2e611894565b825181516001600160a01b039091169052602080840151825182015260e083015181830180519190915251439101526106c681611356565b50505050565b610a7c600160005414600d611268565b8151610a97901580610a9057508251600154145b600e611268565b600080805560028054610aa990611dce565b80601f0160208091040260200160405190810160405280929190818152602001828054610ad590611dce565b8015610b225780601f10610af757610100808354040283529160200191610b22565b820191906000526020600020905b815481529060010190602001808311610b0557829003601f168201915b5050505050806020019051810190610b3a9190611f38565b9050610b446118bd565b610b5582606001514310600f611268565b604080513381528551602080830191909152808701518051838501520151606082015290517f28b3acbd60e1c88f58f9afc3e0ee7cd853273307e47898c088b04f6be7fbcd939181900360800190a1602084015151610bb79015156009611268565b610bcd600085602001516020015111600a611268565b610bdc8260200151600161155c565b808252610bec903414600b611268565b610c0d610c063384604001518760200151600001516115a9565b600c611268565b815181516040516001600160a01b039092169181156108fc0291906000818181858888f19350505050158015610c47573d6000803e3d6000fd5b506040517fe3186c9b3140de057ac0af103f783a8c4cf8db1215158bfd3a04a74b4a6c582f90600090a1602081810180516000905280513390830152858201805190920151815160409081019190915284015181516001600160a01b03909116606090910152905151905160800152610cbe611894565b604083015181516001600160a01b0390911690526020808601518101518251820152828101518183018051919091525143910152610cfb81611356565b5050505050565b610d126001600054146011611268565b8151610d2d901580610d2657508251600154145b6012611268565b600080805560028054610d3f90611dce565b80601f0160208091040260200160405190810160405280929190818152602001828054610d6b90611dce565b8015610db85780601f10610d8d57610100808354040283529160200191610db8565b820191906000526020600020905b815481529060010190602001808311610d9b57829003601f168201915b5050505050806020019051810190610dd09190611f38565b9050610de481606001514310156013611268565b60408051338152845160208083019190915285015115158183015290517f919263be6d51bec670ce110fb6a7df03fe323e3de4dade5355bccc6a4b06d9509181900360600190a1610e3734156010611268565b60008080556001819055610e4d906002906118d7565b505050565b610e626004600054146015611268565b8151610e7d901580610e7657508251600154145b6016611268565b600080805560028054610e8f90611dce565b80601f0160208091040260200160405190810160405280929190818152602001828054610ebb90611dce565b8015610f085780601f10610edd57610100808354040283529160200191610f08565b820191906000526020600020905b815481529060010190602001808311610eeb57829003601f168201915b5050505050806020019051810190610f209190611fbb565b60408051338152855160208083019190915286015115158183015290519192507faa99e317c364fb804a6b7e67b51beee98735c62eb3df9d8182015e63bb190722919081900360600190a1610e3734156014611268565b610f7f6117ed565b6001600054141561103a57600060028054610f9990611dce565b80601f0160208091040260200160405190810160405280929190818152602001828054610fc590611dce565b80156110125780601f10610fe757610100808354040283529160200191611012565b820191906000526020600020905b815481529060010190602001808311610ff557829003601f168201915b505050505080602001905181019061102a9190611f38565b905061103860006007611268565b505b600460005414156111495760006002805461105490611dce565b80601f016020809104026020016040519081016040528092919081815260200182805461108090611dce565b80156110cd5780601f106110a2576101008083540402835291602001916110cd565b820191906000526020600020905b8154815290600101906020018083116110b057829003601f168201915b50505050508060200190518101906110e59190611fbb565b90506110ef611911565b60208083015182516001600160a01b039182169052604080850151845190151593019290925260608085015184519216919092015260808084015183519092019190915260a0909201518151909201919091525192915050565b600660005414156112575760006002805461116390611dce565b80601f016020809104026020016040519081016040528092919081815260200182805461118f90611dce565b80156111dc5780601f106111b1576101008083540402835291602001916111dc565b820191906000526020600020905b8154815290600101906020018083116111bf57829003601f168201915b50505050508060200190518101906111f49190611e03565b90506111fe611911565b60408083015182516001600160a01b039182169052606080850151845190151560209091015260808086015185519316929093019190915260a084015183519091015260c0909201518151909201919091525192915050565b61126360006007611268565b919050565b816102265760405163100960cb60e01b8152600481018290526024015b60405180910390fd5b60008115806112b2575082826112a4818361207a565b92506112b09083612099565b145b6112ed5760405162461bcd60e51b815260206004820152600c60248201526b6d756c206f766572666c6f7760a01b6044820152606401611285565b92915050565b6112fe8383836115c1565b610e4d57600080fd5b60008261131483826120bb565b91508111156112ed5760405162461bcd60e51b815260206004820152600e60248201526d1cdd58881ddc985c185c9bdd5b9960921b6044820152606401611285565b6020810151515115611453576040805160c081018252600080825260208201819052918101829052606081018290526080810182905260a08101919091528151516001600160a01b0390811680835260208085018051518201518416828601908152600160408088018281528451516060908101518916818b01908152865151608090810151818d0190815297515185015160a0808e019182526004600055439097558551998a019a909a5295518a16938801939093529051151590860152519095169083015251928101929092525160c082015260e0015b60405160208183030381529060405260029080519060200190610e4d929190611924565b6040805160e081018252600080825260208201819052918101829052606081018290526080810182905260a0810182905260c08101919091528151516001600160a01b0390811682528251602090810151818401528084018051518201518316604080860191909152600060608087018290528351510151909416608080870191909152825151015160a086015290515181015160c0850152600690925543600155905161142f9183910181516001600160a01b039081168252602080840151908301526040808401518216908301526060808401511515908301526080808401519091169082015260a0828101519082015260c0918201519181019190915260e00190565b50565b60008261156983826120d2565b91508110156112ed5760405162461bcd60e51b815260206004820152600c60248201526b616464206f766572666c6f7760a01b6044820152606401611285565b60006115b783853085611692565b90505b9392505050565b604080516001600160a01b038481166024830152604480830185905283518084039091018152606490920183526020820180516001600160e01b031663a9059cbb60e01b179052915160009283928392918816918391611620916120ea565b60006040518083038185875af1925050503d806000811461165d576040519150601f19603f3d011682016040523d82523d6000602084013e611662565b606091505b50915091506116738282600261176c565b50808060200190518101906116889190612106565b9695505050505050565b604080516001600160a01b0385811660248301528481166044830152606480830185905283518084039091018152608490920183526020820180516001600160e01b03166323b872dd60e01b1790529151600092839283929189169183916116f9916120ea565b60006040518083038185875af1925050503d8060008114611736576040519150601f19603f3d011682016040523d82523d6000602084013e61173b565b606091505b509150915061174c8282600161176c565b50808060200190518101906117619190612106565b979650505050505050565b6060831561177b5750816115ba565b82511561178b5782518084602001fd5b60405163100960cb60e01b815260048101839052602401611285565b60408051608081018252600080825260208201819052918101829052606081019190915290565b6040518060400160405280600081526020016117e86119a8565b905290565b6040805160a08101825260008082526020820181905291810182905260608101829052608081019190915290565b604080516101208101825260006101008201818152825260208201529081016118426117ed565b815260200161184f6117ed565b81526040805160208082018352600082528301520161186c6117ed565b81526020016118876040518060200160405280600081525090565b81526020016117e86117ed565b6040805160808101825260009181018281526060820192909252908152602081016117e86119bb565b6040518060400160405280600081526020016117e86117ed565b5080546118e390611dce565b6000825580601f106118f3575050565b601f01602090049060005260206000209081019061155991906119db565b60405180602001604052806117e86117ed565b82805461193090611dce565b90600052602060002090601f0160209004810192826119525760008555611998565b82601f1061196b57805160ff1916838001178555611998565b82800160010185558215611998579182015b8281111561199857825182559160200191906001019061197d565b506119a49291506119db565b5090565b60405180602001604052806117e86119f0565b60405180604001604052806119ce6117ed565b8152602001600081525090565b5b808211156119a457600081556001016119dc565b6040805160a081019091528060008152602001611a196040518060200160405280600081525090565b815260006020808301829052604080518083018252838152818501528051918201905290815260609091015290565b600060c08284031215611a5a57600080fd5b50919050565b600060608284031215611a5a57600080fd5b6001600160a01b038116811461155957600080fd5b600060208284031215611a9957600080fd5b81356115ba81611a72565b600060408284031215611a5a57600080fd5b600060208284031215611ac857600080fd5b5035919050565b60005b83811015611aea578181015183820152602001611ad2565b83811115610a665750506000910152565b8281526040602082015260008251806040840152611b20816060850160208701611acf565b601f01601f1916919091016060019392505050565b6040805190810167ffffffffffffffff81118282101715611b6657634e487b7160e01b600052604160045260246000fd5b60405290565b6040516020810167ffffffffffffffff81118282101715611b6657634e487b7160e01b600052604160045260246000fd5b60405160a0810167ffffffffffffffff81118282101715611b6657634e487b7160e01b600052604160045260246000fd5b600060208284031215611be057600080fd5b6040516020810181811067ffffffffffffffff82111715611c1157634e487b7160e01b600052604160045260246000fd5b6040529135825250919050565b801515811461155957600080fd5b600081830360c0811215611c3f57600080fd5b611c47611b35565b8335815260a0601f1983011215611c5d57600080fd5b611c65611b6c565b611c6d611b9d565b602086013560048110611c7f57600080fd5b8152611c8e8760408801611bce565b60208201526060860135611ca181611c1e565b60408201526020607f1985011215611cb857600080fd5b611cc0611b6c565b93506080860135611cd081611a72565b845260608101849052611ce68760a08801611bce565b608082015281526020820152949350505050565b60008183036060811215611d0d57600080fd5b611d15611b35565b833581526040601f1983011215611d2b57600080fd5b611d33611b35565b60208581013582526040909501358582015293810193909352509092915050565b634e487b7160e01b600052602160045260246000fd5b600060408284031215611d7c57600080fd5b6040516040810181811067ffffffffffffffff82111715611dad57634e487b7160e01b600052604160045260246000fd5b604052823581526020830135611dc281611c1e565b60208201529392505050565b600181811c90821680611de257607f821691505b60208210811415611a5a57634e487b7160e01b600052602260045260246000fd5b600060e08284031215611e1557600080fd5b60405160e0810181811067ffffffffffffffff82111715611e4657634e487b7160e01b600052604160045260246000fd5b6040528251611e5481611a72565b8152602083810151908201526040830151611e6e81611a72565b60408201526060830151611e8181611c1e565b60608201526080830151611e9481611a72565b608082015260a0838101519082015260c0928301519281019290925250919050565b6001600160a01b038381168252825160208084019190915283015151805160e0840192919060048110611ef957634e487b7160e01b600052602160045260246000fd5b806040860152506020810151516060850152604081015115156080850152816060820151511660a085015260808101515160c085015250509392505050565b600060808284031215611f4a57600080fd5b6040516080810181811067ffffffffffffffff82111715611f7b57634e487b7160e01b600052604160045260246000fd5b6040528251611f8981611a72565b8152602083810151908201526040830151611fa381611a72565b60408201526060928301519281019290925250919050565b600060c08284031215611fcd57600080fd5b60405160c0810181811067ffffffffffffffff82111715611ffe57634e487b7160e01b600052604160045260246000fd5b604052825161200c81611a72565b8152602083015161201c81611a72565b6020820152604083015161202f81611c1e565b6040820152606083015161204281611a72565b60608201526080838101519082015260a0928301519281019290925250919050565b634e487b7160e01b600052601160045260246000fd5b600081600019048311821515161561209457612094612064565b500290565b6000826120b657634e487b7160e01b600052601260045260246000fd5b500490565b6000828210156120cd576120cd612064565b500390565b600082198211156120e5576120e5612064565b500190565b600082516120fc818460208701611acf565b9190910192915050565b60006020828403121561211857600080fd5b81516115ba81611c1e56fea26469706673582212209f87dc828a3d17de6c18b48f8995e67179428b31fa84455321659a6f60f73e2264736f6c634300080c0033`,
-  BytecodeLen: 9596,
+  Bytecode: `0x6080604052604051620038f4380380620038f48339810160408190526200002691620004a5565b600080554360035562000038620002d3565b6040805133815283516020808301919091528085015180516001600160a01b03908116848601529181015160608085019190915281850151608085015201511660a082015290517ff3f7b40e3e3b9f4100b9e92d74f44191fabe2129aaf0490c6d70d95395a3def79181900360c00190a1805160009081905281516020908101829052825160409081018390528351828501805191909152805182516060810184528581528251518501519481019490945290515182015115159183019190915262000106929091620001ce565b6040820152620001193415600862000251565b62000133438360200151604001516200027c60201b60201c565b60608201526200014262000322565b60208084018051516001600160a01b0390811684528151830151848401529051606090810151909116604080850191909152848101518285015290840151608084015260016000819055439055516200019e918391016200056c565b60405160208183030381529060405260029080519060200190620001c49291906200035e565b505050506200067b565b620001d8620003ed565b60005b60018110156200022e57848160018110620001fa57620001fa62000556565b602002015182826001811062000214576200021462000556565b602002015280620002258162000605565b915050620001db565b508181846001811062000245576200024562000556565b60200201529392505050565b81620002785760405163100960cb60e01b8152600481018290526024015b60405180910390fd5b5050565b6000826200028b838262000623565b9150811015620002cd5760405162461bcd60e51b815260206004820152600c60248201526b616464206f766572666c6f7760a01b60448201526064016200026f565b92915050565b6040805160e0810190915260006080820181815260a0830182905260c083019190915281526020810162000306620003ed565b815260200162000315620003ed565b8152602001600081525090565b6040518060a0016040528060006001600160a01b031681526020016000815260200160006001600160a01b0316815260200162000315620003ed565b8280546200036c906200063e565b90600052602060002090601f016020900481019282620003905760008555620003db565b82601f10620003ab57805160ff1916838001178555620003db565b82800160010185558215620003db579182015b82811115620003db578251825591602001919060010190620003be565b50620003e99291506200043a565b5090565b60405180602001604052806001905b62000423604051806060016040528060008152602001600081526020016000151581525090565b815260200190600190039081620003fc5790505090565b5b80821115620003e957600081556001016200043b565b604051608081016001600160401b03811182821017156200048257634e487b7160e01b600052604160045260246000fd5b60405290565b80516001600160a01b0381168114620004a057600080fd5b919050565b600081830360a0811215620004b957600080fd5b604080519081016001600160401b0381118282101715620004ea57634e487b7160e01b600052604160045260246000fd5b604052835181526080601f19830112156200050457600080fd5b6200050e62000451565b91506200051e6020850162000488565b82526040840151602083015260608401516040830152620005426080850162000488565b606083015260208101919091529392505050565b634e487b7160e01b600052603260045260246000fd5b81516001600160a01b039081168252602080840151818401526040808501519092168284015260608085015160e08501939192919083860160005b6001811015620005d95782518051835285810151868401528401511515848301529184019190850190600101620005a7565b505050505050608083015160c083015292915050565b634e487b7160e01b600052601160045260246000fd5b60006000198214156200061c576200061c620005ef565b5060010190565b60008219821115620006395762000639620005ef565b500190565b600181811c908216806200065357607f821691505b602082108114156200067557634e487b7160e01b600052602260045260246000fd5b50919050565b613269806200068b6000396000f3fe6080604052600436106100e05760003560e01c806382ab890a11610084578063ab53f2c611610056578063ab53f2c6146101c7578063b6b55f25146101ea578063c19d93fb146101fd578063d96a094a1461026657005b806382ab890a146101845780638323075714610197578063a55526db146101ac578063a7661d54146101b457005b806343d726d6116100bd57806343d726d6146101435780636f8a127c1461014b57806370284d191461015e5780637eea518c1461017157005b80631e93b0f1146100e95780632e1a7d4d1461010d57806342ae229d1461013057005b366100e757005b005b3480156100f557600080fd5b506003545b6040519081526020015b60405180910390f35b61012061011b366004612910565b610279565b6040519015158152602001610104565b6100e761013e366004612929565b6102b4565b6101206102d8565b6100e7610159366004612941565b610308565b61012061016c366004612969565b610328565b6100e761017f366004612986565b61036c565b610120610192366004612910565b61038c565b3480156101a357600080fd5b506001546100fa565b6101206103c7565b6100e76101c2366004612986565b6103f7565b3480156101d357600080fd5b506101dc610417565b6040516101049291906129c4565b6101206101f8366004612910565b6104b4565b34801561020957600080fd5b506102126104ef565b6040805182516001600160a01b039081168252602080850151151590830152838301511691810191909152606080830151908201526080808301519082015260a0918201519181019190915260c001610104565b610120610274366004612910565b610508565b6000610283612448565b6020810180515160069052515160e0015183905261029f612467565b6102a9828261053f565b60c001519392505050565b6102bc612467565b6102d46102ce36849003840184612ae1565b8261154e565b5050565b60006102e2612448565b602081015151600190526102f4612467565b6102fe828261053f565b6020015192915050565b610310612467565b6102d461032236849003840184612ba7565b8261053f565b6000610332612448565b60208101805151600390525151608001516001600160a01b0384169052610357612467565b610361828261053f565b606001519392505050565b610374612467565b6102d461038636849003840184612c8e565b8261186e565b6000610396612448565b6020810180515160059052515160c001518390526103b2612467565b6103bc828261053f565b60a001519392505050565b60006103d1612448565b602081015151600490526103e3612467565b6103ed828261053f565b6080015192915050565b6103ff612467565b6102d461041136849003840184612c8e565b826119be565b60006060600054600280805461042c90612ce4565b80601f016020809104026020016040519081016040528092919081815260200182805461045890612ce4565b80156104a55780601f1061047a576101008083540402835291602001916104a5565b820191906000526020600020905b81548152906001019060200180831161048857829003601f168201915b50505050509050915091509091565b60006104be612448565b60208101805151600290525151606001518390526104da612467565b6104e4828261053f565b604001519392505050565b6104f76124a3565b600061050281611ae3565b91505090565b6000610512612448565b6020818101805151600090525151015183905261052d612467565b610537828261053f565b519392505050565b61054f6006600054146030611df3565b815161056a90158061056357508251600154145b6031611df3565b60008080556002805461057c90612ce4565b80601f01602080910402602001604051908101604052809291908181526020018280546105a890612ce4565b80156105f55780601f106105ca576101008083540402835291602001916105f5565b820191906000526020600020905b8154815290600101906020018083116105d857829003601f168201915b505050505080602001905181019061060d9190612db8565b90506106176124ed565b7f2b1ffb2eefd4382c98a7308c2556b232cbd99c4b9e72f4ca8f1ce912b5efd2253385604051610648929190612e65565b60405180910390a1600060208501515151600681111561066a5761066a6129fe565b14156109165760208085015151015180825260e083015190516106909110156017611df3565b80515160208301516106a29190611e19565b602082018190526106b69034146018611df3565b61073e82604001516000604051806060016040528086604001516000600181106106e2576106e2612f1a565b6020020151600001518152602001866040015160006001811061070757610707612f1a565b6020020151602001518152602001866040015160006001811061072c5761072c612f1a565b60200201516040015115159052611e7e565b6040820152815161075d906107569033906000611ef2565b6019611df3565b604051600081527fdbf4274ff3373bef07815594a5448f2967a0c4814f41eea103cb28fd931fe5b59060200160405180910390a16000808452608083015160208301516040516001600160a01b039092169281156108fc029290818181858888f193505050501580156107d4573d6000803e3d6000fd5b5081518151516107e691903390611f0a565b60a082015160608083018051921515909252608084015182516001600160a01b0391821660209091015261012085015183516040015260c08501519251921691015260e082015181515161083a9190611f1e565b60608201805160800191909152610100830151905160a0015261085b612605565b825181516001600160a01b039091169052602080840151825182015260608381015182840180519190915251439201919091526040808401805182519384019092525151518451516108d393600092909182916108b791611f1e565b8152602001866040015160006001811061070757610707612f1a565b8160200151604001819052506108fe6108f484606001518460200151611f6d565b8360200151611f1e565b60208201516060015261091081611fba565b50611548565b6001602085015151516006811115610930576109306129fe565b1415610b17576109423415601a611df3565b61096e82604001516000604051806060016040528086604001516000600181106106e2576106e2612f1a565b6080820152815161098d906109869033906000611ef2565b601b611df3565b6109b082608001516001600160a01b0316336001600160a01b031614601c611df3565b604051600081527fb2735ccda1fc344b85be03b6ced1086f21a0e9dd030b59af22e800fe5e7388e59060200160405180910390a1600060208401528151608083015160e0840151610a02929190611f0a565b60a080820180516001905260808085015182516001600160a01b0391821660209091015261012086015183516040015260c08601518351911660609190910152815160009101819052905190910152610a59612605565b825181516001600160a01b039091169052602080840151825182015260a0830151818301805191909152514391015260808201805160408051606081019091529151515160e0860151610af79360009290918291610ab691611f1e565b81526020018660800151600060018110610ad257610ad2612f1a565b6020020151602001518152602001866080015160006001811061072c5761072c612f1a565b602082018051604001919091526060808501519151015261091081611fba565b6002602085015151516006811115610b3157610b316129fe565b1415610d0f576020840151516060015160c08201526080820151610b61906001600160a01b03163314601d611df3565b60c081015151610b74901515601e611df3565b610b803415601f611df3565b610ba1610b9a3384600001518460c0015160000151611ef2565b6020611df3565b604051600081527f4c6e52350b46a473d16740f4189476e177cf38b9975ca7f72276fcb0e5633db49060200160405180910390a1600060408085019190915260a083015160e08084018051921515909252608085015182516001600160a01b0391821660209091015261012086015183519094019390935260c080860151925192909316606092909201919091528301519082015151610c419190611f6d565b60e08201516080015261010082015160c082015151610c609190611f6d565b60e082015160a00152610c71612605565b825181516001600160a01b039091169052602080840151825182015260e08301518183018051919091525143910152604080840180518251606081019093529051515160c085015151610af79360009290918291610cce91611f6d565b81526020018760400151600060018110610cea57610cea612f1a565b6020020151602001518152602001876040015160006001811061072c5761072c612f1a565b6003602085015151516006811115610d2957610d296129fe565b1415610e9b5760208401515160800151610100820152610d4b34156021611df3565b610d65610d5e3384600001516000611ef2565b6022611df3565b610d8882608001516001600160a01b0316336001600160a01b0316146023611df3565b604051600081527f4083796a481569eb3471c68d04c9bc23c801e6e30a0b0439e86830c56c2d7dec9060200160405180910390a1600060608085019190915260a0808401516101208085018051921515909252610100808601515183516001600160a01b039182166020909101529187015183516040015260c087015183519216919094015260e08501518151608001529184015191510152610e29612605565b825181516001600160a01b03909116905260208084015182518201526101208301518183018051919091525143910152604080840180518251606081019093529051610af7926000918190835b60200201516000015181526020018760400151600060018110610cea57610cea612f1a565b6004602085015151516006811115610eb557610eb56129fe565b141561116457610ec734156024611df3565b610ef382604001516000604051806060016040528086604001516000600181106106e2576106e2612f1a565b6101408201528151610f1390610f0c9033906000611ef2565b6025611df3565b610f3682608001516001600160a01b0316336001600160a01b0316146026611df3565b604051600081527f52acfd0f369f8bbda0ebd728d0474105135661fe067783a0c605318fa3745bc79060200160405180910390a160006080840152606082015147908110610f8a5760608301518103610f8d565b60005b610160830181905260808401516040516001600160a01b03909116925081156108fc0291906000818181858888f19350505050158015610fd1573d6000803e3d6000fd5b506000610fe2836000015130612196565b610140830151515190915081106110025761014082015151518103611005565b60005b610180830190815260a08401516101a084018051911515909152608085015181516001600160a01b0391821660209091015261012086015182516040015260c0860151915191166060919091015260e084015190516110649250611f6d565b6101a0820151608001526101008201516101808201516110849190611f6d565b6101a082015160a00152611096612605565b825181516001600160a01b03909116905260208084015182518201526101a0830151818301805191909152514391015261014082018051604080516060810190915261018085015192515151611138936000929182916110f591611f6d565b815260200186610140015160006001811061111257611112612f1a565b602002015160200151815260200186610140015160006001811061072c5761072c612f1a565b60208201516040015261016082015160608401516108fe9161115991611f6d565b836101600151611f1e565b600560208501515151600681111561117e5761117e6129fe565b14156112e75760208401515160c001516101c08201526111a034156027611df3565b6111ba6111b33384600001516000611ef2565b6028611df3565b6111dd82608001516001600160a01b0316336001600160a01b0316146029611df3565b6101c0810151516111f1901515602a611df3565b604051600081527f1e9e1106fa02f998810d919b80688f943c9e438b984363de260104ee1ace4a9c9060200160405180910390a1600060a080850191909152828101516101e08301805191151590915260808085015182516001600160a01b039182166020909101526101c08501515183516040015260c0860151835191166060919091015260e0850151825190910152610100840151905190910152611296612605565b825181516001600160a01b03909116905260208084015182518201526101e08301518183018051919091525143910152604080840180518251606081019093529051610af792600091819083610e76565b6006602085015151516006811115611301576113016129fe565b14156115485760208401515160e001516102008201526113233415602b611df3565b61134f82604001516000604051806060016040528086604001516000600181106106e2576106e2612f1a565b610220820152815161136f906113689033906000611ef2565b602c611df3565b61139282608001516001600160a01b0316336001600160a01b031614602d611df3565b610200810151516113a6901515602e611df3565b6113c18260e00151826102000151600001511115602f611df3565b604051600081527fc051e5424fe2b416a10d4851e043a65a5766565b4f5b541ca7ae421f22e606309060200160405180910390a1600060c08401528151608083015161020083015151611415929190611f0a565b60a082015161024082018051911515909152608083015181516001600160a01b0391821660209091015261012084015182516040015260c0840151915191166060919091015260e0820151610200820151516114719190611f1e565b61024082015160800152610100820151610200820151516114929190611f1e565b61024082015160a001526114a4612605565b825181516001600160a01b039091169052602080840151825182015261024083015181830180519190915251439101526102208201805160408051606081019091529151515161020085015151610af7936000929091829161150591611f1e565b815260200186610220015160006001811061152257611522612f1a565b602002015160200151815260200186610220015160006001811061072c5761072c612f1a565b50505050565b61155e600160005414600d611df3565b815161157990158061157257508251600154145b600e611df3565b60008080556002805461158b90612ce4565b80601f01602080910402602001604051908101604052809291908181526020018280546115b790612ce4565b80156116045780601f106115d957610100808354040283529160200191611604565b820191906000526020600020905b8154815290600101906020018083116115e757829003601f168201915b505050505080602001905181019061161c9190612f30565b905061162661262e565b61163782608001514310600f611df3565b604080513381528551602080830191909152808701518051838501520151606082015290517f28b3acbd60e1c88f58f9afc3e0ee7cd853273307e47898c088b04f6be7fbcd939181900360800190a16020840151516116999015156009611df3565b6116af600085602001516020015111600a611df3565b6116c082602001513414600b611df3565b6116e16116da338460400151876020015160000151611ef2565b600c611df3565b815160208301516040516001600160a01b039092169181156108fc0291906000818181858888f1935050505015801561171e573d6000803e3d6000fd5b506040517fe3186c9b3140de057ac0af103f783a8c4cf8db1215158bfd3a04a74b4a6c582f90600090a1805160009052805133602091820152848101805190910151825160409081019190915283015182516001600160a01b039091166060909101528051518251608001525151815160a0015261179a612605565b60408381015182516001600160a01b0390911690526020868101805182015184518301528451828501805191909152514392019190915260608086018051845192830190945251515191515161183b93926000929182916117fa91611f6d565b8152602001876060015160006001811061181657611816612f1a565b6020020151602001518152602001876060015160006001811061072c5761072c612f1a565b602080830151604001919091528301516118559080611f1e565b60208201516060015261186781611fba565b5050505050565b61187e6001600054146011611df3565b815161189990158061189257508251600154145b6012611df3565b6000808055600280546118ab90612ce4565b80601f01602080910402602001604051908101604052809291908181526020018280546118d790612ce4565b80156119245780601f106118f957610100808354040283529160200191611924565b820191906000526020600020905b81548152906001019060200180831161190757829003601f168201915b505050505080602001905181019061193c9190612f30565b905061195081608001514310156013611df3565b60408051338152845160208083019190915285015115158183015290517f919263be6d51bec670ce110fb6a7df03fe323e3de4dade5355bccc6a4b06d9509181900360600190a16119a334156010611df3565b600080805560018190556119b990600290612641565b505050565b6119ce6004600054146015611df3565b81516119e99015806119e257508251600154145b6016611df3565b6000808055600280546119fb90612ce4565b80601f0160208091040260200160405190810160405280929190818152602001828054611a2790612ce4565b8015611a745780601f10611a4957610100808354040283529160200191611a74565b820191906000526020600020905b815481529060010190602001808311611a5757829003601f168201915b5050505050806020019051810190611a8c9190612fb6565b60408051338152855160208083019190915286015115158183015290519192507faa99e317c364fb804a6b7e67b51beee98735c62eb3df9d8182015e63bb190722919081900360600190a16119a334156014611df3565b611aeb6124a3565b60016000541415611ba657600060028054611b0590612ce4565b80601f0160208091040260200160405190810160405280929190818152602001828054611b3190612ce4565b8015611b7e5780601f10611b5357610100808354040283529160200191611b7e565b820191906000526020600020905b815481529060010190602001808311611b6157829003601f168201915b5050505050806020019051810190611b969190612f30565b9050611ba460006007611df3565b505b60046000541415611cc457600060028054611bc090612ce4565b80601f0160208091040260200160405190810160405280929190818152602001828054611bec90612ce4565b8015611c395780601f10611c0e57610100808354040283529160200191611c39565b820191906000526020600020905b815481529060010190602001808311611c1c57829003601f168201915b5050505050806020019051810190611c519190612fb6565b9050611c5b61267b565b60208083015182516001600160a01b039182169052604080850151845190151593019290925260608085015184519216919092015260808084015183519092019190915260a08084015183519092019190915260c0909201518151909201919091525192915050565b60066000541415611de257600060028054611cde90612ce4565b80601f0160208091040260200160405190810160405280929190818152602001828054611d0a90612ce4565b8015611d575780601f10611d2c57610100808354040283529160200191611d57565b820191906000526020600020905b815481529060010190602001808311611d3a57829003601f168201915b5050505050806020019051810190611d6f9190612db8565b9050611d7961267b565b60808083015182516001600160a01b03918216905260a080850151845190151560209091015260c08501518451921660409092019190915260e0840151835160600152610100840151835190920191909152610120909201518151909201919091525192915050565b611dee60006007611df3565b919050565b816102d45760405163100960cb60e01b8152600481018290526024015b60405180910390fd5b6000811580611e3d57508282611e2f8183613074565b9250611e3b9083613093565b145b611e785760405162461bcd60e51b815260206004820152600c60248201526b6d756c206f766572666c6f7760a01b6044820152606401611e10565b92915050565b611e8661268e565b60005b6001811015611ed257848160018110611ea457611ea4612f1a565b6020020151828260018110611ebb57611ebb612f1a565b602002015280611eca816130b5565b915050611e89565b5081818460018110611ee657611ee6612f1a565b60200201529392505050565b6000611f0083853085612262565b90505b9392505050565b611f1583838361233c565b6119b957600080fd5b600082611f2b83826130d0565b9150811115611e785760405162461bcd60e51b815260206004820152600e60248201526d1cdd58881ddc985c185c9bdd5b9960921b6044820152606401611e10565b600082611f7a83826130e7565b9150811015611e785760405162461bcd60e51b815260206004820152600c60248201526b616464206f766572666c6f7760a01b6044820152606401611e10565b60208101515151156120f2576040805160e081018252600080825260208201819052918101829052606081018290526080810182905260a0810182905260c08101919091528151516001600160a01b039081168252602080840180515182015183168285015260016040808601829052825151606090810151909516948601949094528151516080908101519086015281515160a0908101519086015290515183015160c0850152600460005543905590516120ce9183910181516001600160a01b039081168252602080840151821690830152604080840151151590830152606080840151909116908201526080808301519082015260a0828101519082015260c0918201519181019190915260e00190565b604051602081830303815290604052600290805190602001906119b99291906126d9565b6120fa61275d565b8151516001600160a01b0390811682528251602090810151818401528084018051604090810151818601528151606090810151818701528251518401518516608080880191909152600060a08089018290528551519093015190961660c0880152835151015160e0870152825151015161010086015290515181015161012085015260069092554360015590516120ce9183910161313d565b50565b604080516001600160a01b0383811660248084019190915283518084039091018152604490920183526020820180516001600160e01b03166370a0823160e01b1790529151600092839283929187169183916121f1916131e1565b60006040518083038185875af1925050503d806000811461222e576040519150601f19603f3d011682016040523d82523d6000602084013e612233565b606091505b50915091506122448282600661240d565b508080602001905181019061225991906131fd565b95945050505050565b604080516001600160a01b0385811660248301528481166044830152606480830185905283518084039091018152608490920183526020820180516001600160e01b03166323b872dd60e01b1790529151600092839283929189169183916122c9916131e1565b60006040518083038185875af1925050503d8060008114612306576040519150601f19603f3d011682016040523d82523d6000602084013e61230b565b606091505b509150915061231c8282600161240d565b50808060200190518101906123319190613216565b979650505050505050565b604080516001600160a01b038481166024830152604480830185905283518084039091018152606490920183526020820180516001600160e01b031663a9059cbb60e01b17905291516000928392839291881691839161239b916131e1565b60006040518083038185875af1925050503d80600081146123d8576040519150601f19603f3d011682016040523d82523d6000602084013e6123dd565b606091505b50915091506123ee8282600261240d565b50808060200190518101906124039190613216565b9695505050505050565b6060831561241c575081611f03565b82511561242c5782518084602001fd5b60405163100960cb60e01b815260048101839052602401611e10565b6040518060400160405280600081526020016124626127c8565b905290565b6040805160e081018252600080825260208201819052918101829052606081018290526080810182905260a0810182905260c081019190915290565b6040518060c0016040528060006001600160a01b0316815260200160001515815260200160006001600160a01b031681526020016000815260200160008152602001600081525090565b6040805161028081018252600061026082018181528252602082015290810161251461268e565b81526020016125216127db565b815260200161252e61268e565b815260200161253b6127db565b81526020016125566040518060200160405280600081525090565b81526020016125636127db565b8152604080516020808201835260008252830152016125806127db565b815260200161258d61268e565b815260200160008152602001600081526020016125a86127db565b81526020016125c36040518060200160405280600081525090565b81526020016125d06127db565b81526020016125eb6040518060200160405280600081525090565b81526020016125f861268e565b81526020016124626127db565b604080516080810182526000918101828152606082019290925290815260208101612462612825565b60405180602001604052806124626127db565b50805461264d90612ce4565b6000825580601f1061265d575050565b601f0160209004906000526020600020908101906121939190612859565b60405180602001604052806124626124a3565b60405180602001604052806001905b6126c3604051806060016040528060008152602001600081526020016000151581525090565b81526020019060019003908161269d5790505090565b8280546126e590612ce4565b90600052602060002090601f016020900481019282612707576000855561274d565b82601f1061272057805160ff191683800117855561274d565b8280016001018555821561274d579182015b8281111561274d578251825591602001919060010190612732565b50612759929150612859565b5090565b60408051610140810182526000808252602082015290810161277d61268e565b81526020016000815260200160006001600160a01b0316815260200160001515815260200160006001600160a01b031681526020016000815260200160008152602001600081525090565b604051806020016040528061246261286e565b6040518060c0016040528060001515815260200160006001600160a01b031681526020016000815260200160006001600160a01b0316815260200160008152602001600081525090565b60405180608001604052806128386127db565b81526020016000815260200161284c61268e565b8152602001600081525090565b5b80821115612759576000815560010161285a565b60408051610100810190915280600081526020016128986040518060200160405280600081525090565b81526020016000151581526020016128bc6040518060200160405280600081525090565b81526040805160208181019092526000815291019081526020016000151581526020016128f56040518060200160405280600081525090565b81526020016124626040518060200160405280600081525090565b60006020828403121561292257600080fd5b5035919050565b60006060828403121561293b57600080fd5b50919050565b6000610120828403121561293b57600080fd5b6001600160a01b038116811461219357600080fd5b60006020828403121561297b57600080fd5b8135611f0381612954565b60006040828403121561293b57600080fd5b60005b838110156129b357818101518382015260200161299b565b838111156115485750506000910152565b82815260406020820152600082518060408401526129e9816060850160208701612998565b601f01601f1916919091016060019392505050565b634e487b7160e01b600052602160045260246000fd5b634e487b7160e01b600052604160045260246000fd5b6040805190810167ffffffffffffffff81118282101715612a4d57612a4d612a14565b60405290565b6040516020810167ffffffffffffffff81118282101715612a4d57612a4d612a14565b604051610100810167ffffffffffffffff81118282101715612a4d57612a4d612a14565b6040516060810167ffffffffffffffff81118282101715612a4d57612a4d612a14565b604051610140810167ffffffffffffffff81118282101715612a4d57612a4d612a14565b60008183036060811215612af457600080fd5b612afc612a2a565b833581526040601f1983011215612b1257600080fd5b612b1a612a2a565b60208581013582526040909501358582015293810193909352509092915050565b600060208284031215612b4d57600080fd5b612b55612a53565b9135825250919050565b801515811461219357600080fd5b8035611dee81612b5f565b600060208284031215612b8a57600080fd5b612b92612a53565b90508135612b9f81612954565b815292915050565b6000818303610120811215612bbb57600080fd5b612bc3612a2a565b8335815261010080601f1984011215612bdb57600080fd5b612be3612a53565b9250612bed612a76565b602086013560078110612bff57600080fd5b8152612c0e8760408801612b3b565b6020820152612c1f60608701612b6d565b6040820152612c318760808801612b3b565b6060820152612c438760a08801612b78565b6080820152612c5460c08701612b6d565b60a0820152612c668760e08801612b3b565b60c0820152612c7787838801612b3b565b60e082015283525060208101919091529392505050565b600060408284031215612ca057600080fd5b6040516040810181811067ffffffffffffffff82111715612cc357612cc3612a14565b604052823581526020830135612cd881612b5f565b60208201529392505050565b600181811c90821680612cf857607f821691505b6020821081141561293b57634e487b7160e01b600052602260045260246000fd5b8051611dee81612954565b8051611dee81612b5f565b600082601f830112612d4057600080fd5b612d48612a53565b80606080850186811115612d5b57600080fd5b855b81811015612dac57828189031215612d755760008081fd5b612d7d612a9a565b8151815260208083015181830152604080840151612d9a81612b5f565b90830152908652909401938201612d5d565b50919695505050505050565b60006101808284031215612dcb57600080fd5b612dd3612abd565b612ddc83612d19565b815260208301516020820152612df58460408501612d2f565b604082015260a08301516060820152612e1060c08401612d19565b6080820152612e2160e08401612d24565b60a0820152610100612e34818501612d19565b60c08301526101208085015160e0840152610140850151828401526101608501518184015250508091505092915050565b6001600160a01b038316815281516020808301919091528201515180516101408301919060078110612ea757634e487b7160e01b600052602160045260246000fd5b60408401526020810151805160608501525060408101518015156080850152506060810151805160a085015250608081015180516001600160a01b031660c08501525060a081015180151560e08501525060c081015180516101008501525060e001518051610120840152509392505050565b634e487b7160e01b600052603260045260246000fd5b600060e08284031215612f4257600080fd5b60405160a0810181811067ffffffffffffffff82111715612f6557612f65612a14565b6040528251612f7381612954565b8152602083810151908201526040830151612f8d81612954565b6040820152612f9f8460608501612d2f565b606082015260c09290920151608083015250919050565b600060e08284031215612fc857600080fd5b60405160e0810181811067ffffffffffffffff82111715612feb57612feb612a14565b6040528251612ff981612954565b8152602083015161300981612954565b6020820152604083015161301c81612b5f565b6040820152606083015161302f81612954565b806060830152506080830151608082015260a083015160a082015260c083015160c08201528091505092915050565b634e487b7160e01b600052601160045260246000fd5b600081600019048311821515161561308e5761308e61305e565b500290565b6000826130b057634e487b7160e01b600052601260045260246000fd5b500490565b60006000198214156130c9576130c961305e565b5060010190565b6000828210156130e2576130e261305e565b500390565b600082198211156130fa576130fa61305e565b500190565b8060005b6001811015611548578151805185526020808201518187015260409182015115159186019190915260609094019390910190600101613103565b81516001600160a01b03168152610180810160208301516020830152604083015161316b60408401826130ff565b50606083015160a083015260808301516001600160a01b03811660c08401525060a083015180151560e08401525060c08301516101006131b5818501836001600160a01b03169052565b60e085015191506101208281860152818601516101408601528086015161016086015250505092915050565b600082516131f3818460208701612998565b9190910192915050565b60006020828403121561320f57600080fd5b5051919050565b60006020828403121561322857600080fd5b8151611f0381612b5f56fea2646970667358221220189a16dd11d44a4a5e811d74589b353eb5d403add252631f1498ca6f82c9cd4964736f6c634300080c0033`,
+  BytecodeLen: 14580,
   Which: `oD`,
   version: 7,
   views: {
@@ -2949,26 +5161,26 @@ export const _stateSourceMap = {
     who: 'Module'
     },
   2: {
-    at: './interface.rsh:110:15:after expr stmt semicolon',
-    fs: ['at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+    at: './interface.rsh:117:15:after expr stmt semicolon',
+    fs: ['at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
     msg: null,
     who: 'Module'
     },
   4: {
-    at: './interface.rsh:211:11:after expr stmt semicolon',
-    fs: ['at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+    at: './interface.rsh:281:11:after expr stmt semicolon',
+    fs: ['at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
     msg: null,
     who: 'Module'
     },
   5: {
-    at: './interface.rsh:213:11:after expr stmt semicolon',
-    fs: ['at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+    at: './interface.rsh:283:11:after expr stmt semicolon',
+    fs: ['at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
     msg: null,
     who: 'Module'
     },
   6: {
-    at: './interface.rsh:124:29:after expr stmt semicolon',
-    fs: ['at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:89:26:function exp)'],
+    at: './interface.rsh:132:29:after expr stmt semicolon',
+    fs: ['at ./index.rsh:13:6:application call to "App" (defined at: ./interface.rsh:96:26:function exp)'],
     msg: null,
     who: 'Module'
     }
@@ -2984,12 +5196,18 @@ export const _Participants = {
   "Verifier": Verifier,
   "buy": buy,
   "close": close,
+  "deposit": deposit,
   "grant": grant,
-  "update": update
+  "touch": touch,
+  "update": update,
+  "withdraw": withdraw
   };
 export const _APIs = {
   buy: buy,
   close: close,
+  deposit: deposit,
   grant: grant,
-  update: update
+  touch: touch,
+  update: update,
+  withdraw: withdraw
   };
