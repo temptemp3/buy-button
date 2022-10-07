@@ -8,9 +8,7 @@ import "./App.css";
 import axios from "axios";
 
 const appIds = [
-  ["TCOIN (DEC4)", 114909381],
-  ["DEC0", 114917119],
-  ["DEC19", 114923011],
+  ["TINN", 114980325]
 ];
 const provider = "TestNet";
 
@@ -88,7 +86,7 @@ function App() {
       const acc = await state.reach.connectAccount({ addr: state.addr });
       const ctc = acc.contract(backend, state.appId);
       await acc.tokenAccept(app.view.token);
-      await ctc.a.buy(state.reach.parseCurrency(amount, app.view.decimals));
+      await ctc.a.buy(amount);
       appService.getApp(state.appId).then(setApp);
     } catch (e) {
       console.error(e);
@@ -121,7 +119,7 @@ function App() {
                   }}
                 >
                   <div>{app.view.unitName}</div>
-                  <div>{app.view.fPrice}</div>
+                  <div>{app.view.fPrice}A</div>
                 </div>
                 <div
                   style={{
@@ -191,6 +189,7 @@ function App() {
                         value={amount}
                         placeholder={`Amount in ${app.view.unitName}`}
                         onChange={(e) => setAmount(e.target.value)}
+                        step="1"
                       />
                       <button style={{ display: "inline" }} onClick={onBuy}>
                         Buy
